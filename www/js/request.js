@@ -1,6 +1,9 @@
+$(document).ready(function () {
+    console.log("ready!");
+    getlocation();
+});
+
 var baseUrl = "http://coladaservices.de/test_icans26/api/scannerApi.php";
-var blockSubmitform = $("#submitform");
-var blockContent = $("#content");
 
 function loadData() {
 
@@ -30,8 +33,8 @@ function loadData() {
         var button = "";
         var time = "";
 
-        blockSubmitform.hide(100);
-        blockContent.show(100);
+        $("#submitform").hide(100);
+        $("#content").show(100);
         switch (result.status_user) {
             case "1":
                 userData = "<div>User guid not found</div>";
@@ -41,7 +44,7 @@ function loadData() {
                 button = "<button class=\"accept_on\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
                 break;
             case "3":
-                button = "<button class=\"accept\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button><button class=\"reject\" onclick=\"Reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
+                button = "<button class=\"accept\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button><button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
                 if (result.scanned_data) {
                     var date = new Date();
                     date.setTime(result.scanned_data.date);
@@ -80,11 +83,8 @@ function getlocation() {
 }
 
 function accept(guid, location_id) {
-
-    var date = new Date();
-    var time = date.getTime();
     var od = {};
-    od.date = time;
+    od.date = getTime();
     od.guid = guid;
     od.reject = 0;
     od.location_id = location_id;
@@ -100,12 +100,9 @@ function accept(guid, location_id) {
     }, "json");
 }
 
-function Reject(guid, location_id) {
-    var date = new Date();
-    var time = date.getTime();
-
+function reject(guid, location_id) {
     var od = {};
-    od.date = time;
+    od.date = getTime();
     od.reject = 1;
     od.guid = guid;
     od.location_id = location_id;
@@ -118,9 +115,15 @@ function Reject(guid, location_id) {
 
     }, "json");
 }
+function getTime(){
+    var date = new Date();
+    var time = date.getTime();
+    return time;
+}
+
 
 function clean() {
-    blockContent.hide(100);
-    blockSubmitform.show(100);
+    $("#content").hide(100);
+    $("#submitform").show(100);
     $('input[name=guid]').val("");
 }
