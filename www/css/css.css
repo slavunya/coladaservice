@@ -120,7 +120,7 @@ header {
 }
 
 #buttons {
-    margin: 5px 0 13px 0px;
+    margin: 28px 0 13px 0px;
 }
 
 .divs {
@@ -130,8 +130,4 @@ header {
     margin: 1px 0 0 0;
     padding: 15px 0 15px 0;
     background-color: rgb(255, 255, 255);
-}
-
-#b {
-    margin: 23px 0 0 0;
 }
