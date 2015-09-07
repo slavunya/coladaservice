@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>cover</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
+    <script src="js/libs/jquery/jquery.js"></script>
+    <script src="js/libs/jquery/jquery.easing.1.3.js"></script>
+    <script src="js/request.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("ready!");
+            getlocation();
+
+        });
+    </script>
+</head>
+<body>
+<header>
+    <img src="img/logo-colada-services.png">
+</header>
+<div id="submitform">
+    <div>
+        <select id="list" name="list">
+            <option value="0">select location</option>
+        </select>
+    </div>
+    <div>
+        <input id="guid" name='guid' placeholder="">
+    </div>
+    <div>
+    <button class="submit" onclick="loadData()">Submit</button>
+    </div>
+
+</div>
+<div id="content">
+
+</div>
+</body>
+</html>

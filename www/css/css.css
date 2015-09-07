@@ -1,0 +1,137 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, b, samp, small, strike, strong, sub, sup, var, b, u, i, center, dl, dt, dd, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    border: 0 none;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body {
+    background: #fec01c;
+    text-align: center;
+}
+
+#content {
+    font-family: Helvetica;
+    display: inline-block;
+    font-size: 1.2em;
+    width: 480px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.submit {
+    margin-top:20px;
+    width: 15%;
+    height: 48px;
+    /*padding: 0.67em 30px 0.67em 0;*/
+    font-size: 1.2em;
+    color: rgb(255, 255, 255);
+    border: 1px solid black;
+    border-radius: 6px;
+    background: #424242;
+    background: -moz-linear-gradient(top, #424242 0%, #1e1e1e 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #424242), color-stop(100%, #1e1e1e));
+    background: -webkit-linear-gradient(top, #424242 0%, #1e1e1e 100%);
+    background: -o-linear-gradient(top, #424242 0%, #1e1e1e 100%);
+    background: -ms-linear-gradient(top, #424242 0%, #1e1e1e 100%);
+    background: linear-gradient(to bottom, #424242 0%, #1e1e1e 100%);
+}
+
+.reject {
+    margin: 0 0 0 15px;
+    font-size: 1em;
+    height: 48px;
+    border: 1px solid black;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    color: #fffefe;
+    background: #424242;
+    background: -moz-linear-gradient(top, rgb(165, 9, 40) 0%, #E60000 100%);
+    background: -o-linear-gradient(top, rgb(165, 9, 40) 0%, #E60000 100%);
+    background: -ms-linear-gradient(top, rgb(165, 9, 40) 0%, #E60000 100%);
+    background: linear-gradient(to top, rgb(165, 9, 9) 0%, #E60000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#424242', endColorstr='#1e1e1e', GradientType=0);
+    width: 30%;
+}
+
+.accept {
+    height: 48px;
+    font-size: 1em;
+    border: 1px solid black;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    color: #fffefe;
+    background: #424242;
+    background: -moz-linear-gradient(top, rgb(242, 255, 3) 0%, #E6A30C 100%);
+    background: -o-linear-gradient(top, rgb(242, 255, 3) 0%, #E6A30C 100%);
+    background: -ms-linear-gradient(top, rgb(242, 255, 3) 0%, #E6A30C 100%);
+    background: linear-gradient(to bottom, rgb(255, 189, 3) 0%, #CC8F08 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#424242', endColorstr='#1e1e1e', GradientType=0);
+    width: 30%;
+    line-height: 1em;
+    padding: 7px 10px 7px 10px;
+}
+
+.accept_on {
+    height: 48px;
+    font-size: 1em;
+    border: 1px solid black;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    color: #fffefe;
+    background: -moz-linear-gradient(top, rgb(242, 255, 3) 0%, #E6A30C 100%);
+    background: -o-linear-gradient(top, rgb(242, 255, 3) 0%, #E6A30C 100%);
+    background: -ms-linear-gradient(top, rgb(242, 255, 3) 0%, #E6A30C 100%);
+    background: linear-gradient(to bottom, rgb(21, 150, 24) 0%, #156507 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#424242', endColorstr='#1e1e1e', GradientType=0);
+    width: 30%;
+    line-height: 1em;
+    padding: 7px 10px 7px 10px;
+}
+
+#list {
+    width: 480px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 6px;
+    border: 1px solid black;
+    padding: 10px 0 10px 14px;
+    height: 48px;
+    margin: 0px 0 13px 0;
+    font-size: 1.2em;
+}
+
+#guid {
+    width: 480px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 6px;
+    border: 1px solid black;
+    /* padding: 10px 0 10px 0; */
+    height: 48px;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    padding: 10px 0 10px 16px;
+}
+
+header {
+    margin: 33px 0 33px 0;
+    padding: 0px 0 33px 0;
+    border-bottom: 1px solid black;
+}
+
+#buttons {
+    margin: 5px 0 13px 0px;
+}
+
+.divs {
+    border-radius: 6px;
+    border: 1px solid black;
+    font-weight: 600;
+    margin: 1px 0 0 0;
+    padding: 15px 0 15px 0;
+    background-color: rgb(255, 255, 255);
+}
+
+#b {
+    margin: 23px 0 0 0;
+}
