@@ -37,8 +37,8 @@ function loadData() {
         $("#content").show(100);
         switch (result.status_user) {
             case "1":
-                userData = "<div>User guid not found</div>";
-                button = "<button class=\"reject\" onclick=\"clean()\">Cancel</button>";
+                userData = "<div>The code is not found</div>";
+                button = "<button class=\"reject\" onclick=\"clean()\">Back</button>";
                 break;
             case "2":
                 button = "<button class=\"accept_on\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
@@ -93,7 +93,6 @@ function accept(guid, location_id) {
         console.log(result);
 
         if (result.status === "success") {
-            alert("succsses");
             clean();
         }
 
