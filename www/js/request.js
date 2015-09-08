@@ -4,10 +4,8 @@ $(document).ready(function () {
 });
 
 function checkFullReady() {
-    if(device.platform !== 'Android'){
+    alert();
         StatusBar.overlaysWebView(false);
-        alert('yes');
-    }
 }
 
 var baseUrl = "http://coladaservices.de/test_icans26/api/scannerApi.php";
