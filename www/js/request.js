@@ -15,13 +15,13 @@ $(document).on('submit','#login-form',function(){
 
     if (login.length == '0') {
         showAlert('Please input login','Message');
-        //alert("Please select location");
+        //alert("Please input login");
         return false;
     }
 
     if (password.length == 0) {
         showAlert('Please input password','Message');
-        //alert("Please scan the code");
+        //alert("Please input password");
         return false;
     }
 
