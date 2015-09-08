@@ -25,7 +25,7 @@ $(document).on('submit','#login-form',function(){
         if(result['status'] =="success"){
             loadContent('main');
         } else{
-            showAlert('The user with that login and password is not found','');
+            showAlert('The user with that login and password is not found','Message');
             //alert("The user with that login and password is not found");
         }
 
@@ -51,13 +51,15 @@ function formSubmit() {
 
     var select = $('select[name=list]').val();
     if (select == '0') {
-        alert("Please select location");
+        showAlert('Please select location','Message');
+        //alert("Please select location");
         return false;
     }
 
     var id = $('input[name=guid]').val();
     if (id.length == 0) {
-        alert("Please scan the code");
+        showAlert('Please scan the code','Message');
+        //alert("Please scan the code");
         return false;
     }
 
