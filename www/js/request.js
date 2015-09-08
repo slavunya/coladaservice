@@ -1,7 +1,9 @@
 $(document).ready(function () {
     alert();
-    StatusBar.overlaysWebView(false);
+    StatusBar.overlaysWebView(true);
     alert(2);
+    StatusBar.overlaysWebView(false);
+
     loadContent('login');
 });
 
