@@ -6,6 +6,7 @@ $(document).ready(function () {
 function checkFullReady() {
     if(device.platform !== 'Android'){
         StatusBar.overlaysWebView(false);
+        alert('yes');
     }
 }
 

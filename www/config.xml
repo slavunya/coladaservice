@@ -9,7 +9,9 @@
     </author>
     <content src="index.html"/>
     <access origin="*"/>
-
+    <preference name="fullscreen" value="false"/>
+    <preference name="webviewbounce" value="false"/>
+    <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <gap:plugin name="org.apache.cordova.dialogs"/>
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4"/>
