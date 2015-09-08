@@ -1,11 +1,48 @@
 $(document).ready(function () {
-    console.log("ready!");
-    getlocation();
+    loadContent('login');
+
 });
 
 var baseUrl = "http://coladaservices.de/test_icans26/api/scannerApi.php";
 
-function loadData() {
+$(document).on('submit','#login-form',function(){
+    var login = $('input[name=login]').val();
+    var password = $('input[name=password]').val();
+
+    var od = {};
+    od.login = login;
+    od.password = password;
+
+    $.post(baseUrl, od, function (result) {
+
+        console.log("Login");
+        console.log(result);
+
+        if(result['status'] =="success"){
+            loadContent('main');
+        } else{
+            alert("The user with that login and password is not found");
+        }
+
+    }, "json");
+
+    event.preventDefault();
+});
+
+function loadContent(page) {
+    if (page === 'login') {
+        $('#page').load('content.html #login', function () {
+
+        });
+    }
+    if (page === 'main') {
+        $('#page').load('content.html #main', function () {
+            getlocation();
+        });
+    }
+}
+
+function formSubmit() {
 
     var select = $('select[name=list]').val();
     if (select == '0') {
@@ -54,14 +91,14 @@ function loadData() {
                     var hours = date.getHours();
                     var minutes = date.getMinutes();
                     var finalytime = year + ":" + month + ":" + day + "-" + hours + ":" + minutes;
-                    time = ("<br>Last scanned: " + finalytime);
+                    time = ("<p id='scan-time'>Last scanned: " + finalytime+"</p>");
                 }
                 break;
         }
 
 
         if (result.status_user !== "1") {
-            userData = "<div>" + obj.firstname + " " + obj.lastname + "</div><div>" + obj.guid + "</div>";
+            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
         $('#content').html("<div class=\"divs\">" + userData + "" + time + "</div>" + "<div id=\"buttons\">" + button + "</div>");
     }, "json");
@@ -114,12 +151,12 @@ function reject(guid, location_id) {
 
     }, "json");
 }
+
 function getTime(){
     var date = new Date();
     var time = date.getTime();
     return time;
 }
-
 
 function clean() {
     $("#content").hide(100);
