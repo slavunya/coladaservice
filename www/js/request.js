@@ -1,8 +1,7 @@
 $(document).ready(function () {
+    document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login');
 });
-
-document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
     alert();
