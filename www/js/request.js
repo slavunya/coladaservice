@@ -1,12 +1,15 @@
 $(document).ready(function () {
-    alert();
-    StatusBar.overlaysWebView(true);
-    alert(2);
-    StatusBar.overlaysWebView(false);
-
+    document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login');
 });
 
+function onDeviceReady() {
+    alert();
+    StatusBar.overlaysWebView(true);
+    alert(2);
+
+    StatusBar.overlaysWebView(false);
+}
 
 var baseUrl = "http://coladaservices.de/test_icans26/api/scannerApi.php";
 
