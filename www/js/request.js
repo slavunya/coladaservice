@@ -4,10 +4,6 @@ $(document).ready(function () {
 });
 
 function onDeviceReady() {
-    alert();
-    StatusBar.overlaysWebView(true);
-    alert(2);
-
     StatusBar.overlaysWebView(false);
 }
 
@@ -29,7 +25,8 @@ $(document).on('submit','#login-form',function(){
         if(result['status'] =="success"){
             loadContent('main');
         } else{
-            alert("The user with that login and password is not found");
+            showAlert('The user with that login and password is not found','');
+            //alert("The user with that login and password is not found");
         }
 
     }, "json");
@@ -170,4 +167,13 @@ function clean() {
     $("#content").hide(100);
     $("#submitform").show(100);
     $('input[name=guid]').val("");
+}
+
+function showAlert(message,title) {
+    navigator.notification.alert(
+        message,
+        null,
+        title,
+        'Ok'
+    );
 }
