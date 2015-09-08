@@ -13,6 +13,18 @@ $(document).on('submit','#login-form',function(){
     var login = $('input[name=login]').val();
     var password = $('input[name=password]').val();
 
+    if (login.length == '0') {
+        showAlert('Please input login','Message');
+        //alert("Please select location");
+        return false;
+    }
+
+    if (password.length == 0) {
+        showAlert('Please input password','Message');
+        //alert("Please scan the code");
+        return false;
+    }
+
     var od = {};
     od.login = login;
     od.password = password;
