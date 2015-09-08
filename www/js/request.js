@@ -1,7 +1,13 @@
 $(document).ready(function () {
     loadContent('login');
-
+    document.addEventListener("deviceready", checkFullReady, false);
 });
+
+function checkFullReady() {
+    if(device.platform !== 'Android'){
+        StatusBar.overlaysWebView(false);
+    }
+}
 
 var baseUrl = "http://coladaservices.de/test_icans26/api/scannerApi.php";
 
