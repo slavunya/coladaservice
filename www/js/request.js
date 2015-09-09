@@ -1,3 +1,6 @@
+var scan = {
+    slipObjectsArray: []
+};
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login');
