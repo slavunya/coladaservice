@@ -191,3 +191,65 @@ function showAlert(message,title) {
         'Ok'
     );
 }
+function scanBarcode() {
+
+ 
+        scanBarcodeProcess(afterScanCode);
+    
+
+    function afterScanCode(status, result) {
+//        log('result.format: ' + result.format + '; text:' + result.text + '; cancelled: ' + result.cancelled);
+        if (status.error) {
+            showErrorMessage(result);
+            return;
+        }
+
+        if (!(result.cancelled === false || result.cancelled === 0)) {
+            log('scanning cancelled');
+            return;
+        }
+//        if (!(result.format === 'CODE_128')) {
+//            showErrorMessage(eMsg.wrongCodeType);
+//            return;
+//        }
+
+        var scannedCode = result.text;
+        for (var i in scan.slipObjectsArray) {
+            var slipObject = scan.slipObjectsArray[i];
+            if (slipObject.slip === scannedCode) {
+                showErrorMessage(eMsg.codeScanned);
+                return false;
+            }
+        }
+
+        addSlipNumberToView(scannedCode);
+
+    }
+    return false;
+}
+
+
+
+function scanBarcodeProcess(callback) {
+    cordova.plugins.barcodeScanner.scan(
+            function (result) {
+                var status = {success: true, error: false};
+                callback(status, result);
+            },
+            function (error) {
+
+                alert("Scanning failed: " + error);
+                var status = {success: false, error: true};
+                callback(status, error);
+            }
+    );
+
+
+}
+
+function addSlipNumberToView(slipNumber) {
+   
+    $('#guid').value = slipNumber;
+//     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
+
+}
