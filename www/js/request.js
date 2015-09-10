@@ -289,7 +289,16 @@ function moreinfo(guid){
     $.post(baseUrl, od, function (result) {
         console.log(result);
         $("#moreinfolist").css({'display':'block'});
+        var status="";
+      
         for(var i in result.data){
+             var obj=result.data[i];
+            if(obj.status==1){
+                status="red";
+            }
+            else {
+                status="green";
+            }
             var obj=result.data[i];
              var date = new Date();
                     date.setTime(obj.date);
@@ -298,7 +307,7 @@ function moreinfo(guid){
                     var year = date.getFullYear();
                     var hours = date.getHours();
                     var minutes = date.getMinutes();
-            $("#moreinfolist").append("<li>"+obj.locations_name+" "+year+"/"+month+"/"+day+":"+hours+":"+minutes+"</li>");
+            $("#moreinfolist").append("<li class="+status+">"+obj.locations_name+" "+year+"/"+month+"/"+day+":"+hours+":"+minutes+"</li>");
            
         }
        

@@ -200,3 +200,9 @@ position: absolute;right: 0;top: 3px;}
 #moreinfolist li{
     list-style: none;
 }
+.red{
+    background: #E60000;
+}
+.green{
+    background: #156507;
+}
