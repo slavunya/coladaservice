@@ -1,6 +1,7 @@
 var scan = {
     slipObjectsArray: []
 };
+var moreinfostatus=false;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login','');
@@ -133,7 +134,7 @@ function formSubmit() {
         if (result.status_user !== "1") {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
-        $('.content').html("<div class=\"content_data\">" + userData + "" + time + "</div><div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div>" + "<div id=\"buttons\">" + button + "</div>");
+        $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
     }, "json");
 }
 
@@ -281,6 +282,7 @@ function gethistory() {
     }, "json");
 }
 function moreinfo(guid){
+    if(!moreinfostatus){
      var od = {};
     od.user_history = "get";
     od.guid=guid;
@@ -302,4 +304,10 @@ function moreinfo(guid){
        
         
     }, "json");
+    moreinfostatus=true;
+}
+else {
+    $("#moreinfolist").hide(100);
+     moreinfostatus=false;
+}
 }

@@ -185,7 +185,7 @@ position: absolute;right: 0;top: 3px;}
 }
 #moreinfolist{
     display:none;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 6px;
     background-color: rgb(255,255,255);
     height: 99px;
