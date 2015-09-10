@@ -192,17 +192,18 @@ position: absolute;right: 0;top: 3px;}
     background-color: rgb(255,255,255);
     height: 108px;
     font-weight: 600;
-    margin: 1px 0 0 0;
-    padding: 15px;
+    margin: 13px -32px 0 -15px;
+    padding: 15px 0px 0 0px;
     overflow: scroll;
     text-align: left;
+    /* width: 100%; */
 }
 #moreinfolist li{
     list-style: none;
 }
 .red{
-    background: #E60000;
+    color: #CE1212;
 }
 .green{
-    background: #156507;
+    color: #2FEC0E;
 }
