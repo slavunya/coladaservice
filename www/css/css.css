@@ -127,7 +127,9 @@ header img{
 }
 
 #buttons {
-    margin: 20px 0 13px 0;
+    margin: 30px 0 3px 0;
+    /* position: absolute; */
+    /* bottom: 0; */
 }
 
 .content_data {
@@ -188,7 +190,7 @@ position: absolute;right: 0;top: 3px;}
     /* border: 1px solid black; */
     border-radius: 6px;
     background-color: rgb(255,255,255);
-    height: 99px;
+    height: 108px;
     font-weight: 600;
     margin: 1px 0 0 0;
     padding: 15px;
