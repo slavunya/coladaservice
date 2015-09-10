@@ -11,7 +11,7 @@ body {
     text-align: center;
 }
 
-#content {
+.content {
     font-family: Helvetica;
     display: inline-block;
     font-size: 1.2em;
@@ -130,7 +130,7 @@ header img{
     margin: 20px 0 13px 0;
 }
 
-.divs {
+.content_data {
     border-radius: 6px;
     border: 1px solid black;
     font-weight: 600;
@@ -172,7 +172,29 @@ position: absolute;right: 0;top: 3px;}
 #sign-out{
     font-size: 40px;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 10px;
+    right: 10px;
     color: black;
+}
+#get-history{
+     font-size: 40px;
+     position: absolute;
+     bottom: 10px;
+     left: 10px;
+     color: black;
+}
+#moreinfolist{
+    display:none;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: rgb(255,255,255);
+    height: 99px;
+    font-weight: 600;
+    margin: 1px 0 0 0;
+    padding: 15px;
+    overflow: scroll;
+    text-align: left;
+}
+#moreinfolist li{
+    list-style: none;
 }

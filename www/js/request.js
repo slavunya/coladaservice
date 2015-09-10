@@ -3,7 +3,7 @@ var scan = {
 };
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
-    loadContent('login');
+    loadContent('login','');
 });
 
 function onDeviceReady() {
@@ -12,18 +12,18 @@ function onDeviceReady() {
 
 var baseUrl = "http://coladaservices.de/test_icans26/api/scannerApi.php";
 
-$(document).on('submit','#login-form',function(){
+$(document).on('submit', '#login-form', function () {
     var login = $('input[name=login]').val();
     var password = $('input[name=password]').val();
 
     if (login.length == '0') {
-        showAlert('Please input login','Message');
+        showAlert('Please input login', 'Message');
         //alert("Please input login");
         return false;
     }
 
     if (password.length == 0) {
-        showAlert('Please input password','Message');
+        showAlert('Please input password', 'Message');
         //alert("Please input password");
         return false;
     }
@@ -37,10 +37,10 @@ $(document).on('submit','#login-form',function(){
         console.log("Login");
         console.log(result);
 
-        if(result['status'] =="success"){
-            loadContent('main');
-        } else{
-            showAlert('The user with that login and password is not found','Message');
+        if (result['status'] == "success") {
+            loadContent('main','');
+        } else {
+            showAlert('The user with that login and password is not found', 'Message');
             //alert("The user with that login and password is not found");
         }
 
@@ -49,7 +49,7 @@ $(document).on('submit','#login-form',function(){
     event.preventDefault();
 });
 
-function loadContent(page) {
+function loadContent(page,result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
 
@@ -60,20 +60,31 @@ function loadContent(page) {
             getlocation();
         });
     }
+    if (page === 'location_history') {
+        $('#page').load('content.html #location_history', function () {
+             for(var i in result.data){
+             var   obj=result.data[i];
+                $(".content_data").append("<div><p>"+obj.locations_name+":"+obj.num_locations+"</p></div>");
+            }
+           var button = "<button class=\"reject\" onclick=\"loadContent('main','')\">Back</button>";
+           $(".content").append( "<div id=\"buttons\">" + button + "</div>");
+          
+        });
+    }
 }
 
 function formSubmit() {
 
     var select = $('select[name=list]').val();
     if (select == '0') {
-        showAlert('Please select location','Message');
+        showAlert('Please select location', 'Message');
         //alert("Please select location");
         return false;
     }
 
     var id = $('input[name=guid]').val();
     if (id.length == 0) {
-        showAlert('Please scan the code','Message');
+        showAlert('Please scan the code', 'Message');
         //alert("Please scan the code");
         return false;
     }
@@ -93,7 +104,7 @@ function formSubmit() {
         var time = "";
 
         $("#submitform").hide(100);
-        $("#content").show(100);
+        $(".content").show(100);
         switch (result.status_user) {
             case "1":
                 userData = "<div>The code is not found</div>";
@@ -113,7 +124,7 @@ function formSubmit() {
                     var hours = date.getHours();
                     var minutes = date.getMinutes();
                     var finalytime = year + ":" + month + ":" + day + "-" + hours + ":" + minutes;
-                    time = ("<p id='scan-time'>Last scanned: " + finalytime+"</p>");
+                    time = ("<p id='scan-time'>Last scanned: " + finalytime + "</p><a onclick=\"moreinfo('"+obj.guid+"')\">More info</a>");
                 }
                 break;
         }
@@ -122,7 +133,7 @@ function formSubmit() {
         if (result.status_user !== "1") {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
-        $('#content').html("<div class=\"divs\">" + userData + "" + time + "</div>" + "<div id=\"buttons\">" + button + "</div>");
+        $('.content').html("<div class=\"content_data\">" + userData + "" + time + "</div><div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div>" + "<div id=\"buttons\">" + button + "</div>");
     }, "json");
 }
 
@@ -174,31 +185,31 @@ function reject(guid, location_id) {
     }, "json");
 }
 
-function getTime(){
+function getTime() {
     var date = new Date();
     var time = date.getTime();
     return time;
 }
 
 function clean() {
-    $("#content").hide(100);
+    $(".content").hide(100);
     $("#submitform").show(100);
     $('input[name=guid]').val("");
 }
 
-function showAlert(message,title) {
+function showAlert(message, title) {
     navigator.notification.alert(
-        message,
-        null,
-        title,
-        'Ok'
-    );
+            message,
+            null,
+            title,
+            'Ok'
+            );
 }
 function scanBarcode() {
 
- 
-        scanBarcodeProcess(afterScanCode);
-    
+
+    scanBarcodeProcess(afterScanCode);
+
 
     function afterScanCode(status, result) {
 //        log('result.format: ' + result.format + '; text:' + result.text + '; cancelled: ' + result.cancelled);
@@ -251,8 +262,44 @@ function scanBarcodeProcess(callback) {
 }
 
 function addSlipNumberToView(slipNumber) {
-   
+
     $('#guid').val(slipNumber);
 //     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
 
+}
+function gethistory() {
+    var od = {};
+    od.history = "get";
+    $.post(baseUrl, od, function (result) {
+        console.log(result);
+        if(result.status=="success"){
+            loadContent("location_history",result);
+           
+    }
+       
+        
+    }, "json");
+}
+function moreinfo(guid){
+     var od = {};
+    od.user_history = "get";
+    od.guid=guid;
+    $.post(baseUrl, od, function (result) {
+        console.log(result);
+        $("#moreinfolist").css({'display':'block'});
+        for(var i in result.data){
+            var obj=result.data[i];
+             var date = new Date();
+                    date.setTime(obj.date);
+                    var day = date.getDate();
+                    var month = date.getUTCMonth() + 1;
+                    var year = date.getFullYear();
+                    var hours = date.getHours();
+                    var minutes = date.getMinutes();
+            $("#moreinfolist").append("<li>"+obj.locations_name+" "+year+"/"+month+"/"+day+":"+hours+":"+minutes+"</li>");
+           
+        }
+       
+        
+    }, "json");
 }
