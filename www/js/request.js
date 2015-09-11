@@ -265,6 +265,7 @@ function scanBarcodeProcess(callback) {
 function addSlipNumberToView(slipNumber) {
 
     $('#guid').val(slipNumber);
+    formSubmit();
 //     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
 
 }
