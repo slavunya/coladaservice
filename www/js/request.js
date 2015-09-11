@@ -66,6 +66,14 @@ function loadContent(page, result) {
         $('#page').load('content.html #settings_page', function () {
             $(document).ready(function () {
                 //set initial state.
+                if(checked){
+                   // 
+                    document.getElementById("mode").setAttribute("checked","checked");
+                }
+                else{
+                    
+                }
+                    
                 $('#mode').val($(this).is(':checked'));
            
                 $('#mode').change(function () {
