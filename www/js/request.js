@@ -1,10 +1,11 @@
 var scan = {
     slipObjectsArray: []
 };
-var moreinfostatus=false;
+     var checked=false;
+var moreinfostatus = false;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
-    loadContent('login','');
+    loadContent('login', '');
 });
 
 function onDeviceReady() {
@@ -39,7 +40,7 @@ $(document).on('submit', '#login-form', function () {
         console.log(result);
 
         if (result['status'] == "success") {
-            loadContent('main','');
+            loadContent('main', '');
         } else {
             showAlert('The user with that login and password is not found', 'Message');
             //alert("The user with that login and password is not found");
@@ -50,7 +51,7 @@ $(document).on('submit', '#login-form', function () {
     event.preventDefault();
 });
 
-function loadContent(page,result) {
+function loadContent(page, result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
 
@@ -61,15 +62,32 @@ function loadContent(page,result) {
             getlocation();
         });
     }
+    if (page === 'setting') {
+        $('#page').load('content.html #settings_page', function () {
+            $(document).ready(function () {
+                //set initial state.
+                $('#mode').val($(this).is(':checked'));
+           
+                $('#mode').change(function () {
+                    if ($(this).is(":checked")) {
+                        checked = true;
+                    }
+                    else {
+                        checked = false;
+                    }
+                });
+            });
+        });
+    }
     if (page === 'location_history') {
         $('#page').load('content.html #location_history', function () {
-             for(var i in result.data){
-             var   obj=result.data[i];
-                $(".content_data").append("<div><p>"+obj.locations_name+":"+obj.num_locations+"</p></div>");
+            for (var i in result.data) {
+                var obj = result.data[i];
+                $(".content_data").append("<div><p>" + obj.locations_name + ":" + obj.num_locations + "</p></div>");
             }
-           var button = "<button class=\"reject\" onclick=\"loadContent('main','')\">Back</button>";
-           $(".content").append( "<div id=\"buttons\">" + button + "</div>");
-          
+            var button = "<button class=\"reject\" onclick=\"loadContent('main','')\">Back</button>";
+            $(".content").append("<div id=\"buttons\">" + button + "</div>");
+
         });
     }
 }
@@ -124,8 +142,8 @@ function formSubmit() {
                     var year = date.getFullYear();
                     var hours = date.getHours();
                     var minutes = date.getMinutes();
-                    var finalytime = year + ":" + month + ":" + day + "-" + hours + ":" + minutes;
-                    time = ("<p id='scan-time'>Last scanned: " + finalytime + "</p><a onclick=\"moreinfo('"+obj.guid+"')\">More info</a>");
+                    var finalytime = year + "/" + month + "/" + day + "-" + hours + ":" + minutes;
+                    time = ("<p id='scan-time'>Last scanned: " + finalytime + "</p><a onclick=\"moreinfo('" + obj.guid + "')\">More info</a>");
                 }
                 break;
         }
@@ -265,7 +283,9 @@ function scanBarcodeProcess(callback) {
 function addSlipNumberToView(slipNumber) {
 
     $('#guid').val(slipNumber);
+    if(checked){
     formSubmit();
+    }
 //     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
 
 }
@@ -274,50 +294,50 @@ function gethistory() {
     od.history = "get";
     $.post(baseUrl, od, function (result) {
         console.log(result);
-        if(result.status=="success"){
-            loadContent("location_history",result);
-           
-    }
-       
-        
-    }, "json");
-}
-function moreinfo(guid){
-    if(!moreinfostatus){
-     var od = {};
-    od.user_history = "get";
-    od.guid=guid;
-    $.post(baseUrl, od, function (result) {
-        console.log(result);
-        $("#moreinfolist").css({'display':'block'});
-        var status="";
-      
-        for(var i in result.data){
-             var obj=result.data[i];
-            if(obj.status==1){
-                status="red";
-            }
-            else {
-                status="green";
-            }
-            var obj=result.data[i];
-             var date = new Date();
-                    date.setTime(obj.date);
-                    var day = date.getDate();
-                    var month = date.getUTCMonth() + 1;
-                    var year = date.getFullYear();
-                    var hours = date.getHours();
-                    var minutes = date.getMinutes();
-            $("#moreinfolist").append("<li class="+status+">"+obj.locations_name+" "+year+"/"+month+"/"+day+":"+hours+":"+minutes+"</li>");
-           
+        if (result.status == "success") {
+            loadContent("location_history", result);
+
         }
-       
-        
+
+
     }, "json");
-    moreinfostatus=true;
 }
-else {
-    $("#moreinfolist").hide(100);
-     moreinfostatus=false;
-}
+function moreinfo(guid) {
+    if (!moreinfostatus) {
+        var od = {};
+        od.user_history = "get";
+        od.guid = guid;
+        $.post(baseUrl, od, function (result) {
+            console.log(result);
+            $("#moreinfolist").css({'display': 'block'});
+            var status = "";
+
+            for (var i in result.data) {
+                var obj = result.data[i];
+                if (obj.status == 1) {
+                    status = "red";
+                }
+                else {
+                    status = "green";
+                }
+                var obj = result.data[i];
+                var date = new Date();
+                date.setTime(obj.date);
+                var day = date.getDate();
+                var month = date.getUTCMonth() + 1;
+                var year = date.getFullYear();
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                $("#moreinfolist").append("<li class=" + status + ">" + obj.locations_name + " " + year + "/" + month + "/" + day + ":" + hours + ":" + minutes + "</li>");
+
+            }
+
+
+        }, "json");
+        moreinfostatus = true;
+    }
+    else {
+        $("#moreinfolist").hide(100);
+        moreinfostatus = false;
+    }
 }

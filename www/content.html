@@ -37,11 +37,18 @@
 
     </div>
     <div><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></div>
+    <div><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></div>
     <div><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></div>
 </div>
     <div id="location_history">
         <div class="content">
         <div class="content_data"></div>
+        </div>
+    </div>
+    <div id="settings_page">
+        <div id="settings_content">
+            <div><input id="mode" type="checkbox"><span>Camera Auto ON/OFF</span></div>
+            <button class="reject" onclick="loadContent('main','')">Back</button>
         </div>
     </div>
 </body>

@@ -207,3 +207,10 @@ position: absolute;right: 0;top: 3px;}
 .green{
     color: #2FEC0E;
 }
+#settings{
+    font-size: 40px;
+    position: absolute;
+    bottom: 10px;
+    /* right: 10px; */
+    color: black;
+}
