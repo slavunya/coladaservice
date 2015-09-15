@@ -118,7 +118,7 @@ function formSubmit() {
 
     var isConnected = checkConnection();
     if (!isConnected) {
-        callback({status: {error: true}, error: "Connection error"});
+//        callback({status: {error: true}, error: "Connection error"});
         store.setItem(id, JSON.stringify(select));
 
         return false;
@@ -222,7 +222,7 @@ function accept(guid, location_id) {
     var obj={date:od.date,guid: od.guid,reject:0,location_id:od.location_id};
     var isConnected = checkConnection();
     if (!isConnected) {
-        callback({status: {error: true}, error: "Connection error"});
+//        callback({status: {error: true}, error: "Connection error"});
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
