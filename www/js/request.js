@@ -7,7 +7,7 @@ $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
 });
-
+var store = window.localStorage;
 function onDeviceReady() {
     StatusBar.overlaysWebView(false);
 }
@@ -119,8 +119,12 @@ function formSubmit() {
     var isConnected = checkConnection();
     if (!isConnected) {
         callback({status: {error: true}, error: "Connection error"});
+        store.setItem(id, JSON.stringify(select));
+
         return false;
     }
+
+
     var od = {};
     od.guid = id;
     od.location_id = select;
@@ -215,6 +219,13 @@ function accept(guid, location_id) {
     od.guid = guid;
     od.reject = 0;
     od.location_id = location_id;
+    var obj={date:od.date,guid: od.guid,reject:0,location_id:od.location_id};
+    var isConnected = checkConnection();
+    if (!isConnected) {
+        callback({status: {error: true}, error: "Connection error"});
+        store.setItem("accept", JSON.stringify(obj));
+        return false;
+    }
     $.post(baseUrl, od, function (result) {
         console.log("accept");
         console.log(result);
