@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Content</title>
-</head>
-<body>
-<div id="login">
-    <form id="login-form" action="">
-        <div class="blocks">
-            <input type="text" name="login" required placeholder="Enter login">
+    <head>
+        <meta charset="UTF-8">
+        <title>Content</title>
+    </head>
+    <body>
+        <div id="login">
+            <form id="login-form" action="">
+                <div class="blocks">
+                    <input type="text" name="login" required placeholder="Enter login">
+                </div>
+                <div class="blocks">
+                    <input type="password" name="password" required placeholder="Enter password">
+                </div>
+                <div>
+                    <a href="config.xml"></a>
+                    <button class="submit" type="submit">Login</button>
+                </div>
+            </form>
         </div>
-        <div class="blocks">
-            <input type="password" name="password" required placeholder="Enter password">
-        </div>
-        <div>
-            <a href="config.xml"></a>
-            <button class="submit" type="submit">Login</button>
-        </div>
-    </form>
-</div>
-<div id="main">
-    <div id="submitform">
-        <div class="blocks">
-            <select id="list" name="list">
-                <option value="0">Select location</option>
-            </select>
-        </div >
-        <div class="blocks" >
-            <input id="guid" type="text" name='guid' placeholder="Scan code"><span class="qr"><a onclick="scanBarcode()"><img  src="img/qr.png"></a></span>
-        </div>
-        <div class="submit-holder">
-            <button class="submit" onclick="formSubmit()">Submit</button>
-        </div>
-    </div>
-    <div class="content">
+        <div id="main">
+            <div id="submitform">
+                <div class="blocks">
+                    <select id="list" name="list">
+                        <option value="0">Select location</option>
+                    </select>
+                </div >
+                <div class="blocks" >
+                    <input id="guid" type="text" name='guid' placeholder="Scan code"><span class="qr"><a onclick="scanBarcode()"><img  src="img/qr.png"></a></span>
+                </div>
+                <div class="submit-holder">
+                    <button class="submit" onclick="formSubmit()">Submit</button>
+                </div>
+            </div>
+            <div class="content">
 
-    </div>
-    <div><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></div>
-    <div><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></div>
-    <div><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></div>
-</div>
-    <div id="location_history">
-        <div class="content">
-        <div class="content_data"></div>
+            </div>
+            <div><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></div>
+            <div><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></div>
+            <div><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></div>
         </div>
-    </div>
-    <div id="settings_page">
-        <div id="settings_content">
-            <div><input id="mode" type="checkbox" ><span>Camera Auto ON/OFF</span></div>
-            <button class="reject" onclick="loadContent('main','')">Back</button>
+        <div id="location_history">
+            <div class="content">
+                <div class="content_data"></div>
+            </div>
         </div>
-    </div>
-</body>
+        <div id="settings_page">
+            <span class="setting_page_title">  Camera Auto</span>
+        <div class="switch">
+             
+            <input type="checkbox" id="switch" class="switch-check">
+            <label for="switch" class="switch-label">
+                Опция
+                <span class="switch-slider switch-slider-on"></span>
+                <span class="switch-slider switch-slider-off"></span>
+            </label>
+           
+        </div>
+        </div>
+        <!--        <div id="settings_page">
+                    <div id="settings_content" class="switch">
+                        <div><input id="mode" type="checkbox" ><span>Camera Auto ON/OFF</span></div>
+                        <input type="checkbox" id="model" class="switch-check">
+                        <label for="model" class="switch-label">Опция
+                            <span class="switch-slider switch-slider-on"></span>
+                            <span class="switch-slider switch-slider-off"></span></label>
+                        <button class="reject" onclick="loadContent('main', '')">Back</button>
+                    </div>
+                </div>-->
+    </body>
 </html>

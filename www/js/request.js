@@ -74,9 +74,9 @@ function loadContent(page, result) {
                     
                 }
                     
-                $('#mode').val($(this).is(':checked'));
+                $('#switch').val($(this).is(':checked'));
            
-                $('#mode').change(function () {
+                $('#switch').change(function () {
                     if ($(this).is(":checked")) {
                         checked = true;
                     }
