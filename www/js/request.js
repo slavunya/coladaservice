@@ -191,6 +191,9 @@ function accept(guid, location_id) {
 
         if (result.status === "success") {
             clean();
+            if(checked){
+                scanBarcode();
+            }
         }
 
     }, "json");
