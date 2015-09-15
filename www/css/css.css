@@ -221,7 +221,8 @@ header img{
     height:54px;
 }
 .switch {
-    float: right;
+    text-align: center;
+    /* float: right; */
     position:relative;
     display:inline-block;
     margin: 0 165px 50px 0;
@@ -242,6 +243,7 @@ header img{
     left:0;
     /* height: 5px; */
     text-indent:-9999px;
+    /* width: 194px; */
 }
 .switch-slider {
     border-radius:27px;
@@ -297,7 +299,8 @@ header img{
     width:54px;
 }
 .setting_page_title{
-    float: left;
+    /* float: left; */
+    text-align: center;
     font-size: 20px;
     margin: 17px 0 0px 100px;
     display: block;
