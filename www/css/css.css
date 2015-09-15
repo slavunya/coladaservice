@@ -222,10 +222,10 @@ header img{
 }
 .switch {
     text-align: center;
-    /* float: right; */
+    float: right;
     position:relative;
     display:inline-block;
-    margin: 0 165px 50px 0;
+    /* margin: 0 165px 50px 0; */
     /* height: 18px; */
     /* width: 89px; */
 }
@@ -305,4 +305,9 @@ header img{
     font-size: 20px;
     /* margin: 1px 0 0px 112px; */
     display: block;
+}
+.settings_switch{
+    display: inline-block;
+    margin: 0 0 26px 0;
+    width: 71%;
 }
