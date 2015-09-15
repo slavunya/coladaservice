@@ -68,7 +68,7 @@ function loadContent(page, result) {
                 //set initial state.
                 if(checked){
                    // 
-                    document.getElementById("mode").setAttribute("checked","checked");
+                    document.getElementById("switch").setAttribute("checked","checked");
                 }
                 else{
                     

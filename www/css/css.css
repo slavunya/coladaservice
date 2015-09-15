@@ -301,8 +301,8 @@ header img{
 }
 .setting_page_title{
     float: left;
-    text-align: center;
+    /* text-align: left; */
     font-size: 20px;
-    margin: 1px 0 0px 224px;
+    /* margin: 1px 0 0px 112px; */
     display: block;
 }
