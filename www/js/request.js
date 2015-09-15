@@ -116,6 +116,11 @@ function formSubmit() {
         return false;
     }
 
+    var isConnected = checkConnection();
+    if (!isConnected) {
+        callback({status: {error: true}, error: "Connection error"});
+        return false;
+    }
     var od = {};
     od.guid = id;
     od.location_id = select;
@@ -163,7 +168,32 @@ function formSubmit() {
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
     }, "json");
 }
+function checkConnection() {
+    try {
+        if (typeof (navigator.connection) === 'undefined') {
+            return true;  // is browser
+        }
+        var networkState = navigator.connection.type;
 
+        var states = {};
+        states[Connection.UNKNOWN] = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI] = 'WiFi connection';
+        states[Connection.CELL_2G] = 'Cell 2G connection';
+        states[Connection.CELL_3G] = 'Cell 3G connection';
+        states[Connection.CELL_4G] = 'Cell 4G connection';
+        states[Connection.CELL] = 'Cell generic connection';
+        states[Connection.NONE] = 'No network connection';
+
+        if (networkState === Connection.NONE) {
+            return false;
+        }
+        return true;
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 function getlocation() {
     var od = {};
     od.locations = "get";
