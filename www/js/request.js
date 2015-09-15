@@ -1,7 +1,7 @@
 var scan = {
     slipObjectsArray: []
 };
-     var checked=false;
+var checked = false;
 var moreinfostatus = false;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -66,16 +66,16 @@ function loadContent(page, result) {
         $('#page').load('content.html #settings_page', function () {
             $(document).ready(function () {
                 //set initial state.
-                if(checked){
-                   // 
-                    document.getElementById("switch").setAttribute("checked","checked");
+                if (checked) {
+                    // 
+                    document.getElementById("switch").setAttribute("checked", "checked");
                 }
-                else{
-                    
+                else {
+
                 }
-                    
+
                 $('#switch').val($(this).is(':checked'));
-           
+
                 $('#switch').change(function () {
                     if ($(this).is(":checked")) {
                         checked = true;
@@ -191,9 +191,7 @@ function accept(guid, location_id) {
 
         if (result.status === "success") {
             clean();
-            if(checked){
-                scanBarcode();
-            }
+
         }
 
     }, "json");
@@ -222,9 +220,13 @@ function getTime() {
 }
 
 function clean() {
+    if (checked) {
+        scanBarcode();
+    }
     $(".content").hide(100);
     $("#submitform").show(100);
     $('input[name=guid]').val("");
+
 }
 
 function showAlert(message, title) {
@@ -294,8 +296,8 @@ function scanBarcodeProcess(callback) {
 function addSlipNumberToView(slipNumber) {
 
     $('#guid').val(slipNumber);
-    if(checked){
-    formSubmit();
+    if (checked) {
+        formSubmit();
     }
 //     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
 
