@@ -68,7 +68,7 @@ function loadContent(page, result) {
                 var locations = JSON.parse(store.getItem("locations"));
 
                 for (var i in locations.data) {
-                    var obj = result.data[i];
+                    var obj = locations.data[i];
                     $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
                 }
             }
