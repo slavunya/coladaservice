@@ -37,7 +37,12 @@ $(document).on('submit', '#login-form', function () {
     var od = {};
     od.login = login;
     od.password = password;
-
+    var isConnected = checkConnection();
+    if (!isConnected) {
+//        callback({status: {error: true}, error: "Connection error"});
+        loadContent('main', '');
+        
+    }
     $.post(baseUrl, od, function (result) {
 
         console.log("Login");
