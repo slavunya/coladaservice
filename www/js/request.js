@@ -72,6 +72,7 @@ function loadContent(page, result) {
         $('#page').load('content.html #main', function () {
             getlocation();
             if (offlinemode) {
+                $(".titleMode").append("Offline Mode");
                 var locations = JSON.parse(store.getItem("locations"));
 
                 for (var i in locations.data) {

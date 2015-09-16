@@ -328,3 +328,8 @@ header img{
     /* margin: 0  0 0; */
     display: inline-block;
 }
+.titleMode{
+    display: block;
+    color: rgb(253, 16, 16);
+    margin: 0 0 8px 0;
+}
