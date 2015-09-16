@@ -71,7 +71,7 @@ function loadContent(page, result) {
     if (page === 'main') {
         $('#page').load('content.html #main', function () {
             getlocation();
-            if (store.getItem("scans").length > 0) {
+            if (typeof(store.getItem("scans"))!=="undefined") {
                 $("#sendData").show();
             }
             if (offlinemode) {
