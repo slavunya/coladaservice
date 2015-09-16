@@ -160,6 +160,8 @@ function formSubmit() {
     scans.push(result);
     if (offlinemode) {
         store.setItem("scans", JSON.stringify(scans));
+        clean();
+        return false;
     }
     $.post(baseUrl, od, function (result) {
 
