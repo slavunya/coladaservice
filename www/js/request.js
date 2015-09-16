@@ -71,6 +71,9 @@ function loadContent(page, result) {
     if (page === 'main') {
         $('#page').load('content.html #main', function () {
             getlocation();
+            if(store.getItem("scans").length>0){
+                $("#sendData").show();
+            }
             if (offlinemode) {
                 $(".titleMode").append("Offline Mode");
                 var locations = JSON.parse(store.getItem("locations"));
@@ -438,4 +441,7 @@ function moreinfo(guid) {
         $("#moreinfolist").hide(100);
         moreinfostatus = false;
     }
+}
+function uploadData(){
+    
 }
