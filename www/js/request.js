@@ -154,7 +154,7 @@ function formSubmit() {
     od.location_id = select;
     od.login = login;
     od.password = password;
-    var result={guid:guid,location_id:location_id,login:login,password:password};
+    var result={guid:od.guid,location_id:od.location_id};
     if (offlinemode) {
         store.setItem("scans", JSON.stringify(result));
     }
