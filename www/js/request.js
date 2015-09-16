@@ -165,7 +165,7 @@ function formSubmit() {
         store.setItem("scans", JSON.stringify(scans));
         clean();
         if (store.getItem("scans").length > 0) {
-            $("#sendData").show();
+            $("#sendData").css({'display':'inline!Important'});
         }
         return false;
     }
