@@ -1,8 +1,11 @@
 var scan = {
     slipObjectsArray: []
 };
+var login = '';
+var password = '';
 var checked = false;
 var moreinfostatus = false;
+var offlinemode = false;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -11,12 +14,13 @@ var store = window.localStorage;
 function onDeviceReady() {
     StatusBar.overlaysWebView(false);
 }
-
-var baseUrl = "http://coladaservices.de/test_icans26/api/scannerApi.php";
+var store = window.localStorage;
+var baseUrl = "http://coladaservices.de/test_general/";
+//        "http://coladaservices.de/test_icans26/api/scannerApi.php";
 
 $(document).on('submit', '#login-form', function () {
-    var login = $('input[name=login]').val();
-    var password = $('input[name=password]').val();
+    login = $('input[name=login]').val();
+    password = $('input[name=password]').val();
 
     if (login.length == '0') {
         showAlert('Please input login', 'Message');
@@ -60,6 +64,14 @@ function loadContent(page, result) {
     if (page === 'main') {
         $('#page').load('content.html #main', function () {
             getlocation();
+            if (offlinemode) {
+                var locations = JSON.parse(store.getItem("locations"));
+
+                for (var i in locations.data) {
+                    var obj = result.data[i];
+                    $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
+                }
+            }
         });
     }
     if (page === 'setting') {
@@ -70,11 +82,15 @@ function loadContent(page, result) {
                     // 
                     document.getElementById("switch").setAttribute("checked", "checked");
                 }
-                else {
 
+                if (offlinemode) {
+                    // 
+                    document.getElementById("offlinemode").setAttribute("checked", "checked");
                 }
 
+
                 $('#switch').val($(this).is(':checked'));
+                $('#offlinemode').val($(this).is(':checked'));
 
                 $('#switch').change(function () {
                     if ($(this).is(":checked")) {
@@ -82,6 +98,14 @@ function loadContent(page, result) {
                     }
                     else {
                         checked = false;
+                    }
+                });
+                $('#offlinemode').change(function () {
+                    if ($(this).is(":checked")) {
+                        offlinemode = true;
+                    }
+                    else {
+                        offlinemode = false;
                     }
                 });
             });
@@ -116,6 +140,8 @@ function formSubmit() {
         return false;
     }
 
+
+
     var isConnected = checkConnection();
     if (!isConnected) {
 //        callback({status: {error: true}, error: "Connection error"});
@@ -123,11 +149,11 @@ function formSubmit() {
 
         return false;
     }
-
-
     var od = {};
     od.guid = id;
     od.location_id = select;
+    od.login = login;
+    od.password = password;
 
     $.post(baseUrl, od, function (result) {
 
@@ -201,11 +227,13 @@ function checkConnection() {
 function getlocation() {
     var od = {};
     od.locations = "get";
+    od.login = login;
+    od.password = password;
     $.post(baseUrl, od, function (result) {
 
         console.log("Location");
         console.log(result);
-
+        store.setItem("locations", JSON.stringify(result));
         for (i in result.data) {
             var obj = result.data[i];
             $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
@@ -219,7 +247,9 @@ function accept(guid, location_id) {
     od.guid = guid;
     od.reject = 0;
     od.location_id = location_id;
-    var obj={date:od.date,guid: od.guid,reject:0,location_id:od.location_id};
+    od.login = login;
+    od.password = password;
+    var obj = {date: od.date, guid: od.guid, reject: 0, location_id: od.location_id};
     var isConnected = checkConnection();
     if (!isConnected) {
 //        callback({status: {error: true}, error: "Connection error"});
@@ -244,6 +274,8 @@ function reject(guid, location_id) {
     od.reject = 1;
     od.guid = guid;
     od.location_id = location_id;
+    od.login = login;
+    od.password = password;
     $.post(baseUrl, od, function (result) {
         console.log("Reject");
         console.log(result);
@@ -346,6 +378,8 @@ function addSlipNumberToView(slipNumber) {
 function gethistory() {
     var od = {};
     od.history = "get";
+    od.login = login;
+    od.password = password;
     $.post(baseUrl, od, function (result) {
         console.log(result);
         if (result.status == "success") {
@@ -361,6 +395,8 @@ function moreinfo(guid) {
         var od = {};
         od.user_history = "get";
         od.guid = guid;
+        od.login = login;
+        od.password = password;
         $.post(baseUrl, od, function (result) {
             console.log(result);
             $("#moreinfolist").css({'display': 'block'});

@@ -173,16 +173,17 @@ header img{
 
 #sign-out{
     font-size: 40px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+    /* position: absolute; */
+    /* float: right; */
+    /* right: 10px; */
     color: black;
 }
 #get-history{
+    /* float: right; */
     font-size: 40px;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+    /* position: absolute; */
+    /* bottom: 10px; */
+    /* left: 10px; */
     color: black;
 }
 #moreinfolist{
@@ -209,9 +210,10 @@ header img{
 }
 #settings{
     font-size: 40px;
-    position: absolute;
-    bottom: 10px;
+    /* position: absolute; */
+    /* bottom: 10px; */
     /* right: 10px; */
+    /* float: right; */
     color: black;
 }
 .switch,
@@ -310,4 +312,19 @@ header img{
     display: inline-block;
     margin: 0 0 26px 0;
     width: 71%;
+}
+.control_bottom_buttons{
+    width: 100%;
+    float: left;
+    border-top: 1px solid black;
+    /* margin: 18px 0 0px 31px; */
+    padding: 37px 0 0 0;
+    /* margin: 2px 0px 0 -33px; */
+}
+.control_bottom_buttons li{
+    list-style:none;
+    padding: 0 14% 0 6%;
+    text-align: center;
+    /* margin: 0  0 0; */
+    display: inline-block;
 }

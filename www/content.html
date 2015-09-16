@@ -36,9 +36,14 @@
             <div class="content">
 
             </div>
-            <div><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></div>
-            <div><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></div>
-            <div><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></div>
+            <div class="parentControlBottomButtons">
+                <ul class="control_bottom_buttons">
+                    <li><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
+                    <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
+                    <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
+                </ul>
+            </div>
+
         </div>
         <div id="location_history">
             <div class="content">
@@ -52,6 +57,19 @@
 
                     <input type="checkbox" id="switch" class="switch-check">
                     <label for="switch" class="switch-label">
+                        Опция
+                        <span class="switch-slider switch-slider-on"></span>
+                        <span class="switch-slider switch-slider-off"></span>
+                    </label>
+
+                </div>
+            </div>
+            <div class="settings_switch">
+                <span class="setting_page_title">Offline mode</span>
+                <div class="switch">
+
+                    <input type="checkbox" id="offlinemode" class="switch-check">
+                    <label for="offlinemode" class="switch-label">
                         Опция
                         <span class="switch-slider switch-slider-on"></span>
                         <span class="switch-slider switch-slider-off"></span>
