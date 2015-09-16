@@ -356,7 +356,7 @@ header img{
     margin: 0 0 8px 0;
 }
 #sendData{
-    display: none!important;
+    display: none;
     font-size: 40px;
-    color: black;   
+    color: black;
 }

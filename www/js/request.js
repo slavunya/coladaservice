@@ -159,13 +159,16 @@ function formSubmit() {
     od.location_id = select;
     od.login = login;
     od.password = password;
-    var result = {guid: od.guid, location_id: od.location_id};
-    scans.push(result);
     if (offlinemode) {
+        od.mode="1";
+        od.date = getTime();
+        var result = {guid: od.guid, location_id: od.location_id, date: od.date};
+        scans.push(result);
         store.setItem("scans", JSON.stringify(scans));
+
         clean();
         if (store.getItem("scans").length > 0) {
-            $("#sendData").css({'display':'inline!Important'});
+            $("#sendData").css({'display': 'inline'});
         }
         return false;
     }
