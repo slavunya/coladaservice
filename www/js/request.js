@@ -39,6 +39,7 @@ $(document).on('submit', '#login-form', function () {
     od.password = password;
     var isConnected = checkConnection();
     if (!isConnected) {
+        offlinemode=true;
 //        callback({status: {error: true}, error: "Connection error"});
         loadContent('main', '');
 
