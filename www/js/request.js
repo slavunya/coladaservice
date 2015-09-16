@@ -41,7 +41,7 @@ $(document).on('submit', '#login-form', function () {
     if (!isConnected) {
 //        callback({status: {error: true}, error: "Connection error"});
         loadContent('main', '');
-        
+
     }
     $.post(baseUrl, od, function (result) {
 
@@ -147,19 +147,16 @@ function formSubmit() {
 
 
 
-    var isConnected = checkConnection();
-    if (!isConnected) {
-//        callback({status: {error: true}, error: "Connection error"});
-        store.setItem(id, JSON.stringify(select));
 
-        return false;
-    }
     var od = {};
     od.guid = id;
     od.location_id = select;
     od.login = login;
     od.password = password;
-
+    var result={guid:guid,location_id:location_id,login:login,password:password};
+    if (offlinemode) {
+        store.setItem("scans", JSON.stringify(result));
+    }
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
