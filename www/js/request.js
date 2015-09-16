@@ -6,7 +6,7 @@ var password = '';
 var checked = false;
 var moreinfostatus = false;
 var offlinemode = false;
-var scans=[];
+var scans = [];
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -40,7 +40,7 @@ $(document).on('submit', '#login-form', function () {
     od.password = password;
     var isConnected = checkConnection();
     if (!isConnected) {
-        offlinemode=true;
+        offlinemode = true;
 //        callback({status: {error: true}, error: "Connection error"});
         loadContent('main', '');
 
@@ -71,7 +71,7 @@ function loadContent(page, result) {
     if (page === 'main') {
         $('#page').load('content.html #main', function () {
             getlocation();
-            if(store.getItem("scans").length>0){
+            if (store.getItem("scans").length > 0) {
                 $("#sendData").show();
             }
             if (offlinemode) {
@@ -159,11 +159,14 @@ function formSubmit() {
     od.location_id = select;
     od.login = login;
     od.password = password;
-    var result={guid:od.guid,location_id:od.location_id};
+    var result = {guid: od.guid, location_id: od.location_id};
     scans.push(result);
     if (offlinemode) {
         store.setItem("scans", JSON.stringify(scans));
         clean();
+        if (store.getItem("scans").length > 0) {
+            $("#sendData").show();
+        }
         return false;
     }
     $.post(baseUrl, od, function (result) {
@@ -442,6 +445,6 @@ function moreinfo(guid) {
         moreinfostatus = false;
     }
 }
-function uploadData(){
-    
+function uploadData() {
+
 }
