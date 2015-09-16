@@ -6,6 +6,7 @@ var password = '';
 var checked = false;
 var moreinfostatus = false;
 var offlinemode = false;
+var scans=[];
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -155,8 +156,9 @@ function formSubmit() {
     od.login = login;
     od.password = password;
     var result={guid:od.guid,location_id:od.location_id};
+    scans.push(result);
     if (offlinemode) {
-        store.setItem("scans", JSON.stringify(result));
+        store.setItem("scans", JSON.stringify(scans));
     }
     $.post(baseUrl, od, function (result) {
 
