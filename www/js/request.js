@@ -459,6 +459,10 @@ function uploadData() {
     data.password=JSON.parse(store.getItem("password"));
     $.post(baseUrl, data, function (result) {
         console.log(result);
-        
+        if(result.message=="Error login")
+        {
+            loadContent('login');
+        }
+            
     });
 }
