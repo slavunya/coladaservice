@@ -39,8 +39,8 @@ $(document).on('submit', '#login-form', function () {
     od.login = login;
     od.password = password;
 //    var user={login:od.login,password:od.password};
-    store.setItem("login",JSON.stringify(od.login));
-    store.setItem("password",JSON.stringify(od.password));
+    store.setItem("login", JSON.stringify(od.login));
+    store.setItem("password", JSON.stringify(od.password));
     var isConnected = checkConnection();
     if (!isConnected) {
         offlinemode = true;
@@ -167,7 +167,7 @@ function formSubmit() {
         od.date = getTime();
         var result = {guid: od.guid, location_id: od.location_id, date: od.date};
         scans.push(result);
-        store.setItem("scans", JSON.stringJSONify(scans));
+        store.setItem("scans", JSON.stringify(scans));
 
         clean();
         if (store.getItem("scans").length > 0) {
@@ -453,21 +453,21 @@ function moreinfo(guid) {
 }
 function uploadData() {
     var data = {};
-    data.id="send";
-    data.data=store.getItem("scans");
-    data.login=JSON.parse(store.getItem("login"));
-    data.password=JSON.parse(store.getItem("password"));
+    data.id = "send";
+    data.data = store.getItem("scans");
+    data.login = JSON.parse(store.getItem("login"));
+    data.password = JSON.parse(store.getItem("password"));
     $.post(baseUrl, data, function (result) {
         console.log(result);
-        if(result.message=="Error login")
+        if (result.message == "Error login")
         {
             loadContent('login');
         }
-        if(result.status=="success"){
+        if (result.status == "success") {
             localStorage.removeItem("scans");
             loadContent('main');
         }
-        
-            
+
+
     }, "json");
 }
