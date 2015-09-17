@@ -40,7 +40,7 @@ $(document).on('submit', '#login-form', function () {
     od.password = password;
 //    var user={login:od.login,password:od.password};
     store.setItem("login",JSON.stringify(od.login));
-    store.setItem("login",JSON.stringify(od.password));
+    store.setItem("password",JSON.stringify(od.password));
     var isConnected = checkConnection();
     if (!isConnected) {
         offlinemode = true;
