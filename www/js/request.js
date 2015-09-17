@@ -451,7 +451,7 @@ function moreinfo(guid) {
 function uploadData() {
     var data = {};
     data.id="send";
-    data.data=store.GetItem("scans");
+    data.data=store.getItem("scans");
     $.post(baseUrl, data, function (result) {
         console.log(result);
         
