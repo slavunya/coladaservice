@@ -153,13 +153,16 @@ header img{
     /* position: absolute; */
     /* bottom: 0; */
 }
-
+.cd{
+     text-align: left;
+}
 .content_data {
     border-radius: 6px;
     border: 1px solid black;
     font-weight: 600;
     margin: 1px 0 0 0;
     padding: 15px;
+   
     background-color: rgb(255, 255, 255);
 }
 #scan-time{
@@ -216,7 +219,7 @@ header img{
     height: 108px;
     font-weight: 600;
     margin: 13px -15px 0 -15px;
-    padding: 15px 0px 0 0px;
+    padding: 15px 0px 0 10px;
     overflow: scroll;
     text-align: left;
     /* width: 100%; */

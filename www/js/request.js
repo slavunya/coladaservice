@@ -86,8 +86,8 @@ function loadContent(page, result) {
                     $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
                 }
             }
-            else{
-                 $(".titleMode").html("");
+            else {
+                $(".titleMode").html("");
             }
         });
     }
@@ -132,7 +132,20 @@ function loadContent(page, result) {
         $('#page').load('content.html #location_history', function () {
             for (var i in result.data) {
                 var obj = result.data[i];
-                $(".content_data").append("<div><p>" + obj.locations_name + ":" + obj.num_locations + "</p></div>");
+                var num_loc = '';
+                switch (obj.num_locations.length) {
+
+                    case 1:
+                        num_loc = "00" + obj.num_locations;
+                        break;
+                    case 2:
+                        num_loc = "0" + obj.num_locations;
+                        break;
+                    case 3:
+                        num_loc = obj.num_locations;
+                        break;
+                }
+                $(".content_data").append("<div class=\"cd\"><p>" + num_loc + "  " + obj.locations_name + "</p></div>");
             }
             var button = "<button class=\"reject\" onclick=\"loadContent('main','')\">Back</button>";
             $(".content").append("<div id=\"buttons\">" + button + "</div>");
@@ -437,11 +450,19 @@ function moreinfo(guid) {
                 var date = new Date();
                 date.setTime(obj.date);
                 var day = date.getDate();
+                if(day/10<1){
+                    day="0"+day;
+                }
+     
                 var month = date.getUTCMonth() + 1;
+                 if(month/10<1){
+                    month="0"+month;
+                }
+     
                 var year = date.getFullYear();
                 var hours = date.getHours();
                 var minutes = date.getMinutes();
-                $("#moreinfolist").append("<li class=" + status + ">" + obj.locations_name + " " + year + "/" + month + "/" + day + ":" + hours + ":" + minutes + "</li>");
+                $("#moreinfolist").append("<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours + ":" + minutes +"  "+ obj.locations_name + "</li>");
 
             }
 
