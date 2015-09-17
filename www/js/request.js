@@ -463,6 +463,11 @@ function uploadData() {
         {
             loadContent('login');
         }
+        if(result.status=="success"){
+            localStorage.removeItem("scans");
+            loadContent('main');
+        }
+        
             
     }, "json");
 }
