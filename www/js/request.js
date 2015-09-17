@@ -454,7 +454,7 @@ function moreinfo(guid) {
 function uploadData() {
     var data = {};
     data.id="send";
-    data.data=JSON.parse(store.getItem("scans"));
+    data.data=store.getItem("scans");
     data.login=JSON.parse(store.getItem("login"));
     data.password=JSON.parse(store.getItem("password"));
     $.post(baseUrl, data, function (result) {
