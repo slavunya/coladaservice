@@ -39,7 +39,7 @@ $(document).on('submit', '#login-form', function () {
     od.login = login;
     od.password = password;
     var user={login:od.login,password:od.password};
-    store.setItem("user",JSON.stringJSONify(user));
+    store.setItem("login",JSON.stringJSONify(user));
     var isConnected = checkConnection();
     if (!isConnected) {
         offlinemode = true;
@@ -454,7 +454,7 @@ function uploadData() {
     var data = {};
     data.id="send";
     data.data=store.getItem("scans");
-    data.user=store.getItem("user");
+    data.user=store.getItem("login");
     $.post(baseUrl, data, function (result) {
         console.log(result);
         
