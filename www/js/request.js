@@ -464,5 +464,5 @@ function uploadData() {
             loadContent('login');
         }
             
-    });
+    }, "json");
 }
