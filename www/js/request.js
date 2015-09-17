@@ -86,6 +86,9 @@ function loadContent(page, result) {
                     $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
                 }
             }
+            else{
+                 $(".titleMode").html("");
+            }
         });
     }
     if (page === 'setting') {
