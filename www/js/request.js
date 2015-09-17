@@ -38,7 +38,7 @@ $(document).on('submit', '#login-form', function () {
     var od = {};
     od.login = login;
     od.password = password;
-    var user={login:od.login,password:od.password}
+    var user={login:od.login,password:od.password};
     store.setItem("user",JSON.stringJSONify(user));
     var isConnected = checkConnection();
     if (!isConnected) {
