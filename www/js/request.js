@@ -71,7 +71,7 @@ function loadContent(page, result) {
     if (page === 'main') {
         $('#page').load('content.html #main', function () {
             getlocation();
-            if (store.getItem("scans")!==null) {
+            if (store.getItem("scans") !== null) {
                 $("#sendData").show();
             }
             if (offlinemode) {
@@ -160,7 +160,7 @@ function formSubmit() {
     od.login = login;
     od.password = password;
     if (offlinemode) {
-        od.mode="1";
+        od.mode = "1";
         od.date = getTime();
         var result = {guid: od.guid, location_id: od.location_id, date: od.date};
         scans.push(result);
@@ -449,5 +449,11 @@ function moreinfo(guid) {
     }
 }
 function uploadData() {
-
+    var data = {};
+    data.id="send";
+    data.data=store.GetItem("scans");
+    $.post(baseUrl, data, function (result) {
+        console.log(result);
+        
+    });
 }
