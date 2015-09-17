@@ -38,6 +38,8 @@ $(document).on('submit', '#login-form', function () {
     var od = {};
     od.login = login;
     od.password = password;
+    var user={login:od.login,password:od.password}
+    store.setItem("user",JSON.stringJSONify(user));
     var isConnected = checkConnection();
     if (!isConnected) {
         offlinemode = true;
@@ -164,7 +166,7 @@ function formSubmit() {
         od.date = getTime();
         var result = {guid: od.guid, location_id: od.location_id, date: od.date};
         scans.push(result);
-        store.setItem("scans", JSON.stringify(scans));
+        store.setItem("scans", JSON.stringJSONify(scans));
 
         clean();
         if (store.getItem("scans").length > 0) {
@@ -452,6 +454,7 @@ function uploadData() {
     var data = {};
     data.id="send";
     data.data=store.getItem("scans");
+    data.user=store.getItem("user");
     $.post(baseUrl, data, function (result) {
         console.log(result);
         

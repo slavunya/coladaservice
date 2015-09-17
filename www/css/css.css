@@ -345,7 +345,7 @@ header img{
 }
 .control_bottom_buttons li{
     list-style:none;
-    padding: 0 6% 0 6%;
+   /* padding: 0 6% 0 6%;*/
     text-align: center;
     /* margin: 0  0 0; */
     display: inline-block;
