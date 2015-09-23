@@ -15,7 +15,6 @@ var store = window.localStorage;
 function onDeviceReady() {
     StatusBar.overlaysWebView(false);
 }
-var store = window.localStorage;
 var baseUrl = "https://seera.de/scanner-api/index.php";
 
 
@@ -497,7 +496,7 @@ function uploadData() {
             }
             if (result.status == "success") {
 
-                localStorage.removeItem("scans");
+                store.removeItem("scans");
                 loadContent('main');
             }
 
