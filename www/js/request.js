@@ -16,8 +16,8 @@ function onDeviceReady() {
     StatusBar.overlaysWebView(false);
 }
 var store = window.localStorage;
-var baseUrl = "http://coladaservices.de/test_general/";
-//        "http://coladaservices.de/test_icans26/api/scannerApi.php";
+var baseUrl = "https://seera.de/scanner-api/index.php";
+
 
 $(document).on('submit', '#login-form', function () {
     login = $('input[name=login]').val();
@@ -93,39 +93,39 @@ function loadContent(page, result) {
     }
     if (page === 'setting') {
         $('#page').load('content.html #settings_page', function () {
-            $(document).ready(function () {
-                //set initial state.
-                if (checked) {
-                    // 
-                    document.getElementById("switch").setAttribute("checked", "checked");
+            //  $(document).ready(function () {
+            //set initial state.
+            if (checked) {
+                // 
+                document.getElementById("switch").setAttribute("checked", "checked");
+            }
+
+            if (offlinemode) {
+                // 
+                document.getElementById("offlinemode").setAttribute("checked", "checked");
+            }
+
+
+            $('#switch').val($(this).is(':checked'));
+            $('#offlinemode').val($(this).is(':checked'));
+
+            $('#switch').change(function () {
+                if ($(this).is(":checked")) {
+                    checked = true;
                 }
-
-                if (offlinemode) {
-                    // 
-                    document.getElementById("offlinemode").setAttribute("checked", "checked");
+                else {
+                    checked = false;
                 }
-
-
-                $('#switch').val($(this).is(':checked'));
-                $('#offlinemode').val($(this).is(':checked'));
-
-                $('#switch').change(function () {
-                    if ($(this).is(":checked")) {
-                        checked = true;
-                    }
-                    else {
-                        checked = false;
-                    }
-                });
-                $('#offlinemode').change(function () {
-                    if ($(this).is(":checked")) {
-                        offlinemode = true;
-                    }
-                    else {
-                        offlinemode = false;
-                    }
-                });
             });
+            $('#offlinemode').change(function () {
+                if ($(this).is(":checked")) {
+                    offlinemode = true;
+                }
+                else {
+                    offlinemode = false;
+                }
+            });
+            // });
         });
     }
     if (page === 'location_history') {
@@ -450,19 +450,19 @@ function moreinfo(guid) {
                 var date = new Date();
                 date.setTime(obj.date);
                 var day = date.getDate();
-                if(day/10<1){
-                    day="0"+day;
+                if (day / 10 < 1) {
+                    day = "0" + day;
                 }
-     
+
                 var month = date.getUTCMonth() + 1;
-                 if(month/10<1){
-                    month="0"+month;
+                if (month / 10 < 1) {
+                    month = "0" + month;
                 }
-     
+
                 var year = date.getFullYear();
                 var hours = date.getHours();
                 var minutes = date.getMinutes();
-                $("#moreinfolist").append("<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours + ":" + minutes +"  "+ obj.locations_name + "</li>");
+                $("#moreinfolist").append("<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours + ":" + minutes + "  " + obj.locations_name + "</li>");
 
             }
 
@@ -481,17 +481,27 @@ function uploadData() {
     data.data = store.getItem("scans");
     data.login = JSON.parse(store.getItem("login"));
     data.password = JSON.parse(store.getItem("password"));
-    $.post(baseUrl, data, function (result) {
-        console.log(result);
-        if (result.message == "Error login")
-        {
-            loadContent('login');
-        }
-        if (result.status == "success") {
-            localStorage.removeItem("scans");
-            loadContent('main');
-        }
+    navigator.notification.confirm(
+            'Are you sure to clear the offline scans?', // message
+            send(data), // callback to invoke with index of button pressed
+            'Message', // title
+            'Yes,No'          // buttonLabels
+            );
+
+    function send(data) {
+        $.post(baseUrl, data, function (result) {
+            console.log(result);
+            if (result.message == "Error login")
+            {
+                loadContent('login');
+            }
+            if (result.status == "success") {
+
+                localStorage.removeItem("scans");
+                loadContent('main');
+            }
 
 
-    }, "json");
+        }, "json");
+    }
 }
