@@ -421,6 +421,9 @@ function gethistory() {
             loadContent("location_history", result);
 
         }
+        else{
+            showAlert('History is empty', 'Message');
+        }
 
 
     }, "json");
@@ -443,7 +446,7 @@ function moreinfo(guid) {
                     status = "red";
                 }
                 else {
-                    status = "green";
+                    status = "black";
                 }
                 var obj = result.data[i];
                 var date = new Date();
