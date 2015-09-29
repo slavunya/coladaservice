@@ -20,4 +20,28 @@
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
+    <icon src="/res/icon/icon.png"/>
+    <splash src="res/screen/splash.png"/>
+    <gap:splash src="res/screen/splash.png"/>
+    <!-- -->
+    <icon gap:platform="android" height="96" src="/res/icon/android/icon-96-xhdpi.png" width="96"/>
+    <icon gap:platform="android" height="72" src="/res/icon/android/icon-72-hdpi.png" width="72"/>
+    <icon gap:platform="android" height="48" src="/res/icon/android/icon-48-mdpi.png" width="48"/>
+    <icon gap:platform="android" height="36" src="/res/icon/android/icon-36-ldpi.png" width="36"/>
+    
+    <gap:splash gap:platform="android" height="800" src="/res/screen/android/screen-hdpi-portrait.png" width="480"/>
+    <gap:splash gap:platform="android" height="320" src="/res/screen/android/screen-hdpi-portrait.png" width="200"/>
+    <gap:splash gap:platform="android" height="480" src="/res/screen/android/screen-hdpi-portrait.png" width="320"/>
+    <gap:splash gap:platform="android" height="1280" src="/res/screen/android/screen-hdpi-portrait.png" width="720"/>
+    
+    <icon gap:platform="ios" height="57" src="/res/icon/ios/icon-57.png" width="57"/>
+    <icon gap:platform="ios" height="72" src="/res/icon/ios/icon-72.png" width="72"/>
+    <icon gap:platform="ios" height="114" src="/res/icon/ios/icon-57-2x.png" width="114"/>
+    <icon gap:platform="ios" height="144" src="/res/icon/ios/icon-72-2x.png" width="144"/>
+    <icon gap:platform="ios" height="120" src="/res/icon/ios/icon-120.png" width="120"/>
+    <gap:splash gap:platform="ios" height="1024" src="res/screen/splash.png" width="768"/>
+    <gap:splash gap:platform="ios" height="2048" src="res/screen/splash.png" width="1536"/>
+    <gap:splash gap:platform="ios" height="480" src="res/screen/splash.png" width="320"/>
+    <gap:splash gap:platform="ios" height="960" src="res/screen/splash.png" width="640"/>
+    <gap:splash gap:platform="ios" height="1136" src="res/screen/splash.png" width="640"/>
 </widget>
