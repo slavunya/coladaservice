@@ -8,6 +8,7 @@ var moreinfostatus = false;
 var offlinemode = false;
 var scans = [];
 var scannerAuto = false;
+var currlocation = '';
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -76,7 +77,10 @@ function loadContent(page, result) {
         });
     }
     if (page === 'main') {
+
         $('#page').load('content.html #main', function () {
+
+
             getlocation();
             if (store.getItem("scans") !== null) {
                 $("#sendData").show();
@@ -94,11 +98,13 @@ function loadContent(page, result) {
                 $(".titleMode").html("");
             }
             if (scannerAuto) {
+                $('#list').val(currlocation);
+                $('#guid').fucus();
                 var input = document.getElementById('guid');
                 input.oninput = function () {
-                    if($("#guid").val().length>5){
+                    if ($("#guid").val().length > 5) {
                         formSubmit();
-                 }
+                    }
                 };
                 /*   $("#guid").oninput(function(){
                  
@@ -193,6 +199,7 @@ function formSubmit() {
     }
 
     var id = $('input[name=guid]').val();
+    currlocation = id;
     if (id.length == 0) {
         showAlert('Please scan the code', 'Message');
         //alert("Please scan the code");
