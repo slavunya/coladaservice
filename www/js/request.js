@@ -99,7 +99,7 @@ function loadContent(page, result) {
             }
             if (scannerAuto) {
                 $('#list').val(currlocation);
-                $('#guid').focus();
+                
                 var input = document.getElementById('guid');
                 input.oninput = function () {
                     if ($("#guid").val().length > 5) {
@@ -368,8 +368,12 @@ function clean() {
     if (checked) {
         scanBarcode();
     }
+   
     $(".content").hide(100);
     $("#submitform").show(100);
+     if(scannerAuto){
+         $('#guid').focus();
+     }
     $('input[name=guid]').val("");
 
 }
