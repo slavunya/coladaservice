@@ -99,7 +99,7 @@ function loadContent(page, result) {
             }
             if (scannerAuto) {
                 $('#list').val(currlocation);
-                
+
                 var input = document.getElementById('guid');
                 input.oninput = function () {
                     if ($("#guid").val().length > 5) {
@@ -368,13 +368,15 @@ function clean() {
     if (checked) {
         scanBarcode();
     }
-   
+
     $(".content").hide(100);
     $("#submitform").show(100);
-     if(scannerAuto){
-         setTimeout(function(){  $('#guid').val(222); }, 0);
-        
-     }
+    if (scannerAuto) {
+        setTimeout(function () {
+            $('#guid').trigger('touchstart');
+        }, 0);
+
+    }
     $('input[name=guid]').val("");
 
 }
