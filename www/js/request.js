@@ -372,7 +372,7 @@ function clean() {
     $(".content").hide(100);
     $("#submitform").show(100);
      if(scannerAuto){
-         setTimeout(function(){  $('#guid').focus(); }, 3000);
+         setTimeout(function(){  $('#guid').focus(); }, 0);
         
      }
     $('input[name=guid]').val("");
