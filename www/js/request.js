@@ -99,7 +99,7 @@ function loadContent(page, result) {
             }
             if (scannerAuto) {
                 $('#list').val(currlocation);
-                $('#guid').fucus();
+                $('#guid').focus();
                 var input = document.getElementById('guid');
                 input.oninput = function () {
                     if ($("#guid").val().length > 5) {
