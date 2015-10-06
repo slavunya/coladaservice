@@ -48,6 +48,10 @@ $(document).on('submit', '#login-form', function () {
         loadContent('main', '');
 
     }
+    else{
+        offlinemode = false;
+        loadContent('main', '');
+    }
     $.post(baseUrl, od, function (result) {
 
         console.log("Login");
