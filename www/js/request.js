@@ -7,6 +7,7 @@ var checked = false;
 var moreinfostatus = false;
 var offlinemode = false;
 var scans = [];
+var scannerAuto = false;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -77,7 +78,7 @@ function loadContent(page, result) {
                 $("#sendData").show();
             }
             if (offlinemode) {
-                $(".titleMode").append("Offline Mode");
+                $(".titleMode").html("Offline Mode");
                 var locations = JSON.parse(store.getItem("locations"));
 
                 for (var i in locations.data) {
@@ -103,10 +104,16 @@ function loadContent(page, result) {
                 // 
                 document.getElementById("offlinemode").setAttribute("checked", "checked");
             }
+            if (scannerAuto) {
+                // 
+                document.getElementById("scanner").setAttribute("checked", "checked");
+            }
 
+       
 
             $('#switch').val($(this).is(':checked'));
             $('#offlinemode').val($(this).is(':checked'));
+            $('#scanner').val($(this).is(':checked'));
 
             $('#switch').change(function () {
                 if ($(this).is(":checked")) {
@@ -122,6 +129,14 @@ function loadContent(page, result) {
                 }
                 else {
                     offlinemode = false;
+                }
+            });
+            $('#scanner').change(function () {
+                if ($(this).is(":checked")) {
+                    scannerAuto = true;
+                }
+                else {
+                    scannerAuto = false;
                 }
             });
             // });
@@ -421,7 +436,7 @@ function gethistory() {
             loadContent("location_history", result);
 
         }
-        else{
+        else {
             showAlert('History is empty', 'Message');
         }
 
