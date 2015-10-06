@@ -48,7 +48,7 @@ $(document).on('submit', '#login-form', function () {
         loadContent('main', '');
 
     }
-    else{
+    else {
         offlinemode = false;
         loadContent('main', '');
     }
@@ -93,6 +93,17 @@ function loadContent(page, result) {
             else {
                 $(".titleMode").html("");
             }
+            if (scannerAuto) {
+                var input = document.getElementById('guid');
+                input.oninput = function () {
+                    if($("#guid").val().length>5){
+                        formSubmit();
+                 }
+                };
+                /*   $("#guid").oninput(function(){
+                 
+                 });*/
+            }
         });
     }
     if (page === 'setting') {
@@ -113,7 +124,7 @@ function loadContent(page, result) {
                 document.getElementById("scanner").setAttribute("checked", "checked");
             }
 
-       
+
 
             $('#switch').val($(this).is(':checked'));
             $('#offlinemode').val($(this).is(':checked'));
@@ -524,5 +535,11 @@ function uploadData() {
 
 
         }, "json");
+    }
+}
+/**/
+function isAutoMode(input) {
+    if (input.value.length > 5) {
+
     }
 }
