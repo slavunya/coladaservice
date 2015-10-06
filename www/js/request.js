@@ -372,9 +372,13 @@ function clean() {
     $(".content").hide(100);
     $("#submitform").show(100);
     if (scannerAuto) {
-        setTimeout(function () {
-            $('#guid').trigger('touchstart');
-        }, 0);
+
+        $('#guid').trigger('touchstart');
+        
+        $('#guid').on('touchstart', function () {
+            $(this).focus();
+            focused = $(this);
+        });
 
     }
     $('input[name=guid]').val("");
