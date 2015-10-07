@@ -104,7 +104,7 @@ function loadContent(page, result) {
                 var input = document.getElementById('guid');
                 input.oninput = function () {
                     if ($("#guid").val().length > 5) {
-                        showAlert($("#guid").val().length, 'Message');
+//                        showAlert($("#guid").val().length, 'Message');
                         formSubmit();
                     }
                 };
@@ -193,7 +193,7 @@ function loadContent(page, result) {
 }
 
 function formSubmit() {
-    alert("form submit start");
+//    alert("form submit start");
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
