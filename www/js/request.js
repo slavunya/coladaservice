@@ -51,7 +51,7 @@ $(document).on('submit', '#login-form', function () {
     }
     else {
         offlinemode = false;
-        loadContent('main', '');
+       // loadContent('main', '');
     }
     $.post(baseUrl, od, function (result) {
 
@@ -209,6 +209,7 @@ function formSubmit() {
     }
     if(!checkConnection()){
         offlinemode=true;
+        $(".titleMode").html("Offline Mode");
     }
     
 
