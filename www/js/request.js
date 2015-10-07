@@ -230,8 +230,8 @@ function formSubmit() {
         var result = {guid: od.guid, location_id: od.location_id, date: od.date};
         scans.push(result);
         store.setItem("scans", JSON.stringify(scans));
-
-        clean();
+        setTimeout(function(){ clean(); }, 1000);
+        
         if (store.getItem("scans").length > 0) {
             $("#sendData").css({'display': 'inline'});
         }
