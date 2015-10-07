@@ -7,7 +7,7 @@ var checked = false;
 var moreinfostatus = false;
 var offlinemode = false;
 var scans = [];
-var scannerAuto = false;
+var scannerAuto = true;
 var currlocation = '';
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -98,8 +98,9 @@ function loadContent(page, result) {
                 $(".titleMode").html("");
             }
             if (scannerAuto) {
+                
                 $('#list').val(currlocation);
-
+                $('#btn').hide();
                 var input = document.getElementById('guid');
                 input.oninput = function () {
                     if ($("#guid").val().length > 5) {
@@ -110,6 +111,7 @@ function loadContent(page, result) {
                  
                  });*/
             }
+         
         });
     }
     if (page === 'setting') {
