@@ -207,8 +207,10 @@ function formSubmit() {
         //alert("Please scan the code");
         return false;
     }
-
-
+    if(!checkConnection()){
+        offlinemode=true;
+    }
+    
 
 
     var od = {};
