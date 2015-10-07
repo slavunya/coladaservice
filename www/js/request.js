@@ -386,9 +386,7 @@ function clean() {
     if (scannerAuto) {
         $('#guid').focus();
         var focused = $('input:first'); //this is just to have a starting point
-        $('button').on('click', function () {
-            focused.next('input').trigger('touchstart'); //trigger touchstart
-        });
+        ('input').trigger('touchstart');
         $('input').on('touchstart', function () {
             $(this).focus();
             focused = $(this);
