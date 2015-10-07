@@ -209,9 +209,9 @@ function formSubmit() {
         return false;
     }
     var isConn=checkConnection();
-    alert (isConn);
+//    alert (isConn);
     if(!isConn){
-        showAlert('no connection', 'Message');
+//        showAlert('no connection', 'Message');
 //        alert(isConn);
         offlinemode=true;
         $(".titleMode").html("Offline Mode");
