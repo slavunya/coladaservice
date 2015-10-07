@@ -385,9 +385,9 @@ function clean() {
     $("#submitform").show(100);
     if (scannerAuto) {
         $('#guid').focus();
-        var focused = $('input:first'); //this is just to have a starting point
-        ('input').trigger('touchstart');
-        $('input').on('touchstart', function () {
+        var focused = $('#guid'); //this is just to have a starting point
+        $('#guid').trigger('touchstart');
+        $('#guid').on('touchstart', function () {
             $(this).focus();
             focused = $(this);
         });
