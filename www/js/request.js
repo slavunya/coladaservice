@@ -209,7 +209,7 @@ function formSubmit() {
         return false;
     }
     var isConn=checkConnection();
-    alert (isConn);
+//    alert (isConn);
     if(!isConn){
 //        showAlert('no connection', 'Message');
 //        alert(isConn);
