@@ -51,7 +51,7 @@ $(document).on('submit', '#login-form', function () {
     }
     else {
         offlinemode = false;
-       // loadContent('main', '');
+        // loadContent('main', '');
     }
     $.post(baseUrl, od, function (result) {
 
@@ -98,7 +98,7 @@ function loadContent(page, result) {
                 $(".titleMode").html("");
             }
             if (scannerAuto) {
-                
+
                 $('#list').val(currlocation);
                 $('#btn').hide();
                 var input = document.getElementById('guid');
@@ -112,7 +112,7 @@ function loadContent(page, result) {
                  
                  });*/
             }
-         
+
         });
     }
     if (page === 'setting') {
@@ -208,15 +208,15 @@ function formSubmit() {
         //alert("Please scan the code");
         return false;
     }
-    var isConn=checkConnection();
+    var isConn = checkConnection();
 //    alert (isConn);
-    if(!isConn){
+    if (!isConn) {
 //        showAlert('no connection', 'Message');
 //        alert(isConn);
-        offlinemode=true;
+        offlinemode = true;
         $(".titleMode").html("Offline Mode");
     }
-    
+
 
 
     var od = {};
@@ -230,8 +230,10 @@ function formSubmit() {
         var result = {guid: od.guid, location_id: od.location_id, date: od.date};
         scans.push(result);
         store.setItem("scans", JSON.stringify(scans));
-        setTimeout(function(){ clean(); }, 1000);
-        
+        setTimeout(function () {
+            clean();
+        }, 1000);
+
         if (store.getItem("scans").length > 0) {
             $("#sendData").css({'display': 'inline'});
         }
@@ -383,6 +385,14 @@ function clean() {
     $("#submitform").show(100);
     if (scannerAuto) {
         $('#guid').focus();
+        var focused = $('input:first'); //this is just to have a starting point
+        $('button').on('click', function () {
+            focused.next('input').trigger('touchstart'); //trigger touchstart
+        });
+        $('input').on('touchstart', function () {
+            $(this).focus();
+            focused = $(this);
+        });
         /* $('#guid').trigger('touchstart');
          
          $('#guid').on('touchstart', function () {
