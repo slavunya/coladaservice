@@ -207,7 +207,9 @@ function formSubmit() {
         //alert("Please scan the code");
         return false;
     }
-    if(!checkConnection()){
+    var isConn=checkConnection()
+    if(!isConn){
+        alert(isConn);
         offlinemode=true;
         $(".titleMode").html("Offline Mode");
     }
