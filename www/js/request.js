@@ -392,12 +392,12 @@ function clean() {
 //    loadContent('main', '');
     if (scannerAuto) {
         $('#guid').focus();
-        var focused = $('#guid');
-        $('#guid').trigger('touchstart');
-        $('#guid').on('touchstart', function () {
-            $(this).focus();
-            focused = $(this);
-        });
+//        var focused = $('#guid');
+//        $('#guid').trigger('touchstart');
+//        $('#guid').on('touchstart', function () {
+//            $(this).focus();
+//            focused = $(this);
+//        });
         /* $('#guid').trigger('touchstart');
          
          $('#guid').on('touchstart', function () {
