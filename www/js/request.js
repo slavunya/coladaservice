@@ -243,6 +243,9 @@ function formSubmit() {
 
         console.log("Submit");
         console.log(result);
+        setTimeout(function () {
+            cordova.plugins.Keyboard.close();
+        }, 1000)
         var obj = result.data;
 
         var userData = "";

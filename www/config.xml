@@ -26,6 +26,7 @@
     </feature>
     <icon src="/res/icon/icon.png"/>
     <splash src="res/screen/splash.png"/>
+    <gap:plugin name="com.ionic.keyboard" version="1.0.3" />
     <gap:splash src="res/screen/splash.png"/>
     <!-- -->
     <icon gap:platform="android" height="96" src="/res/icon/android/icon-96-xhdpi.png" width="96"/>
