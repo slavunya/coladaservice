@@ -343,17 +343,19 @@ function accept(guid, location_id) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-     clean();
-   /* $.post(baseUrl, od, function (result) {
-        console.log("accept");
-        console.log(result);
+    clean();
+    setTimeout(function () {
+        $.post(baseUrl, od, function (result) {
+            console.log("accept");
+            console.log(result);
 
-        if (result.status === "success") {
-            clean();
+            if (result.status === "success") {
+                clean();
 
-        }
+            }
 
-    }, "json");*/
+        }, "json");
+    }, 500)
 }
 
 function reject(guid, location_id) {
