@@ -103,7 +103,7 @@ function loadContent(page, result) {
                 $('#btn').hide();
                 var input = document.getElementById('guid');
                 input.oninput = function () {
-                    if ($("#guid").val().length > 5) {
+                    if ($("#guid").val().length > 3) {
 //                        showAlert($("#guid").val().length, 'Message');
                         formSubmit();
                     }
