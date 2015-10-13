@@ -343,7 +343,8 @@ function accept(guid, location_id) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-    $.post(baseUrl, od, function (result) {
+     clean();
+   /* $.post(baseUrl, od, function (result) {
         console.log("accept");
         console.log(result);
 
@@ -352,7 +353,7 @@ function accept(guid, location_id) {
 
         }
 
-    }, "json");
+    }, "json");*/
 }
 
 function reject(guid, location_id) {
@@ -389,7 +390,7 @@ function clean() {
 //    loadContent('main', '');
     if (scannerAuto) {
         $('#guid').focus();
-        var focused = $('#guid'); //this is just to have a starting point
+        var focused = $('#guid');
         $('#guid').trigger('touchstart');
         $('#guid').on('touchstart', function () {
             $(this).focus();
