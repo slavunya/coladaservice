@@ -244,7 +244,7 @@ function formSubmit() {
         console.log("Submit");
         console.log(result);
 //        setTimeout(function () {
-            cordova.plugins.Keyboard.close();
+        cordova.plugins.Keyboard.close();
 //        }, 1000)
         var obj = result.data;
 
@@ -384,8 +384,9 @@ function clean() {
         scanBarcode();
     }
 
-    $(".content").hide(100);
-    $("#submitform").show(100);
+    /*  $(".content").hide(100);
+     $("#submitform").show(100);*/
+    loadContent('main', '');
     if (scannerAuto) {
         $('#guid').focus();
         var focused = $('#guid'); //this is just to have a starting point
