@@ -9,6 +9,8 @@ var offlinemode = false;
 var scans = [];
 var scannerAuto = true;
 var currlocation = '';
+var delay = 0;
+var code_lenght = 3;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -103,7 +105,7 @@ function loadContent(page, result) {
                 $('#btn').hide();
                 var input = document.getElementById('guid');
                 input.oninput = function () {
-                    if ($("#guid").val().length > 3) {
+                    if ($("#guid").val().length > code_lenght-1) {
 //                        showAlert($("#guid").val().length, 'Message');
                         formSubmit();
                     }
@@ -138,7 +140,20 @@ function loadContent(page, result) {
             $('#switch').val($(this).is(':checked'));
             $('#offlinemode').val($(this).is(':checked'));
             $('#scanner').val($(this).is(':checked'));
+            $('#delay').val(delay);
+            $('#Code_lenght').val(code_lenght);
 
+
+            $('#delay').change(function () {
+
+                delay = $('#delay').val();
+
+            });
+            $('#Code_lenght').change(function () {
+
+                code_lenght = $('#Code_lenght').val();
+
+            });
             $('#switch').change(function () {
                 if ($(this).is(":checked")) {
                     checked = true;
@@ -283,7 +298,11 @@ function formSubmit() {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
+    setTimeout(function(){
+        accept(obj.guid, od.location_id );
+    },delay);
     }, "json");
+    
 }
 function checkConnection() {
     try {
