@@ -9,8 +9,8 @@ var offlinemode = false;
 var scans = [];
 var scannerAuto = true;
 var currlocation = '';
-var delay = 0;
-var code_lenght = 3;
+var delay;
+var code_lenght;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -105,7 +105,7 @@ function loadContent(page, result) {
                 $('#btn').hide();
                 var input = document.getElementById('guid');
                 input.oninput = function () {
-                    if ($("#guid").val().length > code_lenght-1) {
+                    if ($("#guid").val().length > code_lenght - 1) {
 //                        showAlert($("#guid").val().length, 'Message');
                         formSubmit();
                     }
@@ -298,11 +298,11 @@ function formSubmit() {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
-    setTimeout(function(){
-        accept(obj.guid, od.location_id );
-    },delay);
+        setTimeout(function () {
+            accept(obj.guid, od.location_id);
+        }, delay);
     }, "json");
-    
+
 }
 function checkConnection() {
     try {
