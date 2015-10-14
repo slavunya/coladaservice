@@ -9,8 +9,8 @@ var offlinemode = false;
 var scans = [];
 var scannerAuto = true;
 var currlocation = '';
-var delay;
-var code_lenght;
+var delay = 3;
+var code_lenght = 3;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -300,7 +300,7 @@ function formSubmit() {
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
         setTimeout(function () {
             accept(obj.guid, od.location_id);
-        }, delay);
+        }, delay * 1000);
     }, "json");
 
 }
