@@ -306,6 +306,9 @@ function formSubmit() {
         }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
 
+        if (timeOutVar) {
+            clearTimeout(timeOutVar);
+        }
         timeOutVar = setTimeout(function () {
 
             accept(obj.guid, od.location_id);
@@ -359,7 +362,7 @@ function getlocation() {
 }
 
 function accept(guid, location_id) {
-    if (timeOutVar != null) {
+    if (timeOutVar) {
         clearTimeout(timeOutVar);
     }
     var od = {};
@@ -377,7 +380,7 @@ function accept(guid, location_id) {
         return false;
     }
 //    clean();
-    setTimeout(function () {
+    if (checked) {
         $.post(baseUrl, od, function (result) {
             console.log("accept");
             console.log(result);
@@ -388,7 +391,21 @@ function accept(guid, location_id) {
             }
 
         }, "json");
-    }, 500)
+    }
+    else {
+        setTimeout(function () {
+            $.post(baseUrl, od, function (result) {
+                console.log("accept");
+                console.log(result);
+
+                if (result.status === "success") {
+                    clean();
+
+                }
+
+            }, "json");
+        }, 500)
+    }
 }
 
 function reject(guid, location_id) {
