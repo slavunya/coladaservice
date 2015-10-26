@@ -11,6 +11,7 @@ var scannerAuto = true;
 var currlocation = '';
 var delay = 3;
 var code_lenght = 3;
+var count = 0;
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -210,6 +211,7 @@ function loadContent(page, result) {
 
 function formSubmit() {
 //    alert("form submit start");
+
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
@@ -299,9 +301,17 @@ function formSubmit() {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
+
         setTimeout(function () {
-            accept(obj.guid, od.location_id);
+            if (count == 0) {
+                accept(obj.guid, od.location_id);
+            }
+            else {
+                count = 0;
+                return false;
+            }
         }, delay * 1000);
+
     }, "json");
 
 }
@@ -349,6 +359,7 @@ function getlocation() {
 }
 
 function accept(guid, location_id) {
+    count++;
     var od = {};
     od.date = getTime();
     od.guid = guid;
