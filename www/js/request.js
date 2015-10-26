@@ -17,6 +17,7 @@ $(document).ready(function () {
 });
 var store = window.localStorage;
 function onDeviceReady() {
+    screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
 }
 var baseUrl = "https://seera.de/scanner-api/index.php";
