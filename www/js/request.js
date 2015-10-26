@@ -11,7 +11,7 @@ var scannerAuto = true;
 var currlocation = '';
 var delay = 3;
 var code_lenght = 3;
-var count = null;
+var timeOut = null;
 
 
 $(document).ready(function () {
@@ -306,7 +306,7 @@ function formSubmit() {
         }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
 
-   count=  setTimeout(function () {
+   timeOut=  setTimeout(function () {
 
             accept(obj.guid, od.location_id);
 
@@ -359,8 +359,8 @@ function getlocation() {
 }
 
 function accept(guid, location_id) {
-    if(count!=null){
-        CleanTimeout(count);
+    if(timeOut!=null){
+        clearTimeout(timeOut);
     }
     var od = {};
     od.date = getTime();
