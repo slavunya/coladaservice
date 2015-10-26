@@ -363,7 +363,7 @@ function accept(guid, location_id) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-    clean();
+//    clean();
     setTimeout(function () {
         $.post(baseUrl, od, function (result) {
             console.log("accept");
