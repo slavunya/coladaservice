@@ -349,10 +349,10 @@ header img{
 }
 .control_bottom_buttons li{
     list-style:none;
-    /* padding: 0 6% 0 6%; */
+    padding: 0 3% 0 3%;
     text-align: center;
     /* margin: 0  0 0; */
-    display: inline;
+    display: inline-block;
 }
 .titleMode{
     display: block;
@@ -360,7 +360,10 @@ header img{
     margin: 0 0 8px 0;
 }
 #sendData{
-    display: none;
+    /* display: none; */
     font-size: 40px;
-    color: black;
+    /* color: black; */
+}
+.active{
+    pointer-events: none;
 }

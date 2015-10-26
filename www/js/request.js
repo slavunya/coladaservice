@@ -87,7 +87,8 @@ function loadContent(page, result) {
 
             getlocation();
             if (store.getItem("scans") !== null) {
-                $("#sendData").show();
+                $("#sendData").css({'color': 'black'});
+                $(".active").css({'pointer-events': 'inherit'});
             }
             if (offlinemode) {
                 $(".titleMode").html("Offline Mode");
@@ -253,7 +254,8 @@ function formSubmit() {
         }, 1000);
 
         if (store.getItem("scans").length > 0) {
-            $("#sendData").css({'display': 'inline'});
+            $("#sendData").css({'color': 'black'});
+            $(".active").css({'pointer-events': 'inherit'});
         }
         return false;
     }
