@@ -212,7 +212,7 @@ function loadContent(page, result) {
 
 function formSubmit() {
 //    alert("form submit start");
-
+    count == 0;
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
