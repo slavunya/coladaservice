@@ -20,7 +20,7 @@ $(document).ready(function () {
 });
 var store = window.localStorage;
 function onDeviceReady() {
-    console.log(Cocoon.Camera.getNumberOfCameras());
+    alert(Cocoon.Camera.getNumberOfCameras());
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
 }
