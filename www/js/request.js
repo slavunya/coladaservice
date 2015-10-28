@@ -106,7 +106,8 @@ function loadContent(page, result) {
             }
             if (scannerAuto) {
 
-                $('#list').val(currlocation);
+
+
                 $('#btn').hide();
                 var input = document.getElementById('guid');
                 input.oninput = function () {
@@ -123,6 +124,7 @@ function loadContent(page, result) {
         });
     }
     if (page === 'setting') {
+        currlocation = $("#list").val();
         $('#page').load('content.html #settings_page', function () {
             //  $(document).ready(function () {
             //set initial state.
@@ -223,7 +225,7 @@ function formSubmit() {
     }
 
     var id = $('input[name=guid]').val();
-    currlocation = id;
+    currlocation = $("#list").val();
     if (id.length == 0) {
         showAlert('Please scan the code', 'Message');
         //alert("Please scan the code");
@@ -356,7 +358,12 @@ function getlocation() {
         store.setItem("locations", JSON.stringify(result));
         for (i in result.data) {
             var obj = result.data[i];
-            $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
+            if (currlocation === obj.id) {
+                $('#list').append("<option selected value=" + obj.id + ">" + obj.locations_name + "</option>");
+            }
+            else {
+                $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
+            }
         }
     }, "json");
 }
