@@ -12,16 +12,23 @@ var currlocation = '';
 var delay = 3;
 var code_lenght = 3;
 var timeOutVar = null;
+var cameraOn=true;
 
 
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
+    if(!cameraOn){
+        $(".qr").remove();
+        
+    }
 });
 var store = window.localStorage;
 function onDeviceReady() {
-    alert(device.model);
-
+//    alert(device.model);
+    if(device.model.indexOf("Ipod")!==-1){
+        cameraOn=false;
+    }
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
 }
@@ -143,9 +150,14 @@ function loadContent(page, result) {
                 // 
                 document.getElementById("scanner").setAttribute("checked", "checked");
             }
+            if (cameraOn) {
+                // 
+                document.getElementById("cameraOn").setAttribute("checked", "checked");
+            }
 
 
 
+            $('#cameraOn').val($(this).is(':checked'));
             $('#switch').val($(this).is(':checked'));
             $('#offlinemode').val($(this).is(':checked'));
             $('#scanner').val($(this).is(':checked'));
@@ -185,6 +197,14 @@ function loadContent(page, result) {
                 }
                 else {
                     scannerAuto = false;
+                }
+            });
+            $('#cameraOn').change(function () {
+                if ($(this).is(":checked")) {
+                    cameraOn = true;
+                }
+                else {
+                    cameraOn = false;
                 }
             });
             // });
