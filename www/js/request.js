@@ -12,22 +12,19 @@ var currlocation = '';
 var delay = 3;
 var code_lenght = 3;
 var timeOutVar = null;
-var cameraOn=true;
+var cameraOn = true;
 
 
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
-    if(!cameraOn){
-        $(".qr").remove();
-        
-    }
+
 });
 var store = window.localStorage;
 function onDeviceReady() {
     alert(device.model);
-    if(device.model.indexOf("iPod")!==-1){
-        cameraOn=false;
+    if (device.model.indexOf("iPod") !== -1) {
+        cameraOn = false;
     }
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
@@ -88,7 +85,10 @@ $(document).on('submit', '#login-form', function () {
 function loadContent(page, result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
+            if (!cameraOn) {
+                $(".qr").remove();
 
+            }
         });
     }
     if (page === 'main') {
