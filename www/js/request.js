@@ -20,7 +20,7 @@ $(document).ready(function () {
 });
 var store = window.localStorage;
 function onDeviceReady() {
-    alert('cam ' + navigator.camera.Direction.BACK);
+    alert('cam length ' + Object.keys(navigator.camera.Direction).length);
 
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
