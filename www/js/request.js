@@ -20,19 +20,8 @@ $(document).ready(function () {
 });
 var store = window.localStorage;
 function onDeviceReady() {
-    navigator.camera.getPicture(onSuccess, onFail, {quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL
-    });
+    alert('cam ' + navigator.camera.Direction.BACK);
 
-    function onSuccess(imageData) {
-          alert('Success');
-       /* var image = document.getElementById('myImage');
-        image.src = "data:image/jpeg;base64," + imageData;*/
-    }
-
-    function onFail(message) {
-        alert('Fail');
-    }
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
 }
