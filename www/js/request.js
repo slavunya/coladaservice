@@ -10,7 +10,7 @@ var scans = [];
 var scannerAuto = true;
 var currlocation = '';
 var delay = 3;
-var code_lenght = 3;
+var code_lenght = 6;
 var timeOutVar = null;
 var cameraOn = true;
 
