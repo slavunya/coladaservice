@@ -20,7 +20,13 @@ $(document).ready(function () {
 });
 var store = window.localStorage;
 function onDeviceReady() {
-    alert("Cam:"+Cocoon.Camera.CameraInfo.cameraType);
+    if (typeof navigator.device !== 'undefined' && typeof navigator.device.capture !== 'undefined' && typeof navigator.device.capture.captureImage !== 'undefined') {
+        // Can take a picture
+        alert("camera yes");
+    } else {
+        // No camera
+        alert("camera No");
+    }
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
 }
