@@ -25,12 +25,13 @@ function onDeviceReady() {
     });
 
     function onSuccess(imageData) {
-        var image = document.getElementById('myImage');
-        image.src = "data:image/jpeg;base64," + imageData;
+          alert('Success');
+       /* var image = document.getElementById('myImage');
+        image.src = "data:image/jpeg;base64," + imageData;*/
     }
 
     function onFail(message) {
-        alert('Failed because: ' + message);
+        alert('Fail');
     }
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
