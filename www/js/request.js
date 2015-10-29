@@ -26,10 +26,7 @@ function onDeviceReady() {
     if (device.model.indexOf("iPod") !== -1) {
         cameraOn = false;
     }
-    if (!cameraOn) {
-        $(".qr").remove();
-
-    }
+  
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
 }
