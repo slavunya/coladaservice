@@ -20,12 +20,17 @@ $(document).ready(function () {
 });
 var store = window.localStorage;
 function onDeviceReady() {
-    if (typeof navigator.device !== 'undefined' && typeof navigator.device.capture !== 'undefined' && typeof navigator.device.capture.captureImage !== 'undefined') {
-        // Can take a picture
-        alert("camera yes");
-    } else {
-        // No camera
-        alert("camera No");
+    navigator.camera.getPicture(onSuccess, onFail, {quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL
+    });
+
+    function onSuccess(imageData) {
+        var image = document.getElementById('myImage');
+        image.src = "data:image/jpeg;base64," + imageData;
+    }
+
+    function onFail(message) {
+        alert('Failed because: ' + message);
     }
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);

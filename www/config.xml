@@ -21,10 +21,16 @@
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4"/>
     <gap:plugin name="org.apache.cordova.device"/>
     <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
+    <gap:plugin name="org.apache.cordova.camera" version="0.2.3" />
     <feature name="http://api.phonegap.com/1.0/network" />
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <feature name="http://api.phonegap.com/1.0/file"/>
+    <feature name="http://api.phonegap.com/1.0/camera"/>
     <icon src="/res/icon/icon.png"/>
     <splash src="res/screen/splash.png"/>
     <gap:plugin name="com.ionic.keyboard" version="1.0.3" />
