@@ -22,9 +22,13 @@ $(document).ready(function () {
 });
 var store = window.localStorage;
 function onDeviceReady() {
-    alert(device.model);
+//    alert(device.model);
     if (device.model.indexOf("iPod") !== -1) {
         cameraOn = false;
+    }
+    if (!cameraOn) {
+        $(".qr").remove();
+
     }
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
@@ -85,10 +89,7 @@ $(document).on('submit', '#login-form', function () {
 function loadContent(page, result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
-            if (!cameraOn) {
-                $(".qr").remove();
 
-            }
         });
     }
     if (page === 'main') {
