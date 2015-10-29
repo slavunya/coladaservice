@@ -25,8 +25,8 @@ $(document).ready(function () {
 });
 var store = window.localStorage;
 function onDeviceReady() {
-//    alert(device.model);
-    if(device.model.indexOf("Ipod")!==-1){
+    alert(device.model);
+    if(device.model.indexOf("iPod")!==-1){
         cameraOn=false;
     }
     screen.lockOrientation('portrait');
