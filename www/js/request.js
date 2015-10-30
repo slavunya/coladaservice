@@ -420,32 +420,16 @@ function accept(guid, location_id) {
     }
 //    clean();
 
-    if (isBarcode) {
-        $.post(baseUrl, od, function (result) {
-            console.log("accept");
-            console.log(result);
+    $.post(baseUrl, od, function (result) {
+        console.log("accept");
+        console.log(result);
 
-            if (result.status === "success") {
-                clean();
+        if (result.status !== "success") {
+            showAlert(result.message,'message')
+        }
 
-            }
-
-        }, "json");
-    }
-    else {
-        setTimeout(function () {
-            $.post(baseUrl, od, function (result) {
-                console.log("accept");
-                console.log(result);
-
-                if (result.status === "success") {
-
-                }
-
-            }, "json");
-        }, 500);
-        clean();
-    }
+    }, "json");
+    clean();
 }
 
 function reject(guid, location_id) {
