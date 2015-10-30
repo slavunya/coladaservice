@@ -31,7 +31,7 @@ $(document).ready(function () {
 });
 
 function keyboardShowHandler() {
-    window.scrollTo(0,100);
+    window.scrollTo(0, 100);
 }
 
 function onDeviceReady() {
@@ -103,16 +103,16 @@ $(document).on('change', '#list', function () {
 });
 
 $(document).on('input', '#guid', function () {
+    if (count == 0) {
+        $('#btn').show();
+        keyboardShowHandler();
+    }
     if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
         lastValue = $("#guid").val().length;
         formSubmit();
     } else {
-        $('#btn').show();
         count++;
         lastValue = $("#guid").val().length;
-    }
-    if(count == 0){
-        keyboardShowHandler();
     }
 });
 
@@ -125,7 +125,7 @@ function loadContent(page, result) {
     if (page === 'main') {
 
         $('#page').load('content.html #main', function () {
-            if(!cameraOn){
+            if (!cameraOn) {
                 $('.qr').remove();
             }
             getlocation();
@@ -661,8 +661,7 @@ function uploadData() {
         }, "json");
     }
 }
-function logout()
-{
+function logout() {
     navigator.notification.confirm('Logout',
         function (button_id) {
             if (button_id == 1) {
