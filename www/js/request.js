@@ -3,11 +3,12 @@ var scan = {
 };
 var login = '';
 var password = '';
-var checked = false;
 var moreinfostatus = false;
 var offlinemode = false;
 var scans = [];
-var scannerAuto = true;
+//var checked = false;
+//var scannerAuto = true;
+var autoMode = true;
 var currlocation = '';
 var delay = 3;
 var code_lenght = 6;
@@ -126,7 +127,7 @@ function loadContent(page, result) {
                 $(".titleMode").html("");
             }
 
-            if (scannerAuto) {
+            if (autoMode) {
                 var lastValue = 0;
                 $('#btn').hide();
                 inputGuid = document.getElementById('guid');
@@ -134,11 +135,9 @@ function loadContent(page, result) {
                     if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
                         lastValue=$("#guid").val().length;
                         formSubmit();
-                        console.log('sub');
                     } else {
                         $('#btn').show();
                         lastValue = $("#guid").val().length;
-                        console.log(lastValue);
                     }
                 };
             }
@@ -150,7 +149,7 @@ function loadContent(page, result) {
         $('#page').load('content.html #settings_page', function () {
             //  $(document).ready(function () {
             //set initial state.
-            if (checked) {
+            if (autoMode) {
                 // 
                 document.getElementById("switch").setAttribute("checked", "checked");
             }
@@ -159,10 +158,10 @@ function loadContent(page, result) {
                 // 
                 document.getElementById("offlinemode").setAttribute("checked", "checked");
             }
-            if (scannerAuto) {
-                // 
-                document.getElementById("scanner").setAttribute("checked", "checked");
-            }
+            //if (scannerAuto) {
+            //    //
+            //    document.getElementById("scanner").setAttribute("checked", "checked");
+            //}
             if (cameraOn) {
                 // 
                 document.getElementById("cameraOn").setAttribute("checked", "checked");
@@ -187,10 +186,10 @@ function loadContent(page, result) {
             });
             $('#switch').change(function () {
                 if ($(this).is(":checked")) {
-                    checked = true;
+                    autoMode = true;
                 }
                 else {
-                    checked = false;
+                    autoMode = false;
                 }
             });
             $('#offlinemode').change(function () {
@@ -201,14 +200,14 @@ function loadContent(page, result) {
                     offlinemode = false;
                 }
             });
-            $('#scanner').change(function () {
-                if ($(this).is(":checked")) {
-                    scannerAuto = true;
-                }
-                else {
-                    scannerAuto = false;
-                }
-            });
+            //$('#scanner').change(function () {
+            //    if ($(this).is(":checked")) {
+            //        scannerAuto = true;
+            //    }
+            //    else {
+            //        scannerAuto = false;
+            //    }
+            //});
             $('#cameraOn').change(function () {
                 if ($(this).is(":checked")) {
                     cameraOn = true;
@@ -419,7 +418,7 @@ function accept(guid, location_id) {
         return false;
     }
 //    clean();
-    if (checked) {
+    if (autoMode) {
         $.post(baseUrl, od, function (result) {
             console.log("accept");
             console.log(result);
@@ -472,14 +471,14 @@ function getTime() {
 }
 
 function clean() {
-    if (checked) {
+    if (autoMode) {
         scanBarcode();
     }
 
     $(".content").hide(100);
     $("#submitform").show(100);
 //    loadContent('main', '');
-    if (scannerAuto) {
+    if (autoMode) {
         $('#guid').focus();
 //        var focused = $('#guid');
 //        $('#guid').trigger('touchstart');
@@ -570,7 +569,7 @@ function scanBarcodeProcess(callback) {
 function addSlipNumberToView(slipNumber) {
 
     $('#guid').val(slipNumber);
-    if (checked) {
+    if (autoMode) {
         formSubmit();
     }
 //     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
