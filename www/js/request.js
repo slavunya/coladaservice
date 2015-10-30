@@ -419,7 +419,7 @@ function accept(guid, location_id) {
         return false;
     }
 //    clean();
-
+    alert(isBarcode);
     if (isBarcode) {
         $.post(baseUrl, od, function (result) {
             console.log("accept");
@@ -433,17 +433,19 @@ function accept(guid, location_id) {
         }, "json");
     }
     else {
-        $.post(baseUrl, od, function (result) {
-            console.log("accept");
-            console.log(result);
+        setTimeout(function () {
+            $.post(baseUrl, od, function (result) {
+                console.log("accept");
+                console.log(result);
 
-            if (result.status === "success") {
-                setTimeout(function () {
+                if (result.status === "success") {
+
                     clean();
-                }, 1000);
-            }
 
-        }, "json");
+                }
+
+            }, "json");
+        }, 5000);
     }
 }
 
@@ -483,9 +485,7 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
-            setTimeout(function () {
-                $('#guid').focus();
-            }, 1000);
+            $('#guid').focus();
         }
 //        var focused = $('#guid');
 //        $('#guid').trigger('touchstart');
