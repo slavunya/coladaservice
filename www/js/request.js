@@ -134,7 +134,7 @@ function loadContent(page, result) {
                 inputGuid = document.getElementById('guid');
                 inputGuid.oninput = function () {
                     if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
-                        lastValue=$("#guid").val().length;
+                        lastValue = $("#guid").val().length;
                         formSubmit();
                     } else {
                         $('#btn').show();
@@ -433,16 +433,17 @@ function accept(guid, location_id) {
         }, "json");
     }
     else {
-            $.post(baseUrl, od, function (result) {
-                console.log("accept");
-                console.log(result);
+        $.post(baseUrl, od, function (result) {
+            console.log("accept");
+            console.log(result);
 
-                if (result.status === "success") {
-                    setTimeout(function () { clean();}, 1000)
+            if (result.status === "success") {
+                setTimeout(function () {
+                    clean();
+                }, 1000);
+            }
 
-                }
-
-            }, "json");
+        }, "json");
     }
 }
 
@@ -479,10 +480,12 @@ function clean() {
     $("#submitform").show(100);
 //    loadContent('main', '');
     if (autoMode) {
-        if(isBarcode){
+        if (isBarcode) {
             scanBarcode();
-        } else{
-            $('#guid').focus();
+        } else {
+            setTimeout(function () {
+                $('#guid').focus();
+            }, 1000);
         }
 //        var focused = $('#guid');
 //        $('#guid').trigger('touchstart');
@@ -556,7 +559,7 @@ function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
         function (result) {
             var status = {success: true, error: false};
-            if(result.cancelled){
+            if (result.cancelled) {
                 isBarcode = false;
             }
             callback(status, result);
