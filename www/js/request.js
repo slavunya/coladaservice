@@ -18,7 +18,7 @@ var timeOutVar = null;
 var cameraOn = true;
 var store = window.localStorage;
 var isMobile = false;
-var inputGuid;
+var count = 0;
 
 if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1) {
     isMobile = true;
@@ -30,7 +30,7 @@ $(document).ready(function () {
     loadContent('login', '');
 });
 
-function keyboardShowHandler(e) {
+function keyboardShowHandler() {
     window.scrollTo(0,100);
 }
 
@@ -108,7 +108,11 @@ $(document).on('input', '#guid', function () {
         formSubmit();
     } else {
         $('#btn').show();
+        count++;
         lastValue = $("#guid").val().length;
+    }
+    if(count == 0){
+        keyboardShowHandler();
     }
 });
 
@@ -479,6 +483,7 @@ function clean() {
     }
     $('input[name=guid]').val("");
     lastValue = 0;
+    count = 0;
 }
 
 function showAlert(message, title) {
