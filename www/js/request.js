@@ -419,7 +419,7 @@ function accept(guid, location_id) {
         return false;
     }
 //    clean();
-    alert(isBarcode);
+
     if (isBarcode) {
         $.post(baseUrl, od, function (result) {
             console.log("accept");
@@ -440,12 +440,11 @@ function accept(guid, location_id) {
 
                 if (result.status === "success") {
 
-                    clean();
-
                 }
 
             }, "json");
-        }, 5000);
+        }, 500);
+        clean();
     }
 }
 
