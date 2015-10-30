@@ -13,25 +13,31 @@ var delay = 3;
 var code_lenght = 6;
 var timeOutVar = null;
 var cameraOn = true;
+var store = window.localStorage;
+var isMobile = false;
+var inputGuid;
 
+if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1) {
+    isMobile = true;
+}
 
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
 
 });
-var store = window.localStorage;
+
 function onDeviceReady() {
 //    alert(device.model);
     if (device.model.indexOf("iPod") !== -1) {
         cameraOn = false;
     }
-  
+
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
 }
-var baseUrl = "https://seera.de/scanner-api/index.php";
 
+var baseUrl = "https://seera.de/scanner-api/index.php";
 
 $(document).on('submit', '#login-form', function () {
     login = $('input[name=login]').val();
@@ -83,6 +89,13 @@ $(document).on('submit', '#login-form', function () {
     event.preventDefault();
 });
 
+$(document).on('change', '#list', function () {
+    if(($("#guid").val().length) > 2 && ($("#list").val()!=0)){
+        formSubmit();
+    }
+});
+
+
 function loadContent(page, result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
@@ -93,12 +106,13 @@ function loadContent(page, result) {
 
         $('#page').load('content.html #main', function () {
 
-
             getlocation();
+
             if (store.getItem("scans") !== null) {
                 $("#sendData").css({'color': 'black'});
                 $(".active").css({'pointer-events': 'inherit'});
             }
+
             if (offlinemode) {
                 $(".titleMode").html("Offline Mode");
                 var locations = JSON.parse(store.getItem("locations"));
@@ -111,21 +125,18 @@ function loadContent(page, result) {
             else {
                 $(".titleMode").html("");
             }
+
             if (scannerAuto) {
 
-
-
-                $('#btn').hide();
-                var input = document.getElementById('guid');
-                input.oninput = function () {
-                    if ($("#guid").val().length > code_lenght - 1) {
-//                        showAlert($("#guid").val().length, 'Message');
+                inputGuid = document.getElementById('guid');
+                inputGuid.oninput = function () {
+                    if ($("#guid").val().length > 1) {
+                        $('#btn').hide();
                         formSubmit();
+                    } else {
+                        $('#btn').show();
                     }
                 };
-                /*   $("#guid").oninput(function(){
-                 
-                 });*/
             }
 
         });
@@ -153,15 +164,12 @@ function loadContent(page, result) {
                 document.getElementById("cameraOn").setAttribute("checked", "checked");
             }
 
-
-
             $('#cameraOn').val($(this).is(':checked'));
             $('#switch').val($(this).is(':checked'));
             $('#offlinemode').val($(this).is(':checked'));
             $('#scanner').val($(this).is(':checked'));
             $('#delay').val(delay);
             $('#Code_lenght').val(code_lenght);
-
 
             $('#delay').change(function () {
 
@@ -208,6 +216,7 @@ function loadContent(page, result) {
             // });
         });
     }
+
     if (page === 'location_history') {
         $('#page').load('content.html #location_history', function () {
             for (var i in result.data) {
@@ -259,7 +268,6 @@ function formSubmit() {
         offlinemode = true;
         $(".titleMode").html("Offline Mode");
     }
-
 
 
     var od = {};
@@ -476,7 +484,7 @@ function clean() {
 //            focused = $(this);
 //        });
         /* $('#guid').trigger('touchstart');
-         
+
          $('#guid').on('touchstart', function () {
          $(this).focus();
          focused = $(this);
@@ -488,12 +496,16 @@ function clean() {
 }
 
 function showAlert(message, title) {
-    navigator.notification.alert(
+    if (isMobile) {
+        navigator.notification.alert(
             message,
             null,
             title,
             'Ok'
-            );
+        );
+    } else {
+        alert(message);
+    }
 }
 function scanBarcode() {
 
@@ -529,23 +541,23 @@ function scanBarcode() {
         addSlipNumberToView(scannedCode);
 
     }
+
     return false;
 }
 
 
-
 function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
-            function (result) {
-                var status = {success: true, error: false};
-                callback(status, result);
-            },
-            function (error) {
+        function (result) {
+            var status = {success: true, error: false};
+            callback(status, result);
+        },
+        function (error) {
 
-                alert("Scanning failed: " + error);
-                var status = {success: false, error: true};
-                callback(status, error);
-            }
+            alert("Scanning failed: " + error);
+            var status = {success: false, error: true};
+            callback(status, error);
+        }
     );
 
 
@@ -634,17 +646,16 @@ function uploadData() {
     data.login = JSON.parse(store.getItem("login"));
     data.password = JSON.parse(store.getItem("password"));
     navigator.notification.confirm(
-            'Are you sure to clear the offline scans?', // message
-            send(data), // callback to invoke with index of button pressed
-            'Message', // title
-            'Yes,No'          // buttonLabels
-            );
+        'Are you sure to clear the offline scans?', // message
+        send(data), // callback to invoke with index of button pressed
+        'Message', // title
+        'Yes,No'          // buttonLabels
+    );
 
     function send(data) {
         $.post(baseUrl, data, function (result) {
             console.log(result);
-            if (result.message == "Error login")
-            {
+            if (result.message == "Error login") {
                 loadContent('login');
             }
             if (result.status == "success") {
