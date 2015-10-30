@@ -104,12 +104,9 @@ $(document).on('input', '#guid', function () {
         formSubmit();
     } else {
         $('#btn').show();
+        window.scrollTo(0,$("#guid").offset().top+50);
         lastValue = $("#guid").val().length;
     }
-});
-
-$(document).on('focus', '#guid', function () {
-    window.scrollTo(0,$("#guid").offset().top+50);
 });
 
 function loadContent(page, result) {
