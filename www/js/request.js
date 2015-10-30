@@ -26,9 +26,13 @@ if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") =
 
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
+    window.addEventListener('native.keyboardshow', keyboardShowHandler);
     loadContent('login', '');
-
 });
+
+function keyboardShowHandler(e) {
+    window.scrollTo(0,$("#guid").offset().top+50);
+}
 
 function onDeviceReady() {
 //    alert(device.model);
@@ -104,7 +108,6 @@ $(document).on('input', '#guid', function () {
         formSubmit();
     } else {
         $('#btn').show();
-        window.scrollTo(0,$("#guid").offset().top+50);
         lastValue = $("#guid").val().length;
     }
 });
