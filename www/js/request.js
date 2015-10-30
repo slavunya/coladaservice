@@ -444,7 +444,7 @@ function accept(guid, location_id) {
                 }
 
             }, "json");
-        }, 500)
+        }, 1000)
     }
 }
 
