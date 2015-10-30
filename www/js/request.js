@@ -31,7 +31,7 @@ $(document).ready(function () {
 });
 
 function keyboardShowHandler(e) {
-    window.scrollTo(0,$("#guid").offset().top+50);
+    window.scrollTo(0,100);
 }
 
 function onDeviceReady() {
