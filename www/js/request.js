@@ -90,7 +90,7 @@ $(document).on('submit', '#login-form', function () {
 });
 
 $(document).on('change', '#list', function () {
-    if(($("#guid").val().length) > 2 && ($("#list").val()!=0)){
+    if (($("#guid").val().length) > 2 && ($("#list").val() != 0)) {
         formSubmit();
     }
 });
@@ -127,14 +127,18 @@ function loadContent(page, result) {
             }
 
             if (scannerAuto) {
-
+                var lastValue = 0;
+                $('#btn').hide();
                 inputGuid = document.getElementById('guid');
                 inputGuid.oninput = function () {
-                    if ($("#guid").val().length > 1) {
-                        $('#btn').hide();
+                    if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
+                        lastValue=$("#guid").val().length;
                         formSubmit();
+                        console.log('sub');
                     } else {
                         $('#btn').show();
+                        lastValue = $("#guid").val().length;
+                        console.log(lastValue);
                     }
                 };
             }
