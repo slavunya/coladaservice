@@ -419,7 +419,8 @@ function accept(guid, location_id) {
         return false;
     }
 //    clean();
-    if (autoMode) {
+
+    if (isBarcode) {
         $.post(baseUrl, od, function (result) {
             console.log("accept");
             console.log(result);
