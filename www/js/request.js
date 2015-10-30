@@ -463,6 +463,7 @@ function clean() {
     //}
 
     $(".content").hide(100);
+    $('#btn').hide();
     $("#submitform").show(100);
 //    loadContent('main', '');
     if (autoMode) {
@@ -471,19 +472,6 @@ function clean() {
         } else {
             $('#guid').focus();
         }
-//        var focused = $('#guid');
-//        $('#guid').trigger('touchstart');
-//        $('#guid').on('touchstart', function () {
-//            $(this).focus();
-//            focused = $(this);
-//        });
-        /* $('#guid').trigger('touchstart');
-
-         $('#guid').on('touchstart', function () {
-         $(this).focus();
-         focused = $(this);
-         });
-         */
     }
     $('input[name=guid]').val("");
     lastValue = 0;
