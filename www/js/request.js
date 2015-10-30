@@ -108,16 +108,9 @@ $(document).on('input', '#guid', function () {
     }
 });
 
-//inputGuid = document.getElementById('#guid');
-//inputGuid.oninput = function () {
-//    if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
-//        lastValue = $("#guid").val().length;
-//        formSubmit();
-//    } else {
-//        $('#btn').show();
-//        lastValue = $("#guid").val().length;
-//    }
-//};
+$(document).on('focus', '#guid', function () {
+    window.scrollTo(0,$("#guid").offset().top+50);
+});
 
 function loadContent(page, result) {
     if (page === 'login') {
@@ -661,9 +654,15 @@ function uploadData() {
         }, "json");
     }
 }
-/**/
-function isAutoMode(input) {
-    if (input.value.length > 5) {
+function logout()
+{
+    navigator.notification.confirm('Logout',
+        function (button_id) {
+            if (button_id == 1) {
 
-    }
+            }
+        },
+        'Message',
+        ['Yes', 'No']
+    );
 }

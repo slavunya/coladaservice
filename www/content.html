@@ -42,7 +42,7 @@
                     <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
                     <li><a class="active" onclick="uploadData()"><i id="sendData" class="fa fa-upload"></i></a></li>
                     <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
-                    <li><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
+                    <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
                 </ul>
             </div>
 
@@ -53,10 +53,10 @@
             </div>
             <div class="parentControlBottomButtons">
                 <ul class="control_bottom_buttons">
-                    <li><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
-                    <li><a onclick="uploadData()"><i id="sendData" class="fa fa-upload"></i></a></li>
-                    <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
                     <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
+                    <li><a class="active" onclick="uploadData()"><i id="sendData" class="fa fa-upload"></i></a></li>
+                    <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
+                    <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -112,9 +112,6 @@
             <div class="settings_switch">
                 <label class="setting_page_title" for="delay" >Accept Delay</label>
                 <select class="switch" id="delay">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
