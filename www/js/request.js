@@ -6,6 +6,7 @@ var password = '';
 var moreinfostatus = false;
 var offlinemode = false;
 var scans = [];
+var isBarcode = false;
 //var checked = false;
 //var scannerAuto = true;
 var autoMode = true;
@@ -471,15 +472,19 @@ function getTime() {
 }
 
 function clean() {
-    if (autoMode) {
-        scanBarcode();
-    }
+    //if (autoMode) {
+    //
+    //}
 
     $(".content").hide(100);
     $("#submitform").show(100);
 //    loadContent('main', '');
     if (autoMode) {
-        $('#guid').focus();
+        if(isBarcode){
+            scanBarcode();
+        } else{
+            $('#guid').focus();
+        }
 //        var focused = $('#guid');
 //        $('#guid').trigger('touchstart');
 //        $('#guid').on('touchstart', function () {
@@ -495,7 +500,6 @@ function clean() {
          */
     }
     $('input[name=guid]').val("");
-
 }
 
 function showAlert(message, title) {
@@ -553,10 +557,12 @@ function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
         function (result) {
             var status = {success: true, error: false};
+            if(result.cancelled){
+                isBarcode = false;
+            }
             callback(status, result);
         },
         function (error) {
-
             alert("Scanning failed: " + error);
             var status = {success: false, error: true};
             callback(status, error);
@@ -567,7 +573,7 @@ function scanBarcodeProcess(callback) {
 }
 
 function addSlipNumberToView(slipNumber) {
-
+    isBarcode = true;
     $('#guid').val(slipNumber);
     if (autoMode) {
         formSubmit();
