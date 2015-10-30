@@ -12,6 +12,7 @@ var isBarcode = false;
 var autoMode = true;
 var currlocation = '';
 var delay = 3;
+var lastValue = 0;
 var code_lenght = 6;
 var timeOutVar = null;
 var cameraOn = true;
@@ -129,7 +130,7 @@ function loadContent(page, result) {
             }
 
             if (autoMode) {
-                var lastValue = 0;
+
                 $('#btn').hide();
                 inputGuid = document.getElementById('guid');
                 inputGuid.oninput = function () {
@@ -425,9 +426,8 @@ function accept(guid, location_id) {
         console.log(result);
 
         if (result.status !== "success") {
-            showAlert(result.message,'message')
+            showAlert(result.message, 'message')
         }
-
     }, "json");
     clean();
 }
@@ -443,11 +443,12 @@ function reject(guid, location_id) {
     $.post(baseUrl, od, function (result) {
         console.log("Reject");
         console.log(result);
-        if (result.status === "success") {
-            clean();
-        }
 
+        if (result.status !== "success") {
+            showAlert(result.message, 'message')
+        }
     }, "json");
+    clean();
 }
 
 function getTime() {
@@ -485,6 +486,7 @@ function clean() {
          */
     }
     $('input[name=guid]').val("");
+    lastValue = 0;
 }
 
 function showAlert(message, title) {
