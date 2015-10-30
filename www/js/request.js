@@ -121,7 +121,9 @@ function loadContent(page, result) {
     if (page === 'main') {
 
         $('#page').load('content.html #main', function () {
-
+            if(!cameraOn){
+                $('.qr').remove();
+            }
             getlocation();
 
             if (store.getItem("scans") !== null) {
