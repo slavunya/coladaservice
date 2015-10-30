@@ -433,18 +433,16 @@ function accept(guid, location_id) {
         }, "json");
     }
     else {
-        //setTimeout(function () {
-        //    $.post(baseUrl, od, function (result) {
-        //        console.log("accept");
-        //        console.log(result);
-        //
-        //        if (result.status === "success") {
-                    clean();
+            $.post(baseUrl, od, function (result) {
+                console.log("accept");
+                console.log(result);
 
-    //            }
-    //
-    //        }, "json");
-    //    }, 1000)
+                if (result.status === "success") {
+                    setTimeout(function () { clean();}, 1000)
+
+                }
+
+            }, "json");
     }
 }
 
