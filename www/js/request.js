@@ -98,7 +98,7 @@ $(document).on('change', '#list', function () {
     }
 });
 
-$(document).on('keypress', '#guid', function () {
+$(document).on('input', '#guid', function () {
     if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
         lastValue = $("#guid").val().length;
         formSubmit();
