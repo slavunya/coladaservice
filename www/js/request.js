@@ -128,8 +128,9 @@ function loadContent(page, result) {
         var isConnected = checkConnection();
         if (!isConnected) {
             offlinemode = true;
-
-
+        }
+        else{
+            offlinemode=false;
         }
         $('#page').load('content.html #main', function () {
             if (!cameraOn) {
