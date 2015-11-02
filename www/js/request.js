@@ -111,7 +111,7 @@ function loadContent(page, result) {
         });
     }
     if (page === 'main') {
-        count=0;
+        count = 0;
         $(document).on('input', '#guid', function () {
             if (count == 0) {
                 $('#btn').show();
@@ -399,6 +399,12 @@ function getlocation() {
     od.locations = "get";
     od.login = login;
     od.password = password;
+    var isConnected = checkConnection();
+    if (!isConnected) {
+        offlinemode=true;
+        return false;
+
+    }
     $.post(baseUrl, od, function (result) {
 
         console.log("Location");
