@@ -653,7 +653,7 @@ function uploadData() {
         }
         if (result.status == "success") {
             navigator.notification.alert(
-                    "Scan date has been uploaded to the server",
+                    "Scan data has been uploaded to the server",
                     null,
                     "Message",
                     'Ok'
