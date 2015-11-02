@@ -125,12 +125,18 @@ function loadContent(page, result) {
                 lastValue = $("#guid").val().length;
             }
         });
+        var isConnected = checkConnection();
+        if (!isConnected) {
+            offlinemode = true;
+         
+
+        }
         $('#page').load('content.html #main', function () {
             if (!cameraOn) {
                 $('.qr').remove();
             }
             getlocation();
-
+            
             if (store.getItem("scans") !== null) {
                 $("#sendData").css({'color': 'black'});
                 $(".active").css({'pointer-events': 'inherit'});
@@ -399,12 +405,7 @@ function getlocation() {
     od.locations = "get";
     od.login = login;
     od.password = password;
-    var isConnected = checkConnection();
-    if (!isConnected) {
-        offlinemode = true;
-        return false;
 
-    }
     $.post(baseUrl, od, function (result) {
 
         console.log("Location");
@@ -676,7 +677,7 @@ function uploadData() {
                     "Message",
                     'Ok'
                     );
-            offlinemode=false;
+            offlinemode = false;
             store.removeItem("scans");
             loadContent('main');
         }
