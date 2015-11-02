@@ -141,7 +141,13 @@ function loadContent(page, result) {
 
                 for (var i in locations.data) {
                     var obj = locations.data[i];
-                    $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
+                    if (currlocation === obj.id) {
+                        $('#list').append("<option selected value=" + obj.id + ">" + obj.locations_name + "</option>");
+                    }
+                    else {
+                        $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
+                    }
+//                    $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
                 }
             }
             else {
