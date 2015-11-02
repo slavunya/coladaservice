@@ -102,19 +102,7 @@ $(document).on('change', '#list', function () {
     }
 });
 
-$(document).on('input', '#guid', function () {
-    if (count == 0) {
-        $('#btn').show();
-        keyboardShowHandler();
-    }
-    if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
-        lastValue = $("#guid").val().length;
-        formSubmit();
-    } else {
-        count++;
-        lastValue = $("#guid").val().length;
-    }
-});
+
 
 function loadContent(page, result) {
     if (page === 'login') {
@@ -123,7 +111,19 @@ function loadContent(page, result) {
         });
     }
     if (page === 'main') {
-
+        $(document).on('input', '#guid', function () {
+            if (count == 0) {
+                $('#btn').show();
+                keyboardShowHandler();
+            }
+            if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
+                lastValue = $("#guid").val().length;
+                formSubmit();
+            } else {
+                count++;
+                lastValue = $("#guid").val().length;
+            }
+        });
         $('#page').load('content.html #main', function () {
             if (!cameraOn) {
                 $('.qr').remove();
