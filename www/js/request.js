@@ -489,11 +489,11 @@ function clean() {
 function showAlert(message, title) {
     if (isMobile) {
         navigator.notification.alert(
-            message,
-            null,
-            title,
-            'Ok'
-        );
+                message,
+                null,
+                title,
+                'Ok'
+                );
     } else {
         alert(message);
     }
@@ -539,18 +539,18 @@ function scanBarcode() {
 
 function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
-        function (result) {
-            var status = {success: true, error: false};
-            if (result.cancelled) {
-                isBarcode = false;
+            function (result) {
+                var status = {success: true, error: false};
+                if (result.cancelled) {
+                    isBarcode = false;
+                }
+                callback(status, result);
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+                var status = {success: false, error: true};
+                callback(status, error);
             }
-            callback(status, result);
-        },
-        function (error) {
-            alert("Scanning failed: " + error);
-            var status = {success: false, error: true};
-            callback(status, error);
-        }
     );
 
 
@@ -638,37 +638,41 @@ function uploadData() {
     data.data = store.getItem("scans");
     data.login = JSON.parse(store.getItem("login"));
     data.password = JSON.parse(store.getItem("password"));
-    navigator.notification.confirm(
-        'Are you sure to clear the offline scans?', // message
-        send(data), // callback to invoke with index of button pressed
-        'Message', // title
-        'Yes,No'          // buttonLabels
-    );
-
-    function send(data) {
-        $.post(baseUrl, data, function (result) {
-            console.log(result);
-            if (result.message == "Error login") {
-                loadContent('login');
-            }
-            if (result.status == "success") {
-
-                store.removeItem("scans");
-                loadContent('main');
-            }
+    //    navigator.notification.confirm(
+    //        'Are you sure to clear the offline scans?', // message
+    //        send(data), // callback to invoke with index of button pressed
+    //        'Message', // title
+    //        'Yes,No'          // buttonLabels
+//    );
 
 
-        }, "json");
-    }
+    $.post(baseUrl, data, function (result) {
+        console.log(result);
+        if (result.message == "Error login") {
+            loadContent('login');
+        }
+        if (result.status == "success") {
+            navigator.notification.alert(
+                    "Scan date has been uploaded to the server",
+                    null,
+                    "Message",
+                    'Ok'
+                    );
+            store.removeItem("scans");
+            loadContent('main');
+        }
+
+
+    }, "json");
 }
 function logout() {
     navigator.notification.confirm('Logout',
-        function (button_id) {
-            if (button_id == 1) {
+            function (button_id) {
+                if (button_id == 1) {
 
-            }
-        },
-        'Message',
-        ['Yes', 'No']
-    );
+                }
+            },
+            'Message',
+            ['Yes', 'No']
+            );
 }
