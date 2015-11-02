@@ -401,7 +401,7 @@ function getlocation() {
     od.password = password;
     var isConnected = checkConnection();
     if (!isConnected) {
-        offlinemode=true;
+        offlinemode = true;
         return false;
 
     }
@@ -658,7 +658,12 @@ function uploadData() {
     //        'Yes,No'          // buttonLabels
 //    );
 
+    var isConnected = checkConnection();
+    if (!isConnected) {
+        offlinemode = true;
+        return false;
 
+    }
     $.post(baseUrl, data, function (result) {
         console.log(result);
         if (result.message == "Error login") {
@@ -671,6 +676,7 @@ function uploadData() {
                     "Message",
                     'Ok'
                     );
+            offlinemode=false;
             store.removeItem("scans");
             loadContent('main');
         }
