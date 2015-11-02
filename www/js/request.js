@@ -110,6 +110,8 @@ function loadContent(page, result) {
 
         });
     }
+    count++;
+
     if (page === 'main') {
         count = 0;
         $(document).on('input', '#guid', function () {
@@ -121,7 +123,6 @@ function loadContent(page, result) {
                 lastValue = $("#guid").val().length;
                 formSubmit();
             } else {
-                count++;
                 lastValue = $("#guid").val().length;
             }
         });
@@ -129,8 +130,8 @@ function loadContent(page, result) {
         if (!isConnected) {
             offlinemode = true;
         }
-        else{
-            offlinemode=false;
+        else {
+            offlinemode = false;
         }
         $('#page').load('content.html #main', function () {
             if (!cameraOn) {
@@ -363,7 +364,7 @@ function formSubmit() {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
         if (result.status == "success") {
-            offlinemode=false;
+            offlinemode = false;
         }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
 
@@ -375,6 +376,13 @@ function formSubmit() {
             accept(obj.guid, od.location_id);
 
         }, delay * 1000);
+        if (result.status_user === '1') {
+            timeOutVar = setTimeout(function () {
+
+                clean();
+
+            }, delay * 1000);
+        }
 
     }, "json");
 
