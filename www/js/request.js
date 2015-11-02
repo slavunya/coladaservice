@@ -128,7 +128,7 @@ function loadContent(page, result) {
         var isConnected = checkConnection();
         if (!isConnected) {
             offlinemode = true;
-         
+
 
         }
         $('#page').load('content.html #main', function () {
@@ -136,7 +136,7 @@ function loadContent(page, result) {
                 $('.qr').remove();
             }
             getlocation();
-            
+
             if (store.getItem("scans") !== null) {
                 $("#sendData").css({'color': 'black'});
                 $(".active").css({'pointer-events': 'inherit'});
@@ -317,6 +317,7 @@ function formSubmit() {
         }
         return false;
     }
+
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
@@ -360,6 +361,9 @@ function formSubmit() {
         if (result.status_user !== "1") {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
+        if (result.status == "success") {
+            offlinemode=false;
+        }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
 
         if (timeOutVar) {
@@ -374,6 +378,7 @@ function formSubmit() {
     }, "json");
 
 }
+
 function checkConnection() {
     try {
         if (typeof (navigator.connection) === 'undefined') {
