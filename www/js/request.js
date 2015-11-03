@@ -372,10 +372,9 @@ function formSubmit() {
         }
 
         if (result.status_user === '1') {
-            //timeOutVar = setTimeout(function () {
-                //clean();
-                $('.reject').click();
-            //}, delay * 1000);
+            timeOutVar = setTimeout(function () {
+                clean();
+            }, delay * 1000);
         } else {
             timeOutVar = setTimeout(function () {
                 accept(obj.guid, od.location_id);
@@ -501,6 +500,9 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
+            $('#guid').focus();
+            $('#guid').focus();
+            $('#guid').focus();
             $('#guid').focus();
         }
     }
