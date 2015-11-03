@@ -341,10 +341,10 @@ function formSubmit() {
                 button = "<button class=\"reject\" onclick=\"clean()\">Back</button>";
                 break;
             case "2":
-                button = "<button class=\"accept_on acc-click\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
+                button = "<button class=\"accept_on acc-click\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "','1')\">Accept</button>";
                 break;
             case "3":
-                button = "<button class=\"accept acc-click\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button><button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
+                button = "<button class=\"accept acc-click\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "','1')\">Accept</button><button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
                 if (result.scanned_data) {
                     var date = new Date();
                     date.setTime(result.scanned_data.date);
@@ -377,10 +377,10 @@ function formSubmit() {
                 clean();
             }, delay * 1000);
         } else {
-            
+
             timeOutVar = setTimeout(function () {
-                cordova.plugins.Keyboard.close();
-                accept(obj.guid, od.location_id, 1);
+//                cordova.plugins.Keyboard.close();
+                accept(obj.guid, od.location_id);
             }, delay * 1000);
         }
 
@@ -435,7 +435,7 @@ function getlocation() {
     }, "json");
 }
 
-function accept(guid, location_id, autoClick) {
+function accept(guid, location_id, NoAutoClick) {
     if (timeOutVar) {
         clearTimeout(timeOutVar);
     }
@@ -453,7 +453,8 @@ function accept(guid, location_id, autoClick) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-    if (!autoClick) {
+    if (NoAutoClick) {
+        cordova.plugins.Keyboard.close();
 //        setTimeout(function () {
 //            $.post(baseUrl, od, function (result) {
 //                console.log("accept");
@@ -465,7 +466,7 @@ function accept(guid, location_id, autoClick) {
 //                }
 //            }, "json");
 //        }, 500)
-        
+
     }
     $.post(baseUrl, od, function (result) {
         console.log("accept");
