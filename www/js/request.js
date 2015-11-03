@@ -494,10 +494,6 @@ function getTime() {
 }
 
 function clean() {
-    //if (autoMode) {
-    //
-    //}
-
     $(".content").hide(100);
     $('#btn').hide();
     $("#submitform").show(100);
@@ -506,6 +502,7 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
+            alert('11');
             $('#guid').focus();
         }
     }
