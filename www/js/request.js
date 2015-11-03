@@ -319,13 +319,13 @@ function formSubmit() {
         }
         return false;
     }
-
+    cordova.plugins.Keyboard.close();
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
         console.log(result);
 //        setTimeout(function () {
-//        cordova.plugins.Keyboard.close();
+        
 //        }, 1000)
         var obj = result.data;
 
