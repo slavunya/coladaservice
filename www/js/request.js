@@ -457,14 +457,14 @@ function accept(guid, location_id) {
     }
 //    clean();
 
-    $.post(baseUrl, od, function (result) {
-        console.log("accept");
-        console.log(result);
-
-        if (result.status !== "success") {
-            showAlert(result.message, 'message')
-        }
-    }, "json");
+    //$.post(baseUrl, od, function (result) {
+    //    console.log("accept");
+    //    console.log(result);
+    //
+    //    if (result.status !== "success") {
+    //        showAlert(result.message, 'message')
+    //    }
+    //}, "json");
     clean();
 }
 
