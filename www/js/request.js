@@ -501,9 +501,7 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
-            //$('#guid').focus();
-            wc = document.getElementById("guid");
-            wc.focus();
+            $('#guid').focus();
         }
 
     }
