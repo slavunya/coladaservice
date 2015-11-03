@@ -273,8 +273,11 @@ function loadContent(page, result) {
 
 function formSubmit() {
 //    alert("form submit start");
-    cordova.plugins.Keyboard.close();
-    
+//    setTimeout(function () {
+//        cordova.plugins.Keyboard.close();
+//    }, delay*1000);
+
+
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
@@ -380,8 +383,9 @@ function formSubmit() {
         } else {
 
             timeOutVar = setTimeout(function () {
-//                cordova.plugins.Keyboard.close();
+                
                 accept(obj.guid, od.location_id);
+                cordova.plugins.Keyboard.close();
             }, delay * 1000);
         }
 
@@ -454,27 +458,28 @@ function accept(guid, location_id, NoAutoClick) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-    if (NoAutoClick!=='1') {
-        
-        cordova.plugins.Keyboard.show();
-
-
-
-//          
-//        setTimeout(function () {
-//            $.post(baseUrl, od, function (result) {
-//                console.log("accept");
-//                console.log(result);
-//
-//                if (result.status == "success") {
-////            showAlert(result.message, 'message')
-//                    clean();
-//                }
-//            }, "json");
-//        }, 500)
-
+    if (NoAutoClick !== '1') {
+//        $('#guid').focus();
     }
-//    setTimeout(function () {
+////        cordova.plugins.Keyboard.show();
+//        
+//
+//
+////          
+////        setTimeout(function () {
+////            $.post(baseUrl, od, function (result) {
+////                console.log("accept");
+////                console.log(result);
+////
+////                if (result.status == "success") {
+//////            showAlert(result.message, 'message')
+////                    clean();
+////                }
+////            }, "json");
+////        }, 500)
+//
+//    }
+////    setTimeout(function () {
 //        $.post(baseUrl, od, function (result) {
 //            console.log("accept");
 //            console.log(result);
@@ -522,9 +527,9 @@ function clean(NoAutoClick) {
         if (isBarcode) {
             scanBarcode();
         } else {
-            if (NoAutoClick) {
-                $('#guid').focus();
-            }
+//            if (NoAutoClick) {
+            $('#guid').focus();
+//            }
 
         }
     }
