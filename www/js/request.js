@@ -325,7 +325,7 @@ function formSubmit() {
         console.log("Submit");
         console.log(result);
 //        setTimeout(function () {
-
+        cordova.plugins.Keyboard.close();
 //        }, 1000)
         var obj = result.data;
 
@@ -454,7 +454,7 @@ function accept(guid, location_id, NoAutoClick) {
         return false;
     }
     if (NoAutoClick) {
-//        cordova.plugins.Keyboard.close();
+//          
 //        setTimeout(function () {
 //            $.post(baseUrl, od, function (result) {
 //                console.log("accept");
@@ -478,7 +478,7 @@ function accept(guid, location_id, NoAutoClick) {
 //        }, "json");
 //       
 //    }, 500);
- clean();
+    clean();
 
 }
 
