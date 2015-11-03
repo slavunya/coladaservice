@@ -378,7 +378,7 @@ function formSubmit() {
             }, delay * 1000);
         } else {
             timeOutVar = setTimeout(function () {
-                accept(obj.guid, od.location_id);
+                accept(obj.guid, od.location_id,1);
             }, delay * 1000);
         }
 
@@ -435,7 +435,7 @@ function getlocation() {
     }, "json");
 }
 
-function accept(guid, location_id) {
+function accept(guid, location_id, autoClick) {
     if (timeOutVar) {
         clearTimeout(timeOutVar);
     }
@@ -453,20 +453,29 @@ function accept(guid, location_id) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-    setTimeout(function () {
+    if (autoClick) {
+        setTimeout(function () {
+            $.post(baseUrl, od, function (result) {
+                console.log("accept");
+                console.log(result);
+
+                if (result.status == "success") {
+//            showAlert(result.message, 'message')
+                    clean();
+                }
+            }, "json");
+        }, 500)
+    } else {
         $.post(baseUrl, od, function (result) {
             console.log("accept");
             console.log(result);
 
             if (result.status == "success") {
 //            showAlert(result.message, 'message')
-
-                clean();
-
-
             }
         }, "json");
-    }, 500)
+        clean();
+    }
 }
 
 function reject(guid, location_id) {
@@ -513,11 +522,11 @@ function clean() {
 function showAlert(message, title) {
     if (isMobile) {
         navigator.notification.alert(
-                message,
-                null,
-                title,
-                'Ok'
-                );
+            message,
+            null,
+            title,
+            'Ok'
+        );
     } else {
         alert(message);
     }
@@ -563,18 +572,18 @@ function scanBarcode() {
 
 function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
-            function (result) {
-                var status = {success: true, error: false};
-                if (result.cancelled) {
-                    isBarcode = false;
-                }
-                callback(status, result);
-            },
-            function (error) {
-                alert("Scanning failed: " + error);
-                var status = {success: false, error: true};
-                callback(status, error);
+        function (result) {
+            var status = {success: true, error: false};
+            if (result.cancelled) {
+                isBarcode = false;
             }
+            callback(status, result);
+        },
+        function (error) {
+            alert("Scanning failed: " + error);
+            var status = {success: false, error: true};
+            callback(status, error);
+        }
     );
 
 
@@ -682,11 +691,11 @@ function uploadData() {
         }
         if (result.status == "success") {
             navigator.notification.alert(
-                    "Scan data has been uploaded to the server",
-                    null,
-                    "Message",
-                    'Ok'
-                    );
+                "Scan data has been uploaded to the server",
+                null,
+                "Message",
+                'Ok'
+            );
             offlinemode = false;
             store.removeItem("scans");
             loadContent('main');
@@ -697,12 +706,12 @@ function uploadData() {
 }
 function logout() {
     navigator.notification.confirm('Logout',
-            function (button_id) {
-                if (button_id == 1) {
-                    loadContent('login', '')
-                }
-            },
-            'Message',
-            ['Yes', 'No']
-            );
+        function (button_id) {
+            if (button_id == 1) {
+                loadContent('login', '')
+            }
+        },
+        'Message',
+        ['Yes', 'No']
+    );
 }
