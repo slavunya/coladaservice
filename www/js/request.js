@@ -453,24 +453,15 @@ function accept(guid, location_id) {
         return false;
     }
 
-    setTimeout(function () {
-        $.post(baseUrl, od, function (result) {
-            console.log("accept");
-            console.log(result);
-            if (result.status === "success") {
-                clean();
-            }
-        }, "json");
-    }, 500);
-    //$.post(baseUrl, od, function (result) {
-    //    console.log("accept");
-    //    console.log(result);
-    //
-    //    if (result.status !== "success") {
-    //        showAlert(result.message, 'message')
-    //    }
-    //}, "json");
-    //clean();
+    $.post(baseUrl, od, function (result) {
+        console.log("accept");
+        console.log(result);
+
+        if (result.status !== "success") {
+            showAlert(result.message, 'message')
+        }
+    }, "json");
+    clean();
 }
 
 function reject(guid, location_id) {
@@ -509,7 +500,9 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
-            $('#guid').focus();
+            setTimeout(function () {
+                $('#guid').focus();
+            });
         }
 
     }
