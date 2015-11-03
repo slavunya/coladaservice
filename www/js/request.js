@@ -454,7 +454,7 @@ function accept(guid, location_id, NoAutoClick) {
         return false;
     }
     if (NoAutoClick) {
-        cordova.plugins.Keyboard.close();
+//        cordova.plugins.Keyboard.close();
 //        setTimeout(function () {
 //            $.post(baseUrl, od, function (result) {
 //                console.log("accept");
