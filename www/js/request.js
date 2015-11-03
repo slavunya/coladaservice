@@ -460,7 +460,10 @@ function accept(guid, location_id) {
 
         if (result.status == "success") {
 //            showAlert(result.message, 'message')
-            clean();
+          setTimeout(function(){
+              clean();
+          },500)
+            
         }
     }, "json");
     
