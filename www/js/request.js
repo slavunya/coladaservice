@@ -455,7 +455,7 @@ function accept(guid, location_id, NoAutoClick) {
         return false;
     }
     if (!NoAutoClick) {
-        $('#guid').blur();
+        $('.acc-click').focus();
 
 
 
