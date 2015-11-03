@@ -161,7 +161,7 @@ function loadContent(page, result) {
             else {
                 $(".titleMode").html("");
             }
-
+            
             if (autoMode) {
                 $('#btn').hide();
             }
