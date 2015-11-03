@@ -319,7 +319,7 @@ function formSubmit() {
         }
         return false;
     }
-    cordova.plugins.Keyboard.close();
+//    cordova.plugins.Keyboard.close();
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
@@ -462,7 +462,7 @@ function accept(guid, location_id) {
 //            showAlert(result.message, 'message')
           setTimeout(function(){
               clean();
-          },500)
+          },1000)
             
         }
     }, "json");
