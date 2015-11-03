@@ -373,7 +373,8 @@ function formSubmit() {
 
         if (result.status_user === '1') {
             timeOutVar = setTimeout(function () {
-                clean();
+                //clean();
+                $('.reject').click();
             }, delay * 1000);
         } else {
             timeOutVar = setTimeout(function () {
@@ -500,7 +501,7 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
-                $('#guid').focus();
+            $('#guid').focus();
         }
     }
 }
