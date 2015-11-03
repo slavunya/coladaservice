@@ -325,7 +325,7 @@ function formSubmit() {
         console.log("Submit");
         console.log(result);
 //        setTimeout(function () {
-        cordova.plugins.Keyboard.close();
+//        cordova.plugins.Keyboard.close();
 //        }, 1000)
         var obj = result.data;
 
@@ -458,9 +458,9 @@ function accept(guid, location_id) {
         console.log("accept");
         console.log(result);
 
-        if (result.status !== "success") {
-            showAlert(result.message, 'message')
-//            clean();
+        if (result.status == "success") {
+//            showAlert(result.message, 'message')
+            clean();
         }
     }, "json");
     
