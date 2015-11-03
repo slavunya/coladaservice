@@ -161,10 +161,10 @@ function loadContent(page, result) {
             else {
                 $(".titleMode").html("");
             }
-            
+
             if (autoMode) {
                 $('#btn').hide();
-            }   
+            }
 //            $('#guid').focus();
 
         });
@@ -273,7 +273,7 @@ function loadContent(page, result) {
 
 function formSubmit() {
 //    alert("form submit start");
-
+    cordova.plugins.Keyboard.close();
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
@@ -319,13 +319,13 @@ function formSubmit() {
         }
         return false;
     }
-//    cordova.plugins.Keyboard.close();
+//   
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
         console.log(result);
 //        setTimeout(function () {
-        
+
 //        }, 1000)
         var obj = result.data;
 
@@ -453,20 +453,20 @@ function accept(guid, location_id) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
+    setTimeout(function () {
+        $.post(baseUrl, od, function (result) {
+            console.log("accept");
+            console.log(result);
 
-    $.post(baseUrl, od, function (result) {
-        console.log("accept");
-        console.log(result);
-
-        if (result.status == "success") {
+            if (result.status == "success") {
 //            showAlert(result.message, 'message')
-          setTimeout(function(){
-              clean();
-          },1000)
-            
-        }
-    }, "json");
-    
+
+                clean();
+
+
+            }
+        }, "json");
+    }, 500)
 }
 
 function reject(guid, location_id) {
@@ -513,11 +513,11 @@ function clean() {
 function showAlert(message, title) {
     if (isMobile) {
         navigator.notification.alert(
-            message,
-            null,
-            title,
-            'Ok'
-        );
+                message,
+                null,
+                title,
+                'Ok'
+                );
     } else {
         alert(message);
     }
@@ -563,18 +563,18 @@ function scanBarcode() {
 
 function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
-        function (result) {
-            var status = {success: true, error: false};
-            if (result.cancelled) {
-                isBarcode = false;
+            function (result) {
+                var status = {success: true, error: false};
+                if (result.cancelled) {
+                    isBarcode = false;
+                }
+                callback(status, result);
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+                var status = {success: false, error: true};
+                callback(status, error);
             }
-            callback(status, result);
-        },
-        function (error) {
-            alert("Scanning failed: " + error);
-            var status = {success: false, error: true};
-            callback(status, error);
-        }
     );
 
 
@@ -682,11 +682,11 @@ function uploadData() {
         }
         if (result.status == "success") {
             navigator.notification.alert(
-                "Scan data has been uploaded to the server",
-                null,
-                "Message",
-                'Ok'
-            );
+                    "Scan data has been uploaded to the server",
+                    null,
+                    "Message",
+                    'Ok'
+                    );
             offlinemode = false;
             store.removeItem("scans");
             loadContent('main');
@@ -697,12 +697,12 @@ function uploadData() {
 }
 function logout() {
     navigator.notification.confirm('Logout',
-        function (button_id) {
-            if (button_id == 1) {
-                loadContent('login', '')
-            }
-        },
-        'Message',
-        ['Yes', 'No']
-    );
+            function (button_id) {
+                if (button_id == 1) {
+                    loadContent('login', '')
+                }
+            },
+            'Message',
+            ['Yes', 'No']
+            );
 }
