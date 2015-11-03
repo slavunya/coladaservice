@@ -500,7 +500,7 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
-            setTimeout(function() {$('#guid').focus();}, 20);
+            $('#guid').focus();
         }
     }
 }
