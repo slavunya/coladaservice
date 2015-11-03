@@ -164,7 +164,8 @@ function loadContent(page, result) {
             
             if (autoMode) {
                 $('#btn').hide();
-            }
+            }   
+            $('#guid').focus();
 
         });
     }
