@@ -466,6 +466,7 @@ function accept(guid, location_id, autoClick) {
             }, "json");
         }, 500)
     } else {
+
         $.post(baseUrl, od, function (result) {
             console.log("accept");
             console.log(result);
