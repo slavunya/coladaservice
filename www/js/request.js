@@ -273,7 +273,7 @@ function loadContent(page, result) {
 
 function formSubmit() {
 //    alert("form submit start");
-    cordova.plugins.Keyboard.close();
+//    cordova.plugins.Keyboard.close();
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
