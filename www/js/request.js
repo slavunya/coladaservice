@@ -273,7 +273,7 @@ function loadContent(page, result) {
 
 function formSubmit() {
 //    alert("form submit start");
-//    cordova.plugins.Keyboard.close();
+
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
@@ -378,7 +378,7 @@ function formSubmit() {
             }, delay * 1000);
         } else {
             timeOutVar = setTimeout(function () {
-                accept(obj.guid, od.location_id,1);
+                accept(obj.guid, od.location_id, 1);
             }, delay * 1000);
         }
 
@@ -466,7 +466,7 @@ function accept(guid, location_id, autoClick) {
             }, "json");
         }, 500)
     } else {
-
+        cordova.plugins.Keyboard.close();
         $.post(baseUrl, od, function (result) {
             console.log("accept");
             console.log(result);
