@@ -372,10 +372,10 @@ function formSubmit() {
         }
 
         if (result.status_user === '1') {
-            timeOutVar = setTimeout(function () {
+            //timeOutVar = setTimeout(function () {
                 //clean();
                 $('.reject').click();
-            }, delay * 1000);
+            //}, delay * 1000);
         } else {
             timeOutVar = setTimeout(function () {
                 accept(obj.guid, od.location_id);
