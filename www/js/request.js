@@ -502,7 +502,7 @@ function clean() {
         } else {
             setTimeout(function () {
                 $('#guid').focus();
-            });
+            },1000);
         }
 
     }
