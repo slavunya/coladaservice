@@ -466,7 +466,6 @@ function accept(guid, location_id, autoClick) {
             }, "json");
         }, 500)
     } else {
-        cordova.plugins.Keyboard.close();
         $.post(baseUrl, od, function (result) {
             console.log("accept");
             console.log(result);
