@@ -325,7 +325,7 @@ function formSubmit() {
         console.log("Submit");
         console.log(result);
 //        setTimeout(function () {
-            cordova.plugins.Keyboard.close();
+
 //        }, 1000)
         var obj = result.data;
 
@@ -451,7 +451,7 @@ function accept(guid, location_id, autoClick) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-//    if (autoClick) {
+    if (!autoClick) {
 //        setTimeout(function () {
 //            $.post(baseUrl, od, function (result) {
 //                console.log("accept");
@@ -462,8 +462,9 @@ function accept(guid, location_id, autoClick) {
 //                    clean();
 //                }
 //            }, "json");
-    //        }, 500)
-//    } else {
+//        }, 500)
+        cordova.plugins.Keyboard.close();
+    }
     $.post(baseUrl, od, function (result) {
         console.log("accept");
         console.log(result);
@@ -472,7 +473,7 @@ function accept(guid, location_id, autoClick) {
         }
     }, "json");
     clean();
-//    }
+
 }
 
 function reject(guid, location_id) {
