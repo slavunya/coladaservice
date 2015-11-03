@@ -341,10 +341,10 @@ function formSubmit() {
                 button = "<button class=\"reject\" onclick=\"clean()\">Back</button>";
                 break;
             case "2":
-                button = "<button class=\"accept_on\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
+                button = "<button class=\"accept_on acc-click\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
                 break;
             case "3":
-                button = "<button class=\"accept\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button><button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
+                button = "<button class=\"accept acc-click\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button><button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
                 if (result.scanned_data) {
                     var date = new Date();
                     date.setTime(result.scanned_data.date);
@@ -378,7 +378,8 @@ function formSubmit() {
             }, delay * 1000);
         } else{
             timeOutVar = setTimeout(function () {
-                accept(obj.guid, od.location_id);
+                //accept(obj.guid, od.location_id);
+                $('.acc-click').click();
             }, delay * 1000);
         }
 
