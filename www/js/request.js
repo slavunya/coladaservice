@@ -703,7 +703,7 @@ function logout() {
     navigator.notification.confirm('Logout',
             function (button_id) {
                 if (button_id == 1) {
-
+                    loadContent('login','')
                 }
             },
             'Message',
