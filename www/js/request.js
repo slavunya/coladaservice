@@ -516,7 +516,7 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
-            $('#guid').focus();
+//            $('#guid').focus();
         }
     }
 }
