@@ -377,7 +377,9 @@ function formSubmit() {
                 clean();
             }, delay * 1000);
         } else {
+            
             timeOutVar = setTimeout(function () {
+                cordova.plugins.Keyboard.close();
                 accept(obj.guid, od.location_id, 1);
             }, delay * 1000);
         }
@@ -463,7 +465,7 @@ function accept(guid, location_id, autoClick) {
 //                }
 //            }, "json");
 //        }, 500)
-        cordova.plugins.Keyboard.close();
+        
     }
     $.post(baseUrl, od, function (result) {
         console.log("accept");
