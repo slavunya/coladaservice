@@ -454,9 +454,9 @@ function accept(guid, location_id, NoAutoClick) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-    if (!NoAutoClick) {
-        $('.acc-click').focus();
-
+    if (NoAutoClick!=='1') {
+        
+        cordova.plugins.Keyboard.show();
 
 
 
