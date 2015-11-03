@@ -378,8 +378,7 @@ function formSubmit() {
             }, delay * 1000);
         } else{
             timeOutVar = setTimeout(function () {
-                //accept(obj.guid, od.location_id);
-                $('.acc-click').click();
+                accept(obj.guid, od.location_id);
             }, delay * 1000);
         }
 
@@ -502,8 +501,11 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
-            $('#guid').focus();
+            //$('#guid').focus();
+            wc = document.getElementById("guid");
+            wc.focus();
         }
+
     }
 }
 
