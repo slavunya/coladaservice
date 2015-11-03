@@ -478,7 +478,7 @@ function accept(guid, location_id, NoAutoClick) {
 //        }, "json");
 //       
 //    }, 500);
-    clean();
+    clean(NoAutoClick);
 
 }
 
@@ -505,7 +505,7 @@ function getTime() {
     return time;
 }
 
-function clean() {
+function clean(NoAutoClick) {
     $(".content").hide(100);
     $('#btn').hide();
     $("#submitform").show(100);
@@ -516,7 +516,9 @@ function clean() {
         if (isBarcode) {
             scanBarcode();
         } else {
-            $('#guid').focus();
+            if (NoAutoClick) {
+                $('#guid').focus();
+            }
         }
     }
 }
