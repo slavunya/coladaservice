@@ -459,8 +459,8 @@ function accept(guid, location_id) {
         console.log(result);
 
         if (result.status !== "success") {
-//            showAlert(result.message, 'message')
-            clean();
+            showAlert(result.message, 'message')
+//            clean();
         }
     }, "json");
     
