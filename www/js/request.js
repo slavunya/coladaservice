@@ -470,8 +470,8 @@ function accept(guid, location_id, autoClick) {
             console.log("accept");
             console.log(result);
 
-            if (result.status == "success") {
-//            showAlert(result.message, 'message')
+            if (result.status !== "success") {
+            showAlert(result.message, 'message')
             }
         }, "json");
         clean();
