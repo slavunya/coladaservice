@@ -324,9 +324,9 @@ function formSubmit() {
 
         console.log("Submit");
         console.log(result);
-//        setTimeout(function () {
-
-//        }, 1000)
+        setTimeout(function () {
+            cordova.plugins.Keyboard.close
+        }, 1000)
         var obj = result.data;
 
         var userData = "";
@@ -364,7 +364,7 @@ function formSubmit() {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
 //        if (result.status == "success") {
-//            offlinemode = false;
+        //            offlinemode = false;
 //        }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
 
@@ -383,7 +383,6 @@ function formSubmit() {
         }
 
     }, "json");
-
 }
 
 function checkConnection() {
@@ -402,7 +401,6 @@ function checkConnection() {
         states[Connection.CELL_4G] = 'Cell 4G connection';
         states[Connection.CELL] = 'Cell generic connection';
         states[Connection.NONE] = 'No network connection';
-
         if (networkState === Connection.NONE) {
             return false;
         }
@@ -449,33 +447,32 @@ function accept(guid, location_id, autoClick) {
     var obj = {date: od.date, guid: od.guid, reject: 0, location_id: od.location_id};
     var isConnected = checkConnection();
     if (!isConnected) {
-//        callback({status: {error: true}, error: "Connection error"});
+        //        callback({status: {error: true}, error: "Connection error"});
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-    if (autoClick) {
-        setTimeout(function () {
-            $.post(baseUrl, od, function (result) {
-                console.log("accept");
-                console.log(result);
-
-                if (result.status == "success") {
-//            showAlert(result.message, 'message')
-                    clean();
-                }
-            }, "json");
-        }, 500)
-    } else {
-        $.post(baseUrl, od, function (result) {
-            console.log("accept");
-            console.log(result);
-
-            if (result.status !== "success") {
+//    if (autoClick) {
+//        setTimeout(function () {
+//            $.post(baseUrl, od, function (result) {
+//                console.log("accept");
+//                console.log(result);
+//
+//                if (result.status == "success") {
+////            showAlert(result.message, 'message')
+//                    clean();
+//                }
+//            }, "json");
+    //        }, 500)
+//    } else {
+    $.post(baseUrl, od, function (result) {
+        console.log("accept");
+        console.log(result);
+        if (result.status !== "success") {
             showAlert(result.message, 'message')
-            }
-        }, "json");
-        clean();
-    }
+        }
+    }, "json");
+    clean();
+//    }
 }
 
 function reject(guid, location_id) {
@@ -489,14 +486,12 @@ function reject(guid, location_id) {
     $.post(baseUrl, od, function (result) {
         console.log("Reject");
         console.log(result);
-
         if (result.status !== "success") {
             showAlert(result.message, 'message')
         }
     }, "json");
     clean();
 }
-
 function getTime() {
     var date = new Date();
     var time = date.getTime();
@@ -522,11 +517,11 @@ function clean() {
 function showAlert(message, title) {
     if (isMobile) {
         navigator.notification.alert(
-            message,
-            null,
-            title,
-            'Ok'
-        );
+                message,
+                null,
+                title,
+                'Ok'
+                );
     } else {
         alert(message);
     }
@@ -538,7 +533,7 @@ function scanBarcode() {
 
 
     function afterScanCode(status, result) {
-//        log('result.format: ' + result.format + '; text:' + result.text + '; cancelled: ' + result.cancelled);
+        //        log('result.format: ' + result.format + '; text:' + result.text + '; cancelled: ' + result.cancelled);
         if (status.error) {
             showErrorMessage(result);
             return;
@@ -550,7 +545,7 @@ function scanBarcode() {
         }
 //        if (!(result.format === 'CODE_128')) {
 //            showErrorMessage(eMsg.wrongCodeType);
-//            return;
+        //            return;
 //        }
 
         var scannedCode = result.text;
@@ -572,18 +567,18 @@ function scanBarcode() {
 
 function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
-        function (result) {
-            var status = {success: true, error: false};
-            if (result.cancelled) {
-                isBarcode = false;
+            function (result) {
+                var status = {success: true, error: false};
+                if (result.cancelled) {
+                    isBarcode = false;
+                }
+                callback(status, result);
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+                var status = {success: false, error: true};
+                callback(status, error);
             }
-            callback(status, result);
-        },
-        function (error) {
-            alert("Scanning failed: " + error);
-            var status = {success: false, error: true};
-            callback(status, error);
-        }
     );
 
 
@@ -595,7 +590,7 @@ function addSlipNumberToView(slipNumber) {
     if (autoMode) {
         formSubmit();
     }
-//     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
+    //     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
 
 }
 function gethistory() {
@@ -675,8 +670,7 @@ function uploadData() {
     //        'Are you sure to clear the offline scans?', // message
     //        send(data), // callback to invoke with index of button pressed
     //        'Message', // title
-    //        'Yes,No'          // buttonLabels
-//    );
+    //        'Yes,No'          // buttonLabels //    );
 
     var isConnected = checkConnection();
     if (!isConnected) {
@@ -691,11 +685,11 @@ function uploadData() {
         }
         if (result.status == "success") {
             navigator.notification.alert(
-                "Scan data has been uploaded to the server",
-                null,
-                "Message",
-                'Ok'
-            );
+                    "Scan data has been uploaded to the server",
+                    null,
+                    "Message",
+                    'Ok'
+                    );
             offlinemode = false;
             store.removeItem("scans");
             loadContent('main');
@@ -706,12 +700,12 @@ function uploadData() {
 }
 function logout() {
     navigator.notification.confirm('Logout',
-        function (button_id) {
-            if (button_id == 1) {
-                loadContent('login', '')
-            }
-        },
-        'Message',
-        ['Yes', 'No']
-    );
+            function (button_id) {
+                if (button_id == 1) {
+                    loadContent('login', '')
+                }
+            },
+            'Message',
+            ['Yes', 'No']
+            );
 }
