@@ -273,7 +273,8 @@ function loadContent(page, result) {
 
 function formSubmit() {
 //    alert("form submit start");
-
+    cordova.plugins.Keyboard.close();
+    
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
@@ -453,8 +454,12 @@ function accept(guid, location_id, NoAutoClick) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-    if (NoAutoClick) {
-        cordova.plugins.Keyboard.close();
+    if (!NoAutoClick) {
+        $('#guid').blur();
+
+
+
+
 //          
 //        setTimeout(function () {
 //            $.post(baseUrl, od, function (result) {
@@ -520,6 +525,7 @@ function clean(NoAutoClick) {
             if (NoAutoClick) {
                 $('#guid').focus();
             }
+
         }
     }
 }
