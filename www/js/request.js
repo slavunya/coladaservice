@@ -455,16 +455,15 @@ function accept(guid, location_id) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-//    clean();
 
-    //$.post(baseUrl, od, function (result) {
-    //    console.log("accept");
-    //    console.log(result);
-    //
-    //    if (result.status !== "success") {
-    //        showAlert(result.message, 'message')
-    //    }
-    //}, "json");
+    $.post(baseUrl, od, function (result) {
+        console.log("accept");
+        console.log(result);
+
+        if (result.status !== "success") {
+            showAlert(result.message, 'message')
+        }
+    }, "json");
     clean();
 }
 
@@ -497,18 +496,16 @@ function clean() {
     $(".content").hide(100);
     $('#btn').hide();
     $("#submitform").show(100);
-//    loadContent('main', '');
+    $('input[name=guid]').val("");
+    lastValue = 0;
+    count = 0;
     if (autoMode) {
         if (isBarcode) {
             scanBarcode();
         } else {
-            alert('11');
             $('#guid').focus();
         }
     }
-    $('input[name=guid]').val("");
-    lastValue = 0;
-    count = 0;
 }
 
 function showAlert(message, title) {
