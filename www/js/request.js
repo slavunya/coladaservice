@@ -7,8 +7,6 @@ var moreinfostatus = false;
 var offlinemode = false;
 var scans = [];
 var isBarcode = false;
-//var checked = false;
-//var scannerAuto = true;
 var autoMode = true;
 var currlocation = '';
 var delay = 10;
@@ -19,6 +17,7 @@ var cameraOn = true;
 var store = window.localStorage;
 var isMobile = false;
 var count = 0;
+var isConnected;
 
 if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1) {
     isMobile = true;
@@ -35,10 +34,22 @@ function keyboardShowHandler() {
 }
 
 function onDeviceReady() {
-//    alert(device.model);
     if (device.model.indexOf("iPod") !== -1) {
         cameraOn = false;
     }
+
+    setInterval(function() {
+        isConnected = checkConnection();
+        if(!isConnected) {
+            offlinemode = true;
+            $(".titleMode").html("Offline Mode");
+            $('#get-history').closest('a').ccs('color','#9E9E9F');
+        } else{
+            offlinemode = false;
+            $(".titleMode").html("");
+            $('#get-history').closest('a').ccs('color','#000');
+        }
+    }, 1000);
 
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
@@ -68,14 +79,10 @@ $(document).on('submit', '#login-form', function () {
 //    var user={login:od.login,password:od.password};
     store.setItem("login", JSON.stringify(od.login));
     store.setItem("password", JSON.stringify(od.password));
-    var isConnected = checkConnection();
-    if (!isConnected) {
-        offlinemode = true;
-//        callback({status: {error: true}, error: "Connection error"});
-        loadContent('main', '');
 
-    }
-    else {
+    if (offlinemode) {
+        loadContent('main', '');
+    }   else {
         offlinemode = false;
         // loadContent('main', '');
     }
@@ -102,6 +109,18 @@ $(document).on('change', '#list', function () {
     }
 });
 
+$(document).on('input', '#guid', function () {
+    if (count == 0) {
+        $('#btn').show();
+        keyboardShowHandler();
+    }
+    if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
+        lastValue = $("#guid").val().length;
+        formSubmit();
+    } else {
+        lastValue = $("#guid").val().length;
+    }
+});
 
 function loadContent(page, result) {
     if (page === 'login') {
@@ -113,25 +132,7 @@ function loadContent(page, result) {
 
     if (page === 'main') {
         count = 0;
-        $(document).on('input', '#guid', function () {
-            if (count == 0) {
-                $('#btn').show();
-                keyboardShowHandler();
-            }
-            if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
-                lastValue = $("#guid").val().length;
-                formSubmit();
-            } else {
-                lastValue = $("#guid").val().length;
-            }
-        });
-        var isConnected = checkConnection();
-        if (!isConnected) {
-            offlinemode = true;
-        }
-        else {
-            offlinemode = false;
-        }
+
         $('#page').load('content.html #main', function () {
             if (!cameraOn) {
                 $('.qr').remove();
@@ -144,7 +145,6 @@ function loadContent(page, result) {
             }
 
             if (offlinemode) {
-                $(".titleMode").html("Offline Mode");
                 var locations = JSON.parse(store.getItem("locations"));
 
                 for (var i in locations.data) {
@@ -155,11 +155,7 @@ function loadContent(page, result) {
                     else {
                         $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
                     }
-//                    $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
                 }
-            }
-            else {
-                $(".titleMode").html("");
             }
 
             if (autoMode) {
@@ -178,10 +174,10 @@ function loadContent(page, result) {
                 document.getElementById("switch").setAttribute("checked", "checked");
             }
 
-            if (offlinemode) {
-                // 
-                document.getElementById("offlinemode").setAttribute("checked", "checked");
-            }
+            //if (offlinemode) {
+            //    //
+            //    document.getElementById("offlinemode").setAttribute("checked", "checked");
+            //}
             //if (scannerAuto) {
             //    //
             //    document.getElementById("scanner").setAttribute("checked", "checked");
@@ -193,7 +189,7 @@ function loadContent(page, result) {
 
             $('#cameraOn').val($(this).is(':checked'));
             $('#switch').val($(this).is(':checked'));
-            $('#offlinemode').val($(this).is(':checked'));
+            //$('#offlinemode').val($(this).is(':checked'));
             $('#scanner').val($(this).is(':checked'));
             $('#delay').val(delay);
             $('#Code_lenght').val(code_lenght);
@@ -203,11 +199,11 @@ function loadContent(page, result) {
                 delay = $('#delay').val();
 
             });
-            $('#Code_lenght').change(function () {
-
-                code_lenght = $('#Code_lenght').val();
-
-            });
+            //$('#Code_lenght').change(function () {
+            //
+            //    code_lenght = $('#Code_lenght').val();
+            //
+            //});
             $('#switch').change(function () {
                 if ($(this).is(":checked")) {
                     autoMode = true;
@@ -216,14 +212,14 @@ function loadContent(page, result) {
                     autoMode = false;
                 }
             });
-            $('#offlinemode').change(function () {
-                if ($(this).is(":checked")) {
-                    offlinemode = true;
-                }
-                else {
-                    offlinemode = false;
-                }
-            });
+            //$('#offlinemode').change(function () {
+            //    if ($(this).is(":checked")) {
+            //        offlinemode = true;
+            //    }
+            //    else {
+            //        offlinemode = false;
+            //    }
+            //});
             //$('#scanner').change(function () {
             //    if ($(this).is(":checked")) {
             //        scannerAuto = true;
@@ -282,20 +278,12 @@ function formSubmit() {
 
     var id = $('input[name=guid]').val();
     currlocation = $("#list").val();
+
     if (id.length == 0) {
         showAlert('Please scan the code', 'Message');
         //alert("Please scan the code");
         return false;
     }
-    var isConn = checkConnection();
-//    alert (isConn);
-    if (!isConn) {
-//        showAlert('no connection', 'Message');
-//        alert(isConn);
-        offlinemode = true;
-        $(".titleMode").html("Offline Mode");
-    }
-
 
     var od = {};
     od.guid = id;
@@ -445,22 +433,11 @@ function accept(guid, location_id) {
     od.login = login;
     od.password = password;
     var obj = {date: od.date, guid: od.guid, reject: 0, location_id: od.location_id};
-    var isConnected = checkConnection();
-    if (!isConnected) {
-//        callback({status: {error: true}, error: "Connection error"});
+
+    if (offlinemode) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-//    clean();
-
-    //$.post(baseUrl, od, function (result) {
-    //    console.log("accept");
-    //    console.log(result);
-    //
-    //    if (result.status !== "success") {
-    //        showAlert(result.message, 'message')
-    //    }
-    //}, "json");
     clean();
 }
 
@@ -669,13 +646,11 @@ function uploadData() {
     //        'Message', // title
     //        'Yes,No'          // buttonLabels
 //    );
-
-    var isConnected = checkConnection();
-    if (!isConnected) {
-        offlinemode = true;
+    if (offlinemode) {
+        showAlert('Check your connection','Message');
         return false;
-
     }
+
     $.post(baseUrl, data, function (result) {
         console.log(result);
         if (result.message == "Error login") {
