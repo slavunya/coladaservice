@@ -320,71 +320,81 @@ function formSubmit() {
         return false;
     }
 
-    $.post(baseUrl, od, function (result) {
+    $("#submitform").hide(100);
+    $(".content").show(100);
 
-        console.log("Submit");
-        console.log(result);
-//        setTimeout(function () {
-        cordova.plugins.Keyboard.close();
-//        }, 1000)
-        var obj = result.data;
+    //cordova.plugins.Keyboard.close();
 
-        var userData = "";
-        var button = "";
-        var time = "";
+    setTimeout(function (){
+    $(".content").hide(100);
+    $("#submitform").show(100);
+    }, 3000)
 
-        $("#submitform").hide(100);
-        $(".content").show(100);
-        switch (result.status_user) {
-            case "1":
-                userData = "<div>The code is not found</div>";
-                button = "<button class=\"reject\" onclick=\"clean()\">Back</button>";
-                break;
-            case "2":
-                button = "<button class=\"accept_on\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
-                break;
-            case "3":
-                button = "<button class=\"accept\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button><button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
-                if (result.scanned_data) {
-                    var date = new Date();
-                    date.setTime(result.scanned_data.date);
-                    var day = date.getDate();
-                    var month = date.getUTCMonth() + 1;
-                    var year = date.getFullYear();
-                    var hours = date.getHours();
-                    var minutes = date.getMinutes();
-                    var finalytime = year + "/" + month + "/" + day + "-" + hours + ":" + minutes;
-                    time = ("<p id='scan-time'>Last scanned: " + finalytime + "</p><a onclick=\"moreinfo('" + obj.guid + "')\">More info</a>");
-                }
-                break;
-        }
-
-
-        if (result.status_user !== "1") {
-            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
-        }
-        if (result.status == "success") {
-            offlinemode = false;
-        }
-        $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
-
-        if (timeOutVar) {
-            clearTimeout(timeOutVar);
-        }
-        timeOutVar = setTimeout(function () {
-
-            accept(obj.guid, od.location_id);
-
-        }, delay * 1000);
-        if (result.status_user === '1') {
-            timeOutVar = setTimeout(function () {
-
-                clean();
-
-            }, delay * 1000);
-        }
-
-    }, "json");
+//    $.post(baseUrl, od, function (result) {
+//
+//        console.log("Submit");
+//        console.log(result);
+////        setTimeout(function () {
+//        cordova.plugins.Keyboard.close();
+////        }, 1000)
+//        var obj = result.data;
+//
+//        var userData = "";
+//        var button = "";
+//        var time = "";
+//
+//        $("#submitform").hide(100);
+//        $(".content").show(100);
+//        switch (result.status_user) {
+//            case "1":
+//                userData = "<div>The code is not found</div>";
+//                button = "<button class=\"reject\" onclick=\"clean()\">Back</button>";
+//                break;
+//            case "2":
+//                button = "<button class=\"accept_on\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
+//                break;
+//            case "3":
+//                button = "<button class=\"accept\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button><button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
+//                if (result.scanned_data) {
+//                    var date = new Date();
+//                    date.setTime(result.scanned_data.date);
+//                    var day = date.getDate();
+//                    var month = date.getUTCMonth() + 1;
+//                    var year = date.getFullYear();
+//                    var hours = date.getHours();
+//                    var minutes = date.getMinutes();
+//                    var finalytime = year + "/" + month + "/" + day + "-" + hours + ":" + minutes;
+//                    time = ("<p id='scan-time'>Last scanned: " + finalytime + "</p><a onclick=\"moreinfo('" + obj.guid + "')\">More info</a>");
+//                }
+//                break;
+//        }
+//
+//
+//        if (result.status_user !== "1") {
+//            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
+//        }
+//        if (result.status == "success") {
+//            offlinemode = false;
+//        }
+//        $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
+//
+//        if (timeOutVar) {
+//            clearTimeout(timeOutVar);
+//        }
+//        timeOutVar = setTimeout(function () {
+//
+//            accept(obj.guid, od.location_id);
+//
+//        }, delay * 1000);
+//        if (result.status_user === '1') {
+//            timeOutVar = setTimeout(function () {
+//
+//                clean();
+//
+//            }, delay * 1000);
+//        }
+//
+//    }, "json");
 
 }
 
