@@ -43,11 +43,11 @@ function onDeviceReady() {
         if(!isConnected) {
             offlinemode = true;
             $(".titleMode").html("Offline Mode");
-            $('#get-history').closest('a').ccs('color','#9E9E9F');
+            $('#get-history').css('color','#9E9E9F');
         } else{
             offlinemode = false;
             $(".titleMode").html("");
-            $('#get-history').closest('a').ccs('color','#000');
+            $('#get-history').css('color','#000');
         }
     }, 1000);
 
@@ -341,7 +341,7 @@ function formSubmit() {
                     var hours = date.getHours();
                     var minutes = date.getMinutes();
                     var finalytime = year + "/" + month + "/" + day + "-" + hours + ":" + minutes;
-                    time = ("<p id='scan-time'>Last scanned: " + finalytime + "</p><a onclick=\"moreinfo('" + obj.guid + "')\">More info</a>");
+                    time = ("<p id='scan-time'>Last scanned: " + finalytime + "</p><a id='more-info' onclick=\"moreinfo('" + obj.guid + "')\">More info</a>");
                 }
                 break;
         }
@@ -595,6 +595,8 @@ function moreinfo(guid) {
         $.post(baseUrl, od, function (result) {
             console.log(result);
             $("#moreinfolist").css({'display': 'block'});
+            $("#more-info").text('Less info');
+
             var status = "";
 
             for (var i in result.data) {
@@ -631,6 +633,7 @@ function moreinfo(guid) {
     }
     else {
         $("#moreinfolist").hide(100);
+        $("#more-info").text('More info');
         moreinfostatus = false;
     }
 }
