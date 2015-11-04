@@ -377,4 +377,5 @@ button,
 .control_bottom_buttons *{
     outline: none;
     outline-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
