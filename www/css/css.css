@@ -362,9 +362,7 @@ header img{
     margin: 0 0 8px 0;
 }
 #sendData{
-    /* display: none; */
     font-size: 40px;
-    /* color: black; */
 }
 .active{
     pointer-events: none;
@@ -374,4 +372,5 @@ header img{
 }
 select,input,button,.switch-slider,.switch-slider,.control_bottom_buttons a{
     outline: none;
+    outline-color: transparent;
 }
