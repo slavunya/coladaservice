@@ -11,7 +11,7 @@ var isBarcode = false;
 //var scannerAuto = true;
 var autoMode = true;
 var currlocation = '';
-var delay = 3;
+var delay = 10;
 var lastValue = 0;
 var code_lenght = 6;
 var timeOutVar = null;
@@ -613,6 +613,9 @@ function gethistory() {
 }
 function moreinfo(guid) {
     if (!moreinfostatus) {
+        if (timeOutVar) {
+            clearTimeout(timeOutVar);
+        }
         var od = {};
         od.user_history = "get";
         od.guid = guid;

@@ -367,6 +367,6 @@ header img{
 .active{
     pointer-events: none;
 }
-.cameraOn{
-    
+select,input,button{
+    outline: none;
 }
