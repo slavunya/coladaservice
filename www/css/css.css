@@ -216,7 +216,8 @@ header img {
     font-weight: 600;
     margin: 13px -15px 0 -15px;
     padding: 15px 0px 0 10px;
-    overflow-y: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     text-align: left;
     /* width: 100%; */
 }
