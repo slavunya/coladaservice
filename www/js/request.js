@@ -44,6 +44,7 @@ function onDeviceReady() {
             offlinemode = true;
             $(".titleMode").html("Offline Mode");
             $('#get-history').css('color','#9E9E9F');
+            $('#sendData').css('color','#9E9E9F');
         } else{
             offlinemode = false;
             $(".titleMode").html("");
