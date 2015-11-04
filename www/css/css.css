@@ -370,7 +370,11 @@ header img{
 .control_bottom_buttons a{
     display: inline-block;
 }
-select,input,button,.switch-slider,.switch-slider,.control_bottom_buttons a{
+select,
+input,
+button,
+.switch *,
+.control_bottom_buttons *{
     outline: none;
     outline-color: transparent;
 }
