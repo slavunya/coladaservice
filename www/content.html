@@ -42,7 +42,7 @@
                     <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
                     <li><a class="active" onclick="uploadData()"><i id="sendData" class="fa fa-upload"></i></a></li>
                     <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
-                    <li><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
+                    <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
                 </ul>
             </div>
 
@@ -53,21 +53,20 @@
             </div>
             <div class="parentControlBottomButtons">
                 <ul class="control_bottom_buttons">
-                    <li><a onclick="loadContent('login')"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
-                    <li><a onclick="uploadData()"><i id="sendData" class="fa fa-upload"></i></a></li>
-                    <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
                     <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
+                    <li><a class="active" onclick="uploadData()"><i id="sendData" class="fa fa-upload"></i></a></li>
+                    <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
+                    <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
                 </ul>
             </div>
         </div>
         <div id="settings_page">
             <div class="settings_switch">
-                <span class="setting_page_title">  Camera Auto</span>
+                <span class="setting_page_title">Camera ON</span>
                 <div class="switch">
 
-                    <input type="checkbox" id="switch" class="switch-check">
-                    <label for="switch" class="switch-label">
-                        Опция
+                    <input type="checkbox" id="cameraOn" class="switch-check">
+                    <label for="cameraOn" class="switch-label">
                         <span class="switch-slider switch-slider-on"></span>
                         <span class="switch-slider switch-slider-off"></span>
                     </label>
@@ -75,25 +74,35 @@
                 </div>
             </div>
             <div class="settings_switch">
-                <span class="setting_page_title">  Scanner Auto</span>
+                <span class="setting_page_title">Auto</span>
                 <div class="switch">
 
-                    <input type="checkbox" id="scanner" class="switch-check">
-                    <label for="scanner" class="switch-label">
-                        Опция
+                    <input type="checkbox" id="switch" class="switch-check">
+                    <label for="switch" class="switch-label">
                         <span class="switch-slider switch-slider-on"></span>
                         <span class="switch-slider switch-slider-off"></span>
                     </label>
 
                 </div>
             </div>
+            <!--<div class="settings_switch">-->
+                <!--<span class="setting_page_title">Scanner Auto</span>-->
+                <!--<div class="switch">-->
+
+                    <!--<input type="checkbox" id="scanner" class="switch-check">-->
+                    <!--<label for="scanner" class="switch-label">-->
+                        <!--<span class="switch-slider switch-slider-on"></span>-->
+                        <!--<span class="switch-slider switch-slider-off"></span>-->
+                    <!--</label>-->
+
+                <!--</div>-->
+            <!--</div>-->
             <div class="settings_switch">
                 <span class="setting_page_title">Offline Mode</span>
                 <div class="switch">
 
                     <input type="checkbox" id="offlinemode" class="switch-check">
                     <label for="offlinemode" class="switch-label">
-                        Опция
                         <span class="switch-slider switch-slider-on"></span>
                         <span class="switch-slider switch-slider-off"></span>
                     </label>
@@ -103,37 +112,34 @@
             <div class="settings_switch">
                 <label class="setting_page_title" for="delay" >Accept Delay</label>
                 <select class="switch" id="delay">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
             </div>
-            <div class="settings_switch">
-                 <label class="setting_page_title" for="Code_lenght" >Code Length</label>
-                <select class="switch" id="Code_lenght">
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                </select>
-            </div>
+            <!--<div class="settings_switch">-->
+                 <!--<label class="setting_page_title" for="Code_lenght" >Code Length</label>-->
+                <!--<select class="switch" id="Code_lenght">-->
+                    <!--<option value="3">3</option>-->
+                    <!--<option value="4">4</option>-->
+                    <!--<option value="5">5</option>-->
+                    <!--<option value="6">6</option>-->
+                    <!--<option value="7">7</option>-->
+                    <!--<option value="8">8</option>-->
+                    <!--<option value="9">9</option>-->
+                    <!--<option value="10">10</option>-->
+                    <!--<option value="11">11</option>-->
+                    <!--<option value="12">12</option>-->
+                    <!--<option value="13">13</option>-->
+                    <!--<option value="14">14</option>-->
+                    <!--<option value="15">15</option>-->
+                    <!--<option value="16">16</option>-->
+                    <!--<option value="17">17</option>-->
+                    <!--<option value="18">18</option>-->
+                    <!--<option value="19">19</option>-->
+                    <!--<option value="20">20</option>-->
+                <!--</select>-->
+            <!--</div>-->
             <div> <button class="reject" onclick="loadContent('main', '')">Back</button></div>
         </div>
         <!--        <div id="settings_page">

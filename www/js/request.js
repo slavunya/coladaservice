@@ -3,29 +3,48 @@ var scan = {
 };
 var login = '';
 var password = '';
-var checked = false;
 var moreinfostatus = false;
 var offlinemode = false;
 var scans = [];
-var scannerAuto = true;
+var isBarcode = false;
+//var checked = false;
+//var scannerAuto = true;
+var autoMode = true;
 var currlocation = '';
 var delay = 3;
-var code_lenght = 3;
+var lastValue = 0;
+var code_lenght = 6;
 var timeOutVar = null;
+var cameraOn = true;
+var store = window.localStorage;
+var isMobile = false;
+var count = 0;
 
+if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1) {
+    isMobile = true;
+}
 
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
+    window.addEventListener('native.keyboardshow', keyboardShowHandler);
     loadContent('login', '');
 });
-var store = window.localStorage;
+
+function keyboardShowHandler() {
+    window.scrollTo(0, 100);
+}
+
 function onDeviceReady() {
-    alert("Cam:"+Cocoon.Camera.CameraInfo.cameraType);
+//    alert(device.model);
+    if (device.model.indexOf("iPod") !== -1) {
+        cameraOn = false;
+    }
+
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
 }
-var baseUrl = "https://seera.de/scanner-api/index.php";
 
+var baseUrl = "https://seera.de/scanner-api/index.php";
 
 $(document).on('submit', '#login-form', function () {
     login = $('input[name=login]').val();
@@ -77,49 +96,75 @@ $(document).on('submit', '#login-form', function () {
     event.preventDefault();
 });
 
+$(document).on('change', '#list', function () {
+    if (($("#guid").val().length) > 2 && ($("#list").val() != 0)) {
+        formSubmit();
+    }
+});
+
+
+
 function loadContent(page, result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
 
         });
     }
+    count++;
+
     if (page === 'main') {
-
+        count = 0;
+        $(document).on('input', '#guid', function () {
+            if (count == 0) {
+                $('#btn').show();
+                keyboardShowHandler();
+            }
+            if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
+                lastValue = $("#guid").val().length;
+                formSubmit();
+            } else {
+                lastValue = $("#guid").val().length;
+            }
+        });
+        var isConnected = checkConnection();
+        if (!isConnected) {
+            offlinemode = true;
+        }
+        else {
+            offlinemode = false;
+        }
         $('#page').load('content.html #main', function () {
-
-
+            if (!cameraOn) {
+                $('.qr').remove();
+            }
             getlocation();
+
             if (store.getItem("scans") !== null) {
                 $("#sendData").css({'color': 'black'});
                 $(".active").css({'pointer-events': 'inherit'});
             }
+
             if (offlinemode) {
                 $(".titleMode").html("Offline Mode");
                 var locations = JSON.parse(store.getItem("locations"));
 
                 for (var i in locations.data) {
                     var obj = locations.data[i];
-                    $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
+                    if (currlocation === obj.id) {
+                        $('#list').append("<option selected value=" + obj.id + ">" + obj.locations_name + "</option>");
+                    }
+                    else {
+                        $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
+                    }
+//                    $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
                 }
             }
             else {
                 $(".titleMode").html("");
             }
-            if (scannerAuto) {
 
-
-
+            if (autoMode) {
                 $('#btn').hide();
-                var input = document.getElementById('guid');
-                input.oninput = function () {
-                    if ($("#guid").val().length > code_lenght - 1) {
-//                        showAlert($("#guid").val().length, 'Message');
-                        formSubmit();
-                    }
-                };
-                /*   $("#guid").oninput(function(){
-                 
-                 });*/
             }
 
         });
@@ -129,7 +174,7 @@ function loadContent(page, result) {
         $('#page').load('content.html #settings_page', function () {
             //  $(document).ready(function () {
             //set initial state.
-            if (checked) {
+            if (autoMode) {
                 // 
                 document.getElementById("switch").setAttribute("checked", "checked");
             }
@@ -138,19 +183,21 @@ function loadContent(page, result) {
                 // 
                 document.getElementById("offlinemode").setAttribute("checked", "checked");
             }
-            if (scannerAuto) {
+            //if (scannerAuto) {
+            //    //
+            //    document.getElementById("scanner").setAttribute("checked", "checked");
+            //}
+            if (cameraOn) {
                 // 
-                document.getElementById("scanner").setAttribute("checked", "checked");
+                document.getElementById("cameraOn").setAttribute("checked", "checked");
             }
 
-
-
+            $('#cameraOn').val($(this).is(':checked'));
             $('#switch').val($(this).is(':checked'));
             $('#offlinemode').val($(this).is(':checked'));
             $('#scanner').val($(this).is(':checked'));
             $('#delay').val(delay);
             $('#Code_lenght').val(code_lenght);
-
 
             $('#delay').change(function () {
 
@@ -164,10 +211,10 @@ function loadContent(page, result) {
             });
             $('#switch').change(function () {
                 if ($(this).is(":checked")) {
-                    checked = true;
+                    autoMode = true;
                 }
                 else {
-                    checked = false;
+                    autoMode = false;
                 }
             });
             $('#offlinemode').change(function () {
@@ -178,17 +225,26 @@ function loadContent(page, result) {
                     offlinemode = false;
                 }
             });
-            $('#scanner').change(function () {
+            //$('#scanner').change(function () {
+            //    if ($(this).is(":checked")) {
+            //        scannerAuto = true;
+            //    }
+            //    else {
+            //        scannerAuto = false;
+            //    }
+            //});
+            $('#cameraOn').change(function () {
                 if ($(this).is(":checked")) {
-                    scannerAuto = true;
+                    cameraOn = true;
                 }
                 else {
-                    scannerAuto = false;
+                    cameraOn = false;
                 }
             });
             // });
         });
     }
+
     if (page === 'location_history') {
         $('#page').load('content.html #location_history', function () {
             for (var i in result.data) {
@@ -242,7 +298,6 @@ function formSubmit() {
     }
 
 
-
     var od = {};
     od.guid = id;
     od.location_id = select;
@@ -264,6 +319,7 @@ function formSubmit() {
         }
         return false;
     }
+
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
@@ -307,6 +363,9 @@ function formSubmit() {
         if (result.status_user !== "1") {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
+        if (result.status == "success") {
+            offlinemode = false;
+        }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
 
         if (timeOutVar) {
@@ -317,10 +376,18 @@ function formSubmit() {
             accept(obj.guid, od.location_id);
 
         }, delay * 1000);
+        if (result.status_user === '1') {
+            timeOutVar = setTimeout(function () {
+
+                clean();
+
+            }, delay * 1000);
+        }
 
     }, "json");
 
 }
+
 function checkConnection() {
     try {
         if (typeof (navigator.connection) === 'undefined') {
@@ -352,6 +419,7 @@ function getlocation() {
     od.locations = "get";
     od.login = login;
     od.password = password;
+
     $.post(baseUrl, od, function (result) {
 
         console.log("Location");
@@ -388,32 +456,16 @@ function accept(guid, location_id) {
         return false;
     }
 //    clean();
-    if (checked) {
-        $.post(baseUrl, od, function (result) {
-            console.log("accept");
-            console.log(result);
 
-            if (result.status === "success") {
-                clean();
-
-            }
-
-        }, "json");
-    }
-    else {
-        setTimeout(function () {
-            $.post(baseUrl, od, function (result) {
-                console.log("accept");
-                console.log(result);
-
-                if (result.status === "success") {
-                    clean();
-
-                }
-
-            }, "json");
-        }, 500)
-    }
+    //$.post(baseUrl, od, function (result) {
+    //    console.log("accept");
+    //    console.log(result);
+    //
+    //    if (result.status !== "success") {
+    //        showAlert(result.message, 'message')
+    //    }
+    //}, "json");
+    clean();
 }
 
 function reject(guid, location_id) {
@@ -427,11 +479,12 @@ function reject(guid, location_id) {
     $.post(baseUrl, od, function (result) {
         console.log("Reject");
         console.log(result);
-        if (result.status === "success") {
-            clean();
-        }
 
+        if (result.status !== "success") {
+            showAlert(result.message, 'message')
+        }
     }, "json");
+    clean();
 }
 
 function getTime() {
@@ -441,40 +494,37 @@ function getTime() {
 }
 
 function clean() {
-    if (checked) {
-        scanBarcode();
-    }
+    //if (autoMode) {
+    //
+    //}
 
     $(".content").hide(100);
+    $('#btn').hide();
     $("#submitform").show(100);
 //    loadContent('main', '');
-    if (scannerAuto) {
-        $('#guid').focus();
-//        var focused = $('#guid');
-//        $('#guid').trigger('touchstart');
-//        $('#guid').on('touchstart', function () {
-//            $(this).focus();
-//            focused = $(this);
-//        });
-        /* $('#guid').trigger('touchstart');
-         
-         $('#guid').on('touchstart', function () {
-         $(this).focus();
-         focused = $(this);
-         });
-         */
+    if (autoMode) {
+        if (isBarcode) {
+            scanBarcode();
+        } else {
+            $('#guid').focus();
+        }
     }
     $('input[name=guid]').val("");
-
+    lastValue = 0;
+    count = 0;
 }
 
 function showAlert(message, title) {
-    navigator.notification.alert(
-            message,
-            null,
-            title,
-            'Ok'
-            );
+    if (isMobile) {
+        navigator.notification.alert(
+                message,
+                null,
+                title,
+                'Ok'
+                );
+    } else {
+        alert(message);
+    }
 }
 function scanBarcode() {
 
@@ -510,19 +560,21 @@ function scanBarcode() {
         addSlipNumberToView(scannedCode);
 
     }
+
     return false;
 }
-
 
 
 function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
             function (result) {
                 var status = {success: true, error: false};
+                if (result.cancelled) {
+                    isBarcode = false;
+                }
                 callback(status, result);
             },
             function (error) {
-
                 alert("Scanning failed: " + error);
                 var status = {success: false, error: true};
                 callback(status, error);
@@ -533,9 +585,9 @@ function scanBarcodeProcess(callback) {
 }
 
 function addSlipNumberToView(slipNumber) {
-
+    isBarcode = true;
     $('#guid').val(slipNumber);
-    if (checked) {
+    if (autoMode) {
         formSubmit();
     }
 //     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
@@ -614,33 +666,47 @@ function uploadData() {
     data.data = store.getItem("scans");
     data.login = JSON.parse(store.getItem("login"));
     data.password = JSON.parse(store.getItem("password"));
-    navigator.notification.confirm(
-            'Are you sure to clear the offline scans?', // message
-            send(data), // callback to invoke with index of button pressed
-            'Message', // title
-            'Yes,No'          // buttonLabels
-            );
+    //    navigator.notification.confirm(
+    //        'Are you sure to clear the offline scans?', // message
+    //        send(data), // callback to invoke with index of button pressed
+    //        'Message', // title
+    //        'Yes,No'          // buttonLabels
+//    );
 
-    function send(data) {
-        $.post(baseUrl, data, function (result) {
-            console.log(result);
-            if (result.message == "Error login")
-            {
-                loadContent('login');
-            }
-            if (result.status == "success") {
+    var isConnected = checkConnection();
+    if (!isConnected) {
+        offlinemode = true;
+        return false;
 
-                store.removeItem("scans");
-                loadContent('main');
-            }
-
-
-        }, "json");
     }
+    $.post(baseUrl, data, function (result) {
+        console.log(result);
+        if (result.message == "Error login") {
+            loadContent('login');
+        }
+        if (result.status == "success") {
+            navigator.notification.alert(
+                    "Scan data has been uploaded to the server",
+                    null,
+                    "Message",
+                    'Ok'
+                    );
+            offlinemode = false;
+            store.removeItem("scans");
+            loadContent('main');
+        }
+
+
+    }, "json");
 }
-/**/
-function isAutoMode(input) {
-    if (input.value.length > 5) {
-
-    }
+function logout() {
+    navigator.notification.confirm('Logout',
+            function (button_id) {
+                if (button_id == 1) {
+                    loadContent('login','')
+                }
+            },
+            'Message',
+            ['Yes', 'No']
+            );
 }
