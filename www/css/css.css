@@ -356,6 +356,8 @@ header img{
 }
 .titleMode{
     display: block;
+    font-family: Helvetica;
+    font-size: 20px;
     color: rgb(253, 16, 16);
     margin: 0 0 8px 0;
 }
@@ -367,6 +369,9 @@ header img{
 .active{
     pointer-events: none;
 }
-select,input,button{
+.control_bottom_buttons a{
+    display: inline-block;
+}
+select,input,button,.switch-slider,.switch-slider,.control_bottom_buttons a{
     outline: none;
 }
