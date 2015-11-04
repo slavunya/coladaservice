@@ -11,9 +11,6 @@ var scannerAuto = true;
 var currlocation = '';
 var delay = 3;
 var code_lenght = 3;
-var timeOutVar = null;
-
-
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
@@ -89,8 +86,7 @@ function loadContent(page, result) {
 
             getlocation();
             if (store.getItem("scans") !== null) {
-                $("#sendData").css({'color': 'black'});
-                $(".active").css({'pointer-events': 'inherit'});
+                $("#sendData").show();
             }
             if (offlinemode) {
                 $(".titleMode").html("Offline Mode");
@@ -214,7 +210,6 @@ function loadContent(page, result) {
 
 function formSubmit() {
 //    alert("form submit start");
-
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Message');
@@ -256,8 +251,7 @@ function formSubmit() {
         }, 1000);
 
         if (store.getItem("scans").length > 0) {
-            $("#sendData").css({'color': 'black'});
-            $(".active").css({'pointer-events': 'inherit'});
+            $("#sendData").css({'display': 'inline'});
         }
         return false;
     }
@@ -305,16 +299,9 @@ function formSubmit() {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
-
-        if (timeOutVar) {
-            clearTimeout(timeOutVar);
-        }
-        timeOutVar = setTimeout(function () {
-
+        setTimeout(function () {
             accept(obj.guid, od.location_id);
-
         }, delay * 1000);
-
     }, "json");
 
 }
@@ -362,9 +349,6 @@ function getlocation() {
 }
 
 function accept(guid, location_id) {
-    if (timeOutVar) {
-        clearTimeout(timeOutVar);
-    }
     var od = {};
     od.date = getTime();
     od.guid = guid;
@@ -379,8 +363,8 @@ function accept(guid, location_id) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
-//    clean();
-    if (checked) {
+    clean();
+    setTimeout(function () {
         $.post(baseUrl, od, function (result) {
             console.log("accept");
             console.log(result);
@@ -391,21 +375,7 @@ function accept(guid, location_id) {
             }
 
         }, "json");
-    }
-    else {
-        setTimeout(function () {
-            $.post(baseUrl, od, function (result) {
-                console.log("accept");
-                console.log(result);
-
-                if (result.status === "success") {
-                    clean();
-
-                }
-
-            }, "json");
-        }, 500)
-    }
+    }, 500)
 }
 
 function reject(guid, location_id) {
