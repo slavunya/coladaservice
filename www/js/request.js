@@ -103,7 +103,6 @@ $(document).on('change', '#list', function () {
 });
 
 
-
 function loadContent(page, result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
@@ -371,16 +370,13 @@ function formSubmit() {
         if (timeOutVar) {
             clearTimeout(timeOutVar);
         }
-        timeOutVar = setTimeout(function () {
-
-            accept(obj.guid, od.location_id);
-
-        }, delay * 1000);
         if (result.status_user === '1') {
             timeOutVar = setTimeout(function () {
-
                 clean();
-
+            }, delay * 1000);
+        } else {
+            timeOutVar = setTimeout(function () {
+                accept(obj.guid, od.location_id);
             }, delay * 1000);
         }
 
@@ -494,14 +490,12 @@ function getTime() {
 }
 
 function clean() {
-    //if (autoMode) {
-    //
-    //}
-
+    if (timeOutVar) {
+        clearTimeout(timeOutVar);
+    }
     $(".content").hide(100);
     $('#btn').hide();
     $("#submitform").show(100);
-//    loadContent('main', '');
     if (autoMode) {
         if (isBarcode) {
             scanBarcode();
@@ -517,11 +511,11 @@ function clean() {
 function showAlert(message, title) {
     if (isMobile) {
         navigator.notification.alert(
-                message,
-                null,
-                title,
-                'Ok'
-                );
+            message,
+            null,
+            title,
+            'Ok'
+        );
     } else {
         alert(message);
     }
@@ -567,18 +561,18 @@ function scanBarcode() {
 
 function scanBarcodeProcess(callback) {
     cordova.plugins.barcodeScanner.scan(
-            function (result) {
-                var status = {success: true, error: false};
-                if (result.cancelled) {
-                    isBarcode = false;
-                }
-                callback(status, result);
-            },
-            function (error) {
-                alert("Scanning failed: " + error);
-                var status = {success: false, error: true};
-                callback(status, error);
+        function (result) {
+            var status = {success: true, error: false};
+            if (result.cancelled) {
+                isBarcode = false;
             }
+            callback(status, result);
+        },
+        function (error) {
+            alert("Scanning failed: " + error);
+            var status = {success: false, error: true};
+            callback(status, error);
+        }
     );
 
 
@@ -689,11 +683,11 @@ function uploadData() {
         }
         if (result.status == "success") {
             navigator.notification.alert(
-                    "Scan data has been uploaded to the server",
-                    null,
-                    "Message",
-                    'Ok'
-                    );
+                "Scan data has been uploaded to the server",
+                null,
+                "Message",
+                'Ok'
+            );
             offlinemode = false;
             store.removeItem("scans");
             loadContent('main');
@@ -704,12 +698,12 @@ function uploadData() {
 }
 function logout() {
     navigator.notification.confirm('Logout',
-            function (button_id) {
-                if (button_id == 1) {
-                    loadContent('login','')
-                }
-            },
-            'Message',
-            ['Yes', 'No']
-            );
+        function (button_id) {
+            if (button_id == 1) {
+                loadContent('login', '')
+            }
+        },
+        'Message',
+        ['Yes', 'No']
+    );
 }
