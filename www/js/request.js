@@ -296,7 +296,7 @@ function formSubmit() {
     od.login = login;
     od.password = password;
     if (offlinemode) {
-        accept(od.guid,od.location_id );
+        accept(od.guid, od.location_id);
         //od.mode = "1";
         //od.date = getTime();
         //var result = {guid: od.guid, location_id: od.location_id, date: od.date};
@@ -442,16 +442,20 @@ function accept(guid, location_id) {
         var result = {guid: od.guid, location_id: od.location_id, date: od.date};
         scans.push(result);
         store.setItem("scans", JSON.stringify(scans));
-    } else {
-        $.post(baseUrl, od, function (result) {
-            console.log("accept");
-            console.log(result);
-
-            if (result.status !== "success") {
-                showAlert(result.message, 'message')
-            }
-        }, "json");
+        setTimeout(function () {
+            clean();
+        }, 1000);
+        return false;
     }
+
+    $.post(baseUrl, od, function (result) {
+        console.log("accept");
+        console.log(result);
+
+        if (result.status !== "success") {
+            showAlert(result.message, 'message')
+        }
+    }, "json");
     clean();
 }
 
