@@ -679,8 +679,9 @@ function uploadData() {
                 'Ok'
             );
             uploadStatus = 0;
-            store.removeItem("scans");
 
+            alert(JSON.stringify(store.getItem("scans")));
+            store.removeItem("scans");
             alert(JSON.stringify(store.getItem("scans")));
         }
 
