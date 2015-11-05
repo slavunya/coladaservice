@@ -44,11 +44,13 @@ function onDeviceReady() {
             offlinemode = true;
             $(".titleMode").html("Offline Mode");
             $('#get-history').css('color','#9E9E9F');
-            $('#sendData').css('color','#9E9E9F');
         } else{
             offlinemode = false;
             $(".titleMode").html("");
             $('#get-history').css('color','#000');
+            if (store.getItem("scans") !== null) {
+               uploadData();
+            }
         }
     }, 1000);
 
@@ -74,19 +76,21 @@ $(document).on('submit', '#login-form', function () {
         return false;
     }
 
+    if (offlinemode) {
+        showAlert('You have not internet connection','message');
+        return false;
+    }
+
     var od = {};
     od.login = login;
     od.password = password;
-//    var user={login:od.login,password:od.password};
+
     store.setItem("login", JSON.stringify(od.login));
     store.setItem("password", JSON.stringify(od.password));
+    store.setItem("remember", JSON.stringify($('#rem-me').is(':checked')));
 
-    if (offlinemode) {
-        loadContent('main', '');
-    }   else {
-        offlinemode = false;
-        // loadContent('main', '');
-    }
+
+
     $.post(baseUrl, od, function (result) {
 
         console.log("Login");
@@ -126,7 +130,11 @@ $(document).on('input', '#guid', function () {
 function loadContent(page, result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
-
+            if(store.getItem('remember')=='true'){
+                $('input[name=login]').val(JSON.parse(store.getItem('login')));
+                $('input[name=password]').val(JSON.parse(store.getItem('password')));
+                $('input[name=remember_me]').attr('checked','checked');
+            }
         });
     }
     count++;
@@ -139,11 +147,6 @@ function loadContent(page, result) {
                 $('.qr').remove();
             }
             getlocation();
-
-            if (store.getItem("scans") !== null) {
-                $("#sendData").css({'color': 'black'});
-                $(".active").css({'pointer-events': 'inherit'});
-            }
 
             if (offlinemode) {
                 var locations = JSON.parse(store.getItem("locations"));
@@ -644,12 +647,7 @@ function uploadData() {
     data.data = store.getItem("scans");
     data.login = JSON.parse(store.getItem("login"));
     data.password = JSON.parse(store.getItem("password"));
-    //    navigator.notification.confirm(
-    //        'Are you sure to clear the offline scans?', // message
-    //        send(data), // callback to invoke with index of button pressed
-    //        'Message', // title
-    //        'Yes,No'          // buttonLabels
-//    );
+
     if (offlinemode) {
         showAlert('Check your connection','Message');
         return false;

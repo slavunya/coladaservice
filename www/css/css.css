@@ -104,11 +104,10 @@ body {
     height: 48px;
     margin: 0 0 15px 0;
     font-size: 1.2em;
-    /* max-width: 480px; */
 }
 
-input[type="text"], input[type="password"] {
-    /* max-width: 480px; */
+input[type="text"],
+input[type="password"] {
     background-color: rgb(255, 255, 255);
     border-radius: 6px;
     border: 1px solid black;
@@ -133,8 +132,6 @@ header img {
 
 #buttons {
     margin: 24px 0 3px 0;
-    /* position: absolute; */
-    /* bottom: 0; */
 }
 
 .cd {
@@ -192,24 +189,16 @@ header img {
 
 #sign-out {
     font-size: 40px;
-    /* position: absolute; */
-    /* float: right; */
-    /* right: 10px; */
     color: black;
 }
 
 #get-history {
-    /* float: right; */
     font-size: 40px;
-    /* position: absolute; */
-    /* bottom: 10px; */
-    /* left: 10px; */
     color: black;
 }
 
 #moreinfolist {
     display: none;
-    /* border: 1px solid black; */
     border-radius: 6px;
     background-color: rgb(255, 255, 255);
     height: 108px;
@@ -219,7 +208,6 @@ header img {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     text-align: left;
-    /* width: 100%; */
 }
 
 #moreinfolist li {
@@ -236,10 +224,6 @@ header img {
 
 #settings {
     font-size: 40px;
-    /* position: absolute; */
-    /* bottom: 10px; */
-    /* right: 10px; */
-    /* float: right; */
     color: black;
 }
 
@@ -256,9 +240,6 @@ header img {
     float: right;
     position: relative;
     display: inline-block;
-    /* margin: 0 165px 50px 0; */
-    /* height: 18px; */
-    /* width: 89px; */
 }
 
 .switch-check {
@@ -290,7 +271,6 @@ header img {
     -webkit-transition: width 0.2s linear;
     -moz-transition: width 0.2s linear;
     -o-transition: width 0.2s linear;
-    /* transition:width 0.2s linear; */
 }
 
 .switch-slider-on {
@@ -342,9 +322,7 @@ header img {
 .setting_page_title {
     font-family: Helvetica;
     float: left;
-    /* text-align: left; */
     font-size: 20px;
-    /* margin: 1px 0 0px 112px; */
     display: block;
 }
 
@@ -358,16 +336,13 @@ header img {
     width: 100%;
     float: left;
     border-top: 1px solid black;
-    /* margin: 18px 0 0px 31px; */
     padding: 37px 0 0 0;
-    /* margin: 2px 0px 0 -33px; */
 }
 
 .control_bottom_buttons li {
     list-style: none;
     padding: 0 3% 0 3%;
     text-align: center;
-    /* margin: 0  0 0; */
     display: inline-block;
 }
 
@@ -399,6 +374,16 @@ button,
 #more-info
 {
     outline: none;
-    outline-color: transparent;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+label[for=rem-me]{
+    display: inline-block;
+    height: 35px;
+    vertical-align: top;
+    font: 16px/30px Arial;
+}
+input[type=checkbox]{
+    margin: 0 0 15px 0;
+    width: 30px;
+    height: 30px;
 }
