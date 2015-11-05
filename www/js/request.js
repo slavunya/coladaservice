@@ -632,7 +632,13 @@ function moreinfo(guid) {
 
                 var year = date.getFullYear();
                 var hours = date.getHours();
+                if (hours / 10 < 1) {
+                    hours = "0" + hours;
+                }
                 var minutes = date.getMinutes();
+                if (minutes / 10 < 1) {
+                    minutes = "0" + minutes;
+                }
                 $("#moreinfolist").append("<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours + ":" + minutes + "  " + obj.locations_name + "</li>");
 
             }
