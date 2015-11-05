@@ -77,7 +77,7 @@ $(document).on('submit', '#login-form', function () {
     }
 
     if (offlinemode) {
-        showAlert('You have not internet connection','message');
+        showAlert('You have not internet connection','Message');
         return false;
     }
 
@@ -442,6 +442,14 @@ function accept(guid, location_id) {
         store.setItem("accept", JSON.stringify(obj));
         return false;
     }
+    $.post(baseUrl, od, function (result) {
+        console.log("accept");
+        console.log(result);
+
+        if (result.status !== "success") {
+            showAlert(result.message, 'message')
+        }
+    }, "json");
     clean();
 }
 
