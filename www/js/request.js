@@ -49,7 +49,7 @@ function onDeviceReady() {
             offlinemode = false;
             $(".titleMode").html("");
             $('#get-history').css('color', '#000');
-            if ((store.getItem("scans") !== null)&&(uploadStatus === 0)) {
+            if ((store.getItem("scans") !== null) && (uploadStatus === 0)) {
                 uploadStatus = 1;
                 uploadData();
             }
@@ -296,19 +296,20 @@ function formSubmit() {
     od.login = login;
     od.password = password;
     if (offlinemode) {
-        od.mode = "1";
-        od.date = getTime();
-        var result = {guid: od.guid, location_id: od.location_id, date: od.date};
-        scans.push(result);
-        store.setItem("scans", JSON.stringify(scans));
-        setTimeout(function () {
-            clean();
-        }, 1000);
-
-        if (store.getItem("scans").length > 0) {
-            $("#sendData").css({'color': 'black'});
-            $(".active").css({'pointer-events': 'inherit'});
-        }
+        accept(od.guid,od.location_id );
+        //od.mode = "1";
+        //od.date = getTime();
+        //var result = {guid: od.guid, location_id: od.location_id, date: od.date};
+        //scans.push(result);
+        //store.setItem("scans", JSON.stringify(scans));
+        //setTimeout(function () {
+        //    clean();
+        //}, 1000);
+        //
+        //if (store.getItem("scans").length > 0) {
+        //    $("#sendData").css({'color': 'black'});
+        //    $(".active").css({'pointer-events': 'inherit'});
+        //}
         return false;
     }
 
@@ -438,17 +439,19 @@ function accept(guid, location_id) {
     var obj = {date: od.date, guid: od.guid, reject: 0, location_id: od.location_id};
 
     if (offlinemode) {
-        store.setItem("accept", JSON.stringify(obj));
-        return false;
-    }
-    $.post(baseUrl, od, function (result) {
-        console.log("accept");
-        console.log(result);
+        var result = {guid: od.guid, location_id: od.location_id, date: od.date};
+        scans.push(result);
+        store.setItem("scans", JSON.stringify(scans));
+    } else {
+        $.post(baseUrl, od, function (result) {
+            console.log("accept");
+            console.log(result);
 
-        if (result.status !== "success") {
-            showAlert(result.message, 'message')
-        }
-    }, "json");
+            if (result.status !== "success") {
+                showAlert(result.message, 'message')
+            }
+        }, "json");
+    }
     clean();
 }
 
@@ -679,10 +682,8 @@ function uploadData() {
                 'Ok'
             );
             uploadStatus = 0;
-
-            alert(JSON.stringify(store.getItem("scans")));
             store.removeItem("scans");
-            alert(JSON.stringify(store.getItem("scans")));
+            scans = [];
         }
 
 
