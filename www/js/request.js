@@ -354,9 +354,7 @@ function formSubmit() {
         if (result.status_user !== "1") {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
-        if (result.status == "success") {
-            offlinemode = false;
-        }
+
         $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
 
         if (timeOutVar) {
@@ -673,9 +671,7 @@ function uploadData() {
                 "Message",
                 'Ok'
             );
-            offlinemode = false;
             store.removeItem("scans");
-            loadContent('main');
         }
 
 
