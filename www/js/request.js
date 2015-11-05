@@ -18,6 +18,7 @@ var store = window.localStorage;
 var isMobile = false;
 var count = 0;
 var isConnected;
+var uploadStatus = 0;
 
 if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1) {
     isMobile = true;
@@ -38,18 +39,19 @@ function onDeviceReady() {
         cameraOn = false;
     }
 
-    setInterval(function() {
+    setInterval(function () {
         isConnected = checkConnection();
-        if(!isConnected) {
+        if (!isConnected) {
             offlinemode = true;
             $(".titleMode").html("Offline Mode");
-            $('#get-history').css('color','#9E9E9F');
-        } else{
+            $('#get-history').css('color', '#9E9E9F');
+        } else {
             offlinemode = false;
             $(".titleMode").html("");
-            $('#get-history').css('color','#000');
-            if (store.getItem("scans") !== null) {
-               uploadData();
+            $('#get-history').css('color', '#000');
+            if ((store.getItem("scans") !== null)&&(uploadStatus === 0)) {
+                uploadStatus = 1;
+                uploadData();
             }
         }
     }, 1000);
@@ -77,7 +79,7 @@ $(document).on('submit', '#login-form', function () {
     }
 
     if (offlinemode) {
-        showAlert('You have not internet connection','Message');
+        showAlert('You have not internet connection', 'Message');
         return false;
     }
 
@@ -88,7 +90,6 @@ $(document).on('submit', '#login-form', function () {
     store.setItem("login", JSON.stringify(od.login));
     store.setItem("password", JSON.stringify(od.password));
     store.setItem("remember", JSON.stringify($('#rem-me').is(':checked')));
-
 
 
     $.post(baseUrl, od, function (result) {
@@ -130,10 +131,10 @@ $(document).on('input', '#guid', function () {
 function loadContent(page, result) {
     if (page === 'login') {
         $('#page').load('content.html #login', function () {
-            if(store.getItem('remember')=='true'){
+            if (store.getItem('remember') == 'true') {
                 $('input[name=login]').val(JSON.parse(store.getItem('login')));
                 $('input[name=password]').val(JSON.parse(store.getItem('password')));
-                $('input[name=remember_me]').attr('checked','checked');
+                $('input[name=remember_me]').attr('checked', 'checked');
             }
         });
     }
@@ -661,7 +662,7 @@ function uploadData() {
     data.password = JSON.parse(store.getItem("password"));
 
     if (offlinemode) {
-        showAlert('Check your connection','Message');
+        showAlert('Check your connection', 'Message');
         return false;
     }
 
@@ -677,6 +678,7 @@ function uploadData() {
                 "Message",
                 'Ok'
             );
+            uploadStatus = 0;
             store.removeItem("scans");
         }
 
