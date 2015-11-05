@@ -680,6 +680,8 @@ function uploadData() {
             );
             uploadStatus = 0;
             store.removeItem("scans");
+
+            alert(JSON.stringify(store.getItem("scans")));
         }
 
 
