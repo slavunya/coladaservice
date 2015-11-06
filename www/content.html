@@ -1,119 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Content</title>
-    </head>
-    <body>
-        <div id="login">
-            <form id="login-form" action="">
-                <div class="blocks">
-                    <input type="text" name="login" required placeholder="Enter login">
-                </div>
-                <div class="blocks">
-                    <input type="password" name="password" required placeholder="Enter password">
-                </div>
-                <div class="blocks">
-                    <input type="checkbox" name="remember_me" id="rem-me">
-                    <label for="rem-me">Remember me</label>
-                </div>
-                <div>
-                    <a href="config.xml"></a>
-                    <button class="submit" type="submit">Login</button>
-                </div>
-            </form>
+<head>
+    <meta charset="UTF-8">
+    <title>Content</title>
+</head>
+<body>
+<div id="login">
+    <form id="login-form" action="">
+        <div class="blocks">
+            <input type="text" name="login" required placeholder="Enter login">
         </div>
-        <div id="main">
-            <span class="titleMode"></span>
-            <div id="submitform">
-                <div class="blocks">
-                    <select id="list" name="list">
-                        <option value="0">Select location</option>
-                    </select>
-                </div >
-                <div class="blocks" >
-                    <input id="guid"  type="text" name='guid' placeholder="Scan code"><span class="qr"><a onclick="scanBarcode()"><img  src="img/qr.png"></a></span>
-                </div>
-                <div class="submit-holder">
-                    <button class="submit" id="btn" onclick="formSubmit()">Submit</button>
-                </div>
-            </div>
-            <div class="content">
+        <div class="blocks">
+            <input type="password" name="password" required placeholder="Enter password">
+        </div>
+        <div class="blocks">
+            <input type="checkbox" id="rem-me" name="remember_me" />
+            <label for="rem-me"><span></span>Remember me</label>
+        </div>
+        <div>
+            <a href="config.xml"></a>
+            <button class="submit" type="submit">Login</button>
+        </div>
+    </form>
+</div>
+<div id="main">
+    <span class="titleMode"></span>
 
-            </div>
-            <div class="parentControlBottomButtons">
-                <ul class="control_bottom_buttons">
+    <div id="submitform">
+        <div class="blocks">
+            <select id="list" name="list">
+                <option value="0">Select location</option>
+            </select>
+        </div>
+        <div class="blocks">
+            <input id="guid" type="text" name='guid' placeholder="Scan code"><span class="qr"><a
+                onclick="scanBarcode()"><img src="img/qr.png"></a></span>
+        </div>
+        <div class="submit-holder">
+            <button class="submit" id="btn" onclick="formSubmit()">Submit</button>
+        </div>
+    </div>
+    <div class="content">
+
+    </div>
+    <div class="parentControlBottomButtons">
+        <ul class="control_bottom_buttons">
+            <div class="wrap">
+                <div class="left-menu">
                     <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
                     <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
+                </div>
+                <div class="right-menu">
                     <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
-                </ul>
-            </div>
-
-        </div>
-        <div id="location_history">
-            <div class="content">
-                <div class="content_data"></div>
-            </div>
-            <div class="parentControlBottomButtons">
-                <ul class="control_bottom_buttons">
-                    <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
-                    <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
-                    <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div id="settings_page">
-            <div class="settings_switch">
-                <span class="setting_page_title">Camera ON</span>
-                <div class="switch">
-
-                    <input type="checkbox" id="cameraOn" class="switch-check">
-                    <label for="cameraOn" class="switch-label">
-                        <span class="switch-slider switch-slider-on"></span>
-                        <span class="switch-slider switch-slider-off"></span>
-                    </label>
-
                 </div>
             </div>
-            <div class="settings_switch">
-                <span class="setting_page_title">Auto</span>
-                <div class="switch">
+        </ul>
+    </div>
 
-                    <input type="checkbox" id="switch" class="switch-check">
-                    <label for="switch" class="switch-label">
-                        <span class="switch-slider switch-slider-on"></span>
-                        <span class="switch-slider switch-slider-off"></span>
-                    </label>
+</div>
+<div id="location_history">
+    <div class="content">
+        <div class="content_data"></div>
+    </div>
+    <div class="parentControlBottomButtons">
+        <ul class="control_bottom_buttons">
+            <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
+            <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
+            <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
+        </ul>
+    </div>
+</div>
+<div id="settings_page">
+    <div class="settings_switch">
+        <span class="setting_page_title">Camera ON</span>
 
-                </div>
-            </div>
-            <!--<div class="settings_switch">-->
-                <!--<span class="setting_page_title">Offline Mode</span>-->
-                <!--<div class="switch">-->
+        <div class="switch">
 
-                    <!--<input type="checkbox" id="offlinemode" class="switch-check">-->
-                    <!--<label for="offlinemode" class="switch-label">-->
-                        <!--<span class="switch-slider switch-slider-on"></span>-->
-                        <!--<span class="switch-slider switch-slider-off"></span>-->
-                    <!--</label>-->
+            <input type="checkbox" id="cameraOn" class="switch-check">
+            <label for="cameraOn" class="switch-label">
+                <span class="switch-slider switch-slider-on"></span>
+                <span class="switch-slider switch-slider-off"></span>
+            </label>
 
-                <!--</div>-->
-            <!--</div>-->
-            <div class="settings_switch">
-                <label class="setting_page_title" for="delay" >Accept Delay</label>
-                <select class="switch" id="delay">
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-            </div>
-            <div> <button class="reject" onclick="loadContent('main', '')">Back</button></div>
         </div>
+    </div>
+    <div class="settings_switch">
+        <span class="setting_page_title">Auto</span>
 
-    </body>
+        <div class="switch">
+
+            <input type="checkbox" id="switch" class="switch-check">
+            <label for="switch" class="switch-label">
+                <span class="switch-slider switch-slider-on"></span>
+                <span class="switch-slider switch-slider-off"></span>
+            </label>
+
+        </div>
+    </div>
+    <!--<div class="settings_switch">-->
+    <!--<span class="setting_page_title">Offline Mode</span>-->
+    <!--<div class="switch">-->
+
+    <!--<input type="checkbox" id="offlinemode" class="switch-check">-->
+    <!--<label for="offlinemode" class="switch-label">-->
+    <!--<span class="switch-slider switch-slider-on"></span>-->
+    <!--<span class="switch-slider switch-slider-off"></span>-->
+    <!--</label>-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <div class="settings_switch">
+        <label class="setting_page_title" for="delay">Accept Delay</label>
+        <select class="switch" id="delay">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+    <div>
+        <button class="reject" onclick="loadContent('main', '')">Back</button>
+    </div>
+</div>
+
+</body>
 </html>

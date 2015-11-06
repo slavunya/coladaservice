@@ -79,7 +79,7 @@ $(document).on('submit', '#login-form', function () {
     }
 
     if (offlinemode) {
-        showAlert('You have not internet connection', 'Message');
+        showAlert('You are not connected to the Internet', 'Message');
         return false;
     }
 
@@ -318,7 +318,9 @@ function formSubmit() {
         console.log("Submit");
         console.log(result);
 //        setTimeout(function () {
-        cordova.plugins.Keyboard.close();
+        if (isMobile) {
+            cordova.plugins.Keyboard.close();
+        }
 //        }, 1000)
         var obj = result.data;
 
@@ -346,8 +348,8 @@ function formSubmit() {
                     var year = date.getFullYear();
                     var hours = date.getHours();
                     var minutes = date.getMinutes();
-                    var finalytime = year + "/" + month + "/" + day + "-" + hours + ":" + minutes;
-                    time = ("<p id='scan-time'>Last scanned: " + finalytime + "</p><a id='more-info' onclick=\"moreinfo('" + obj.guid + "')\">More info</a>");
+                    var finalytime = year + "/" + month + "/" + day + "&nbsp;-&nbsp;" + hours + ":" + minutes;
+                    time = ("<p id='scan-time'>Last scan: " + finalytime + "</p><a id='more-info' onclick=\"moreinfo('" + obj.guid + "')\"><span>More info</span><i class=\"fa fa-angle-down\"></i></a>");
                 }
                 break;
         }
@@ -612,8 +614,10 @@ function moreinfo(guid) {
         od.password = password;
         $.post(baseUrl, od, function (result) {
             console.log(result);
-            $("#moreinfolist").css({'display': 'block'});
-            $("#more-info").text('Less info');
+            $("#moreinfolist").fadeIn(200);
+            $("#more-info span").text('Less info');
+            $("#more-info i").addClass('fa-angle-up').removeClass('fa-angle-down');
+
 
             var status = "";
 
@@ -656,8 +660,10 @@ function moreinfo(guid) {
         moreinfostatus = true;
     }
     else {
-        $("#moreinfolist").hide(100);
-        $("#more-info").text('More info');
+        $("#moreinfolist").fadeOut(200);
+        $("#more-info span").text('More info');
+        $("#more-info i").addClass('fa-angle-down').removeClass('fa-angle-up');
+
         moreinfostatus = false;
     }
 }
@@ -669,7 +675,7 @@ function uploadData() {
     data.password = JSON.parse(store.getItem("password"));
 
     if (offlinemode) {
-        showAlert('Check your connection', 'Message');
+        showAlert('You are not connected to the Internet', 'Message');
         return false;
     }
 
@@ -680,7 +686,7 @@ function uploadData() {
         }
         if (result.status == "success") {
             navigator.notification.alert(
-                "Scan data has been uploaded to the server",
+                "Scanned data has been uploaded to the server",
                 null,
                 "Message",
                 'Ok'
@@ -694,7 +700,7 @@ function uploadData() {
     }, "json");
 }
 function logout() {
-    navigator.notification.confirm('Logout',
+    navigator.notification.confirm('Do you really want to log out?',
         function (button_id) {
             if (button_id == 1) {
                 loadContent('login', '')

@@ -7,6 +7,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 body {
+    min-width: 320px;
     background: #fec01c;
     text-align: center;
     -webkit-touch-callout: none;
@@ -148,7 +149,7 @@ header img {
 }
 
 #scan-time {
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 @media (max-width: 500px) {
@@ -165,7 +166,7 @@ header img {
 }
 
 .blocks {
-    margin: 0 auto;
+    margin: 4px auto;
     text-align: center;
     width: 80%;
     max-width: 480px;
@@ -341,7 +342,7 @@ header img {
 
 .control_bottom_buttons li {
     list-style: none;
-    padding: 0 3% 0 3%;
+    padding: 0 10px 0 10px;
     text-align: center;
     display: inline-block;
 }
@@ -386,4 +387,54 @@ input[type=checkbox]{
     margin: 0 0 15px 0;
     width: 30px;
     height: 30px;
+}
+#more-info i{
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+}
+.wrap{
+    max-width: 420px;
+    width: 80%;
+    margin: 0 auto;
+}
+.left-menu{
+    display: inline-block;
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+.right-menu{
+    text-align: right;
+    display: inline-block;
+    float: right;
+    width: 50%;
+}
+#rem-me {
+    display:none;
+}
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:35px;
+    height:35px;
+    margin:-5px 4px 0 0;
+    vertical-align:middle;
+    background: #FFFFFF left top no-repeat;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor:pointer;
+}
+input[type="checkbox"]:checked + label span:after {
+    font-family: FontAwesome;
+    content: "\f00c";
+    font-size: 30px;
+}
+label[for="rem-me"]{
+    font-family: Arial;
+    font-size: 19.2px;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
 }
