@@ -413,11 +413,11 @@ input[type=checkbox]{
 #rem-me {
     display:none;
 }
-input[type="checkbox"] + label span {
+#rem-me + label span {
     display:inline-block;
     width:35px;
     height:35px;
-    margin:-5px 4px 0 0;
+    margin: -5px 12px 0 0;
     vertical-align:middle;
     background: #FFFFFF left top no-repeat;
     border: 1px solid #000000;
@@ -425,10 +425,10 @@ input[type="checkbox"] + label span {
     box-sizing: border-box;
     cursor:pointer;
 }
-input[type="checkbox"]:checked + label span:after {
+#rem-me:checked + label span:after {
     font-family: FontAwesome;
     content: "\f00c";
-    font-size: 30px;
+    font-size: 32px;
 }
 label[for="rem-me"]{
     font-family: Arial;
@@ -437,4 +437,7 @@ label[for="rem-me"]{
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
+}
+.check-item{
+    text-align: left;
 }

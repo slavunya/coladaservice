@@ -328,8 +328,8 @@ function formSubmit() {
         var button = "";
         var time = "";
 
-        $("#submitform").hide(100);
-        $(".content").show(100);
+        $("#submitform").hide(200);
+        $(".content").show(200);
         switch (result.status_user) {
             case "1":
                 userData = "<div>The code is not found</div>";
@@ -490,9 +490,9 @@ function clean() {
     if (timeOutVar) {
         clearTimeout(timeOutVar);
     }
-    $(".content").hide(100);
+    $(".content").hide(200);
+    $("#submitform").show(200);
     $('#btn').hide();
-    $("#submitform").show(100);
     if (autoMode) {
         if (isBarcode) {
             scanBarcode();
