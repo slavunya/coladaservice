@@ -372,7 +372,8 @@ input,
 button,
 .switch *,
 .control_bottom_buttons *,
-#more-info
+#more-info,
+label
 {
     outline: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
