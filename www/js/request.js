@@ -27,7 +27,7 @@ if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") =
 
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
-    window.addEventListener('native.keyboardshow', null);
+    document.addEventListener('native.keyboardshow', keyboardShowHandler);
     loadContent('login', '');
 });
 
