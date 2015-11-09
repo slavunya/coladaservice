@@ -38,7 +38,7 @@ function keyboardShowHandler() {
 }
 function keyboardHideHandler() {
     if (menu === 1) {
-        $('.parentControlBottomButtons').show();
+        $('.parentControlBottomButtons').show(1000);
     }
 }
 
