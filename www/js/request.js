@@ -283,6 +283,11 @@ function loadContent(page, result) {
 
         });
     }
+    if (page === 'info') {
+        $('#page').load('content.html #info', function () {
+
+        });
+    }
 }
 
 function formSubmit() {
