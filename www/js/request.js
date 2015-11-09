@@ -28,11 +28,21 @@ if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") =
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     document.addEventListener('native.keyboardshow', keyboardShowHandler);
+    document.addEventListener('native.keyboardhide', keyboardHideHandler);
+
     loadContent('login', '');
 });
 
 function keyboardShowHandler() {
     window.scrollTo(0, 100);
+    if (menu === 1) {
+        $('.parentControlBottomButtons').hide();
+    }
+}
+function keyboardHideHandler() {
+    if (menu === 1) {
+        $('.parentControlBottomButtons').slideDown();
+    }
 }
 
 function onDeviceReady() {
@@ -117,9 +127,9 @@ $(document).on('change', '#list', function () {
 });
 
 $(document).on('input', '#guid', function () {
-    if (count == 0) {
-        keyboardShowHandler();
-    }
+    //if (count == 0) {
+    //    keyboardShowHandler();
+    //}
     if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
         lastValue = $("#guid").val().length;
         formSubmit();
@@ -315,7 +325,7 @@ function formSubmit() {
         var time = "";
 
         $("#submitform").hide(200);
-            $(".content").show(200);
+        $(".content").show(200);
 
         switch (result.status_user) {
             case "1":
@@ -492,7 +502,7 @@ function clean() {
         clearTimeout(timeOutVar);
     }
     $(".content").hide(200);
-        $("#submitform").show(200);
+    $("#submitform").show(200);
 
     if (autoMode) {
         if (isBarcode) {
@@ -603,64 +613,64 @@ function gethistory() {
     }, "json");
 }
 function moreinfo(guid) {
-        if (timeOutVar) {
-            clearTimeout(timeOutVar);
-        }
+    if (timeOutVar) {
+        clearTimeout(timeOutVar);
+    }
 
-        var od = {};
-        od.user_history = "get";
-        od.guid = guid;
-        od.login = login;
-        od.password = password;
+    var od = {};
+    od.user_history = "get";
+    od.guid = guid;
+    od.login = login;
+    od.password = password;
 
-        $.post(baseUrl, od, function (result) {
+    $.post(baseUrl, od, function (result) {
 
-            console.log(result);
-            $('.content-option').fadeOut(200);
-            setTimeout(function () {
-                $(".content-more-info").fadeIn(200);
-            }, 201);
+        console.log(result);
+        $('.content-option').fadeOut(200);
+        setTimeout(function () {
+            $(".content-more-info").fadeIn(200);
+        }, 201);
 
-            var status = "";
-            var liTmp = "";
+        var status = "";
+        var liTmp = "";
 
 
-            for (var i in result.data) {
-                var obj = result.data[i];
-                if (obj.status == 1) {
-                    status = "red";
-                }
-                else {
-                    status = "black";
-                }
-                var obj = result.data[i];
-                var date = new Date();
-                date.setTime(obj.date);
-                var day = date.getDate();
-                if (day / 10 < 1) {
-                    day = "0" + day;
-                }
-
-                var month = date.getUTCMonth() + 1;
-                if (month / 10 < 1) {
-                    month = "0" + month;
-                }
-
-                var year = date.getFullYear();
-                var hours = date.getHours();
-                if (hours / 10 < 1) {
-                    hours = "0" + hours;
-                }
-                var minutes = date.getMinutes();
-                if (minutes / 10 < 1) {
-                    minutes = "0" + minutes;
-                }
-                liTmp += "<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours +
-                    ":" + minutes + "  " + obj.locations_name + "</li>";
-
+        for (var i in result.data) {
+            var obj = result.data[i];
+            if (obj.status == 1) {
+                status = "red";
             }
-            $("#moreinfolist").append(liTmp);
-        }, "json");
+            else {
+                status = "black";
+            }
+            var obj = result.data[i];
+            var date = new Date();
+            date.setTime(obj.date);
+            var day = date.getDate();
+            if (day / 10 < 1) {
+                day = "0" + day;
+            }
+
+            var month = date.getUTCMonth() + 1;
+            if (month / 10 < 1) {
+                month = "0" + month;
+            }
+
+            var year = date.getFullYear();
+            var hours = date.getHours();
+            if (hours / 10 < 1) {
+                hours = "0" + hours;
+            }
+            var minutes = date.getMinutes();
+            if (minutes / 10 < 1) {
+                minutes = "0" + minutes;
+            }
+            liTmp += "<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours +
+                ":" + minutes + "  " + obj.locations_name + "</li>";
+
+        }
+        $("#moreinfolist").append(liTmp);
+    }, "json");
 }
 function uploadData() {
     var data = {};
