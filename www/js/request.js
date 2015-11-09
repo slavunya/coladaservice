@@ -32,13 +32,13 @@ $(document).ready(function () {
 
 function keyboardShowHandler() {
     if (menu === 1) {
-        $('.parentControlBottomButtons').slideUp();
+        $('.parentControlBottomButtons').hide();
     }
     window.scrollTo(0, 100);
 }
 function keyboardHideHandler() {
     if (menu === 1) {
-        $('.parentControlBottomButtons').slideDown();
+        $('.parentControlBottomButtons').show();
     }
 }
 
@@ -286,8 +286,8 @@ function loadContent(page, result) {
 function formSubmit() {
     if (isMobile) {
         cordova.plugins.Keyboard.close();
-        return false;
     }
+
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Info:');
