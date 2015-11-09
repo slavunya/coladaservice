@@ -39,7 +39,7 @@ function keyboardShowHandler() {
 function keyboardHideHandler() {
     if (menu === 1) {
         setTimeout(function () {
-            $('.parentControlBottomButtons').show();
+            $('.parentControlBottomButtons').slideDown();
         }, 500);
     }
 }
