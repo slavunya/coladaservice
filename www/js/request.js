@@ -37,11 +37,13 @@ function keyboardShowHandler() {
     window.scrollTo(0, 100);
     if (menu === 1) {
         $('.parentControlBottomButtons').hide();
+        alert('');
     }
 }
 function keyboardHideHandler() {
     if (menu === 1) {
         $('.parentControlBottomButtons').slideDown();
+        alert('');
     }
 }
 
@@ -127,9 +129,9 @@ $(document).on('change', '#list', function () {
 });
 
 $(document).on('input', '#guid', function () {
-    //if (count == 0) {
-    //    keyboardShowHandler();
-    //}
+    if (count == 0) {
+        keyboardShowHandler();
+    }
     if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
         lastValue = $("#guid").val().length;
         formSubmit();
