@@ -40,7 +40,7 @@ function keyboardHideHandler() {
     if (menu === 1) {
         setTimeout(function () {
             $('.parentControlBottomButtons').slideDown();
-        }, 500);
+        }, 600);
     }
 }
 
