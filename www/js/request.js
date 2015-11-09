@@ -27,23 +27,20 @@ if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") =
 
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
-    document.addEventListener('native.keyboardshow', keyboardShowHandler);
-    document.addEventListener('native.keyboardhide', keyboardHideHandler);
-
     loadContent('login', '');
 });
 
 function keyboardShowHandler() {
     if (menu === 1) {
         $('.parentControlBottomButtons').hide();
-        $(".titleMode").html("Show");
+        $("header").html("Show");
     }
     window.scrollTo(0, 100);
 }
 function keyboardHideHandler() {
     if (menu === 1) {
         $('.parentControlBottomButtons').slideDown();
-        $(".titleMode").html("Hide");
+        $("header").html("Hide");
     }
 }
 
@@ -71,6 +68,8 @@ function onDeviceReady() {
 
     screen.lockOrientation('portrait');
     StatusBar.overlaysWebView(false);
+    window.addEventListener('native.keyboardshow', keyboardShowHandler);
+    window.addEventListener('native.keyboardhide', keyboardHideHandler);
 }
 
 var baseUrl = "https://seera.de/scanner-api/index.php";
