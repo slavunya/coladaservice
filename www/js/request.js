@@ -34,16 +34,16 @@ $(document).ready(function () {
 });
 
 function keyboardShowHandler() {
-    window.scrollTo(0, 100);
     if (menu === 1) {
         $('.parentControlBottomButtons').hide();
-        alert('');
+        $(".titleMode").html("Show");
     }
+    window.scrollTo(0, 100);
 }
 function keyboardHideHandler() {
     if (menu === 1) {
         $('.parentControlBottomButtons').slideDown();
-        alert('');
+        $(".titleMode").html("Hide");
     }
 }
 
