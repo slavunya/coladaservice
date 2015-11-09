@@ -38,7 +38,9 @@ function keyboardShowHandler() {
 }
 function keyboardHideHandler() {
     if (menu === 1) {
-        $('.parentControlBottomButtons').slideDown();
+        setInterval(function () {
+            $('.parentControlBottomButtons').slideDown();
+        }, 500);
     }
 }
 
