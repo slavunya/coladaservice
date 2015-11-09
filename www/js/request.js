@@ -284,6 +284,9 @@ function loadContent(page, result) {
 }
 
 function formSubmit() {
+    if (isMobile) {
+        cordova.plugins.Keyboard.close();
+    }
     var select = $('select[name=list]').val();
     if (select == '0') {
         showAlert('Please select location', 'Info:');
@@ -309,9 +312,6 @@ function formSubmit() {
         return false;
     }
 
-    if (isMobile) {
-        cordova.plugins.Keyboard.close();
-    }
 
     $.post(baseUrl, od, function (result) {
 
