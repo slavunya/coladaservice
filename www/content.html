@@ -19,7 +19,7 @@
         </div>
         <div>
             <a href="config.xml"></a>
-            <button class="submit" type="submit">Login</button>
+            <button class="black-button" type="submit">Login</button>
         </div>
     </form>
 </div>
@@ -37,37 +37,16 @@
                 onclick="scanBarcode()"><img src="img/qr.png"></a></span>
         </div>
         <div class="submit-holder">
-            <button class="submit" id="btn" onclick="formSubmit()">Submit</button>
+            <button class="black-button" id="btn" onclick="formSubmit()">Submit</button>
         </div>
     </div>
     <div class="content">
 
     </div>
-    <div class="parentControlBottomButtons">
-        <ul class="control_bottom_buttons">
-            <div class="wrap">
-                <div class="left-menu">
-                    <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
-                    <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
-                </div>
-                <div class="right-menu">
-                    <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
-                </div>
-            </div>
-        </ul>
-    </div>
-
 </div>
 <div id="location_history">
     <div class="content">
         <div class="content_data"></div>
-    </div>
-    <div class="parentControlBottomButtons">
-        <ul class="control_bottom_buttons">
-            <li><a onclick="gethistory()"><i id="get-history" class="fa fa-info-circle"></i></a></li>
-            <li><a onclick="loadContent('setting')"><i id="settings" class="fa fa-cog"></i></a></li>
-            <li><a onclick="logout()"><i id="sign-out" class=" fa fa-sign-out"></i></a></li>
-        </ul>
     </div>
 </div>
 <div id="settings_page">
@@ -97,18 +76,6 @@
 
         </div>
     </div>
-    <!--<div class="settings_switch">-->
-    <!--<span class="setting_page_title">Offline Mode</span>-->
-    <!--<div class="switch">-->
-
-    <!--<input type="checkbox" id="offlinemode" class="switch-check">-->
-    <!--<label for="offlinemode" class="switch-label">-->
-    <!--<span class="switch-slider switch-slider-on"></span>-->
-    <!--<span class="switch-slider switch-slider-off"></span>-->
-    <!--</label>-->
-
-    <!--</div>-->
-    <!--</div>-->
     <div class="settings_switch">
         <label class="setting_page_title" for="delay">Accept Delay</label>
         <select class="switch" id="delay">
@@ -123,7 +90,7 @@
         </select>
     </div>
     <div>
-        <button class="reject" onclick="loadContent('main', '')">Back</button>
+        <button class="black-button" onclick="loadContent('main', '')">Back</button>
     </div>
 </div>
 

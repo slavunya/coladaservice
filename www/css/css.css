@@ -25,11 +25,11 @@ body {
     border-radius: 6px;
 }
 
-.submit {
+.black-button {
     margin-top: 5px;
     width: 15%;
     height: 48px;
-    font-size: 1.2em;
+    font-size: 19px;
     color: rgb(255, 255, 255);
     border: 1px solid black;
     border-radius: 6px;
@@ -44,7 +44,7 @@ body {
 }
 
 .reject {
-    margin: 0 0 0 15px;
+    margin: 0 15px 0 15px;
     font-size: 1em;
     height: 48px;
     border: 1px solid black;
@@ -57,7 +57,7 @@ body {
     background: -ms-linear-gradient(top, rgb(165, 9, 40) 0%, #E60000 100%);
     background: linear-gradient(to top, rgb(165, 9, 9) 0%, #E60000 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#424242', endColorstr='#1e1e1e', GradientType=0);
-    width: 30%;
+    width: 29%;
 }
 
 .accept {
@@ -74,7 +74,7 @@ body {
     background: -ms-linear-gradient(top, rgb(242, 255, 3) 0%, #E6A30C 100%);
     background: linear-gradient(to bottom, rgb(255, 189, 3) 0%, #CC8F08 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#424242', endColorstr='#1e1e1e', GradientType=0);
-    width: 30%;
+    width: 29%;
     line-height: 1em;
     padding: 7px 10px 7px 10px;
 }
@@ -91,7 +91,7 @@ body {
     background: -ms-linear-gradient(top, rgb(242, 255, 3) 0%, #E6A30C 100%);
     background: linear-gradient(to bottom, rgb(21, 150, 24) 0%, #156507 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#424242', endColorstr='#1e1e1e', GradientType=0);
-    width: 30%;
+    width: 29%;
     line-height: 1em;
     padding: 7px 10px 7px 10px;
 }
@@ -188,27 +188,17 @@ header img {
     width: 100%;
 }
 
-#sign-out {
-    font-size: 40px;
-    color: black;
-}
-
-#get-history {
-    font-size: 40px;
-    color: black;
-}
-
 #moreinfolist {
-    display: none;
     border-radius: 6px;
     background-color: rgb(255, 255, 255);
-    height: 108px;
+    height: 170px;
     font-weight: 600;
-    margin: 13px -15px 0 -15px;
-    padding: 15px 0px 0 10px;
+    margin: 0 -15px 0 0;
+    padding: 0;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     text-align: left;
+    font-size: 18px;
 }
 
 #moreinfolist li {
@@ -221,11 +211,6 @@ header img {
 
 .black {
     color: #000000;
-}
-
-#settings {
-    font-size: 40px;
-    color: black;
 }
 
 .switch,
@@ -333,13 +318,6 @@ header img {
     width: 71%;
 }
 
-.control_bottom_buttons {
-    width: 100%;
-    float: left;
-    border-top: 1px solid black;
-    padding: 37px 0 0 0;
-}
-
 .control_bottom_buttons li {
     list-style: none;
     padding: 0 10px 0 10px;
@@ -373,65 +351,54 @@ button,
 .switch *,
 .control_bottom_buttons *,
 #more-info,
-label
-{
+label {
     outline: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-label[for=rem-me]{
+
+label[for=rem-me] {
     display: inline-block;
     height: 35px;
     vertical-align: top;
     font: 16px/30px Arial;
 }
-input[type=checkbox]{
+
+input[type=checkbox] {
     margin: 0 0 15px 0;
     width: 30px;
     height: 30px;
 }
-#more-info i{
+
+#more-info i {
     font-size: 18px;
     color: #000;
     font-weight: bold;
 }
-.wrap{
-    max-width: 420px;
-    width: 80%;
-    margin: 0 auto;
-}
-.left-menu{
-    display: inline-block;
-    float: left;
-    width: 50%;
-    text-align: left;
-}
-.right-menu{
-    text-align: right;
-    display: inline-block;
-    float: right;
-    width: 50%;
-}
+
 #rem-me {
-    display:none;
+    display: none;
 }
+
 #rem-me + label span {
-    display:inline-block;
-    width:35px;
-    height:35px;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
     margin: -5px 12px 0 0;
-    vertical-align:middle;
+    vertical-align: middle;
     background: #FFFFFF left top no-repeat;
     border: 1px solid #000000;
     border-radius: 5px;
     box-sizing: border-box;
-    cursor:pointer;
+    cursor: pointer;
 }
+
 #rem-me:checked + label span:after {
     font-family: FontAwesome;
     content: "\f00c";
     font-size: 32px;
 }
-label[for="rem-me"]{
+
+label[for="rem-me"] {
     font-family: Arial;
     font-size: 19.2px;
     font-stretch: normal;
@@ -439,6 +406,48 @@ label[for="rem-me"]{
     font-variant: normal;
     font-weight: normal;
 }
-.check-item{
+
+.check-item {
     text-align: left;
+}
+
+.parentControlBottomButtons {
+    width: 100%;
+}
+
+.parentControlBottomButtons {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    background: #fec01c;
+    border-top: 1px solid black;
+}
+
+.control_bottom_buttons {
+    width: 100%;
+    margin: 0 auto;
+    float: none;
+    max-width: 480px;
+    padding: 0;
+}
+
+.control_bottom_buttons li {
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+    width: 25%;
+    float: left;
+    padding: 10px 0;
+}
+
+li a .menu-icon {
+    font-size: 40px;
+    color: black;
+}
+.b-info{
+    width: 29%;
+    min-width: 70px;
+}
+.content-more-info{
+    display: none;
 }

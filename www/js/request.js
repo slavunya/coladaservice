@@ -19,6 +19,7 @@ var isMobile = false;
 var count = 0;
 var isConnected;
 var uploadStatus = 0;
+var menu = 0;
 
 if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1) {
     isMobile = true;
@@ -67,19 +68,19 @@ $(document).on('submit', '#login-form', function () {
     password = $('input[name=password]').val();
 
     if (login.length == '0') {
-        showAlert('Please input login', 'Message');
+        showAlert('Please enter login details', 'Info:');
         //alert("Please input login");
         return false;
     }
 
     if (password.length == 0) {
-        showAlert('Please input password', 'Message');
+        showAlert('Please enter password details', 'Info:');
         //alert("Please input password");
         return false;
     }
 
     if (offlinemode) {
-        showAlert('You are not connected to the Internet', 'Message');
+        showAlert('You are not connected to the Internet', 'Info:');
         return false;
     }
 
@@ -100,7 +101,7 @@ $(document).on('submit', '#login-form', function () {
         if (result['status'] == "success") {
             loadContent('main', '');
         } else {
-            showAlert('The user with that login and password is not found', 'Message');
+            showAlert('The user with that login and password is not found', 'Error:');
             //alert("The user with that login and password is not found");
         }
 
@@ -117,7 +118,6 @@ $(document).on('change', '#list', function () {
 
 $(document).on('input', '#guid', function () {
     if (count == 0) {
-        $('#btn').show();
         keyboardShowHandler();
     }
     if (($("#guid").val().length > 2) && ($("#guid").val().length - lastValue > 1)) {
@@ -137,6 +137,14 @@ function loadContent(page, result) {
                 $('input[name=remember_me]').attr('checked', 'checked');
             }
         });
+        menu = 0;
+    } else {
+        menu = 1;
+    }
+    if (menu === 0) {
+        $('.parentControlBottomButtons').slideUp();
+    } else {
+        $('.parentControlBottomButtons').slideDown();
     }
     count++;
 
@@ -162,11 +170,6 @@ function loadContent(page, result) {
                     }
                 }
             }
-
-            if (autoMode) {
-                $('#btn').hide();
-            }
-
         });
     }
     if (page === 'setting') {
@@ -264,7 +267,7 @@ function loadContent(page, result) {
                 }
                 $(".content_data").append("<div class=\"cd\"><p>" + num_loc + "  " + obj.locations_name + "</p></div>");
             }
-            var button = "<button class=\"reject\" onclick=\"loadContent('main','')\">Back</button>";
+            var button = "<button class=\"black-button\" onclick=\"loadContent('main','')\">Back</button>";
             $(".content").append("<div id=\"buttons\">" + button + "</div>");
 
         });
@@ -272,12 +275,9 @@ function loadContent(page, result) {
 }
 
 function formSubmit() {
-//    alert("form submit start");
-
     var select = $('select[name=list]').val();
     if (select == '0') {
-        showAlert('Please select location', 'Message');
-        //alert("Please select location");
+        showAlert('Please select location', 'Info:');
         return false;
     }
 
@@ -285,8 +285,7 @@ function formSubmit() {
     currlocation = $("#list").val();
 
     if (id.length == 0) {
-        showAlert('Please scan the code', 'Message');
-        //alert("Please scan the code");
+        showAlert('Please scan the code', 'Info:');
         return false;
     }
 
@@ -297,19 +296,6 @@ function formSubmit() {
     od.password = password;
     if (offlinemode) {
         accept(od.guid, od.location_id);
-        //od.mode = "1";
-        //od.date = getTime();
-        //var result = {guid: od.guid, location_id: od.location_id, date: od.date};
-        //scans.push(result);
-        //store.setItem("scans", JSON.stringify(scans));
-        //setTimeout(function () {
-        //    clean();
-        //}, 1000);
-        //
-        //if (store.getItem("scans").length > 0) {
-        //    $("#sendData").css({'color': 'black'});
-        //    $(".active").css({'pointer-events': 'inherit'});
-        //}
         return false;
     }
 
@@ -317,11 +303,11 @@ function formSubmit() {
 
         console.log("Submit");
         console.log(result);
-//        setTimeout(function () {
+
         if (isMobile) {
             cordova.plugins.Keyboard.close();
         }
-//        }, 1000)
+
         var obj = result.data;
 
         var userData = "";
@@ -333,13 +319,17 @@ function formSubmit() {
         switch (result.status_user) {
             case "1":
                 userData = "<div>The code is not found</div>";
-                button = "<button class=\"reject\" onclick=\"clean()\">Back</button>";
+                button = "<button class=\"black-button\" onclick=\"clean()\">Back</button>";
                 break;
             case "2":
                 button = "<button class=\"accept_on\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
                 break;
             case "3":
-                button = "<button class=\"accept\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button><button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>";
+                button =
+                    "<button class=\"accept\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>" +
+                    "<button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>" +
+                    "<button class=\"black-button b-info\" onclick=\"moreinfo('" + obj.guid + "')\">Info</button>";
+
                 if (result.scanned_data) {
                     var date = new Date();
                     date.setTime(result.scanned_data.date);
@@ -349,8 +339,9 @@ function formSubmit() {
                     var hours = date.getHours();
                     var minutes = date.getMinutes();
                     var finalytime = year + "/" + month + "/" + day + "&nbsp;-&nbsp;" + hours + ":" + minutes;
-                    time = ("<p id='scan-time'>Last scan: " + finalytime + "</p><a id='more-info' onclick=\"moreinfo('" + obj.guid + "')\"><span>More info</span><i class=\"fa fa-angle-down\"></i></a>");
+                    time = ("<p id='scan-time'>Last scan: " + finalytime + "</p>");
                 }
+
                 break;
         }
 
@@ -359,7 +350,16 @@ function formSubmit() {
             userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
         }
 
-        $('.content').html("<div class=\"content_data\">" + userData + "" + time + "<div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" + "<div id=\"buttons\">" + button + "</div>");
+        $('.content').html(
+            "<div class=\"content-option\">" +
+            "<div class=\"content_data\">" + userData + "" + time + "</div>" +
+            "<div id=\"buttons\">" + button + "</div>" +
+            "</div>" +
+            "<div class=\"content-more-info\">" +
+            "<div class=\"content_data\"><div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" +
+            "<div id=\"buttons\"><button class=\"black-button\" onclick=\"backToOption()\">Back</button></div>" +
+            "</div>"
+        );
 
         if (timeOutVar) {
             clearTimeout(timeOutVar);
@@ -455,7 +455,7 @@ function accept(guid, location_id) {
         console.log(result);
 
         if (result.status !== "success") {
-            showAlert(result.message, 'message')
+            showAlert(result.message, 'Error:')
         }
     }, "json");
     clean();
@@ -474,7 +474,7 @@ function reject(guid, location_id) {
         console.log(result);
 
         if (result.status !== "success") {
-            showAlert(result.message, 'message')
+            showAlert(result.message, 'Error:')
         }
     }, "json");
     clean();
@@ -492,7 +492,6 @@ function clean() {
     }
     $(".content").hide(200);
     $("#submitform").show(200);
-    $('#btn').hide();
     if (autoMode) {
         if (isBarcode) {
             scanBarcode();
@@ -593,31 +592,32 @@ function gethistory() {
         console.log(result);
         if (result.status == "success") {
             loadContent("location_history", result);
-
         }
         else {
-            showAlert('History is empty', 'Message');
+            showAlert('History is empty', 'Info:');
         }
 
 
     }, "json");
 }
 function moreinfo(guid) {
-    if (!moreinfostatus) {
         if (timeOutVar) {
             clearTimeout(timeOutVar);
         }
+
         var od = {};
         od.user_history = "get";
         od.guid = guid;
         od.login = login;
         od.password = password;
-        $.post(baseUrl, od, function (result) {
-            console.log(result);
-            $("#moreinfolist").fadeIn(200);
-            $("#more-info span").text('Less info');
-            $("#more-info i").addClass('fa-angle-up').removeClass('fa-angle-down');
 
+        $.post(baseUrl, od, function (result) {
+
+            console.log(result);
+            $('.content-option').fadeOut(200);
+            setTimeout(function () {
+                $(".content-more-info").fadeIn(200);
+            }, 201);
 
             var status = "";
 
@@ -651,21 +651,13 @@ function moreinfo(guid) {
                 if (minutes / 10 < 1) {
                     minutes = "0" + minutes;
                 }
-                $("#moreinfolist").append("<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours + ":" + minutes + "  " + obj.locations_name + "</li>");
+                $("#moreinfolist").append("<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours +
+                    ":" + minutes + "  " + obj.locations_name + "</li>");
 
             }
 
 
         }, "json");
-        moreinfostatus = true;
-    }
-    else {
-        $("#moreinfolist").fadeOut(200);
-        $("#more-info span").text('More info');
-        $("#more-info i").addClass('fa-angle-down').removeClass('fa-angle-up');
-
-        moreinfostatus = false;
-    }
 }
 function uploadData() {
     var data = {};
@@ -675,7 +667,7 @@ function uploadData() {
     data.password = JSON.parse(store.getItem("password"));
 
     if (offlinemode) {
-        showAlert('You are not connected to the Internet', 'Message');
+        showAlert('You are not connected to the Internet', 'Info:');
         return false;
     }
 
@@ -709,4 +701,11 @@ function logout() {
         'Message',
         ['Yes', 'No']
     );
+}
+
+function backToOption() {
+    $(".content-more-info").fadeOut(200);
+    setTimeout(function () {
+        $('.content-option').fadeIn(200);
+    }, 201);
 }
