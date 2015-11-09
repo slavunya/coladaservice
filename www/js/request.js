@@ -286,6 +286,7 @@ function loadContent(page, result) {
 function formSubmit() {
     if (isMobile) {
         cordova.plugins.Keyboard.close();
+        return false;
     }
     var select = $('select[name=list]').val();
     if (select == '0') {
