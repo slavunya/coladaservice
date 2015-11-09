@@ -32,15 +32,13 @@ $(document).ready(function () {
 
 function keyboardShowHandler() {
     if (menu === 1) {
-        $('.parentControlBottomButtons').hide();
-        $("header").html("Show");
+        $('.parentControlBottomButtons').slideUp();
     }
     window.scrollTo(0, 100);
 }
 function keyboardHideHandler() {
     if (menu === 1) {
         $('.parentControlBottomButtons').slideDown();
-        $("header").html("Hide");
     }
 }
 
