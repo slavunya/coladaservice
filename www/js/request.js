@@ -303,19 +303,20 @@ function formSubmit() {
     od.location_id = select;
     od.login = login;
     od.password = password;
+
     if (offlinemode) {
         accept(od.guid, od.location_id);
         return false;
+    }
+
+    if (isMobile) {
+        cordova.plugins.Keyboard.close();
     }
 
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
         console.log(result);
-
-        if (isMobile) {
-            cordova.plugins.Keyboard.close();
-        }
 
         var obj = result.data;
 
