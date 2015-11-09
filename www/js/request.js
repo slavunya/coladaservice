@@ -27,7 +27,7 @@ if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") =
 
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
-    window.addEventListener('native.keyboardshow', keyboardShowHandler);
+    window.addEventListener('native.keyboardshow', null);
     loadContent('login', '');
 });
 
@@ -626,6 +626,8 @@ function moreinfo(guid) {
             }, 201);
 
             var status = "";
+            var liTmp = "";
+
 
             for (var i in result.data) {
                 var obj = result.data[i];
@@ -657,12 +659,11 @@ function moreinfo(guid) {
                 if (minutes / 10 < 1) {
                     minutes = "0" + minutes;
                 }
-                $("#moreinfolist").append("<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours +
-                    ":" + minutes + "  " + obj.locations_name + "</li>");
+                liTmp += "<li class=" + status + ">" + year + "/" + month + "/" + day + "  " + hours +
+                    ":" + minutes + "  " + obj.locations_name + "</li>";
 
             }
-
-
+            $("#moreinfolist").append(liTmp);
         }, "json");
 }
 function uploadData() {
