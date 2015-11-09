@@ -38,9 +38,7 @@ function keyboardShowHandler() {
 }
 function keyboardHideHandler() {
     if (menu === 1) {
-        setInterval(function () {
-            $('.parentControlBottomButtons').slideDown();
-        }, 500);
+        $('.parentControlBottomButtons').slideDown();
     }
 }
 
