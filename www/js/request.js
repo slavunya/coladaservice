@@ -3,7 +3,6 @@ var scan = {
 };
 var login = '';
 var password = '';
-var moreinfostatus = false;
 var offlinemode = false;
 var scans = [];
 var isBarcode = false;
@@ -581,6 +580,7 @@ function scanBarcodeProcess(callback) {
             var status = {success: true, error: false};
             if (result.cancelled) {
                 isBarcode = false;
+                alert(isBarcode);
             }
             callback(status, result);
         },
