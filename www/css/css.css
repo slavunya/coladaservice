@@ -464,3 +464,6 @@ li a .menu-icon {
     text-align: justify;
     padding-right: 15px;
 }
+.qr a{
+    display: inline-block;
+}

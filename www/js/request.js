@@ -52,11 +52,11 @@ function onDeviceReady() {
         isConnected = checkConnection();
         if (!isConnected) {
             offlinemode = true;
-            $(".titleMode").html("Offline Mode");
+            $(".titleMode").text("Offline Mode");
             $('#get-history').css('color', '#9E9E9F');
         } else {
             offlinemode = false;
-            $(".titleMode").html("");
+            $(".titleMode").text("");
             $('#get-history').css('color', '#000');
             if ((store.getItem("scans") !== null) && (uploadStatus === 0)) {
                 uploadStatus = 1;
@@ -165,9 +165,11 @@ function loadContent(page, result) {
             if (!cameraOn) {
                 $('.qr').remove();
             }
+
             getlocation();
 
             if (offlinemode) {
+                $(".titleMode").text("Offline Mode");
                 var locations = JSON.parse(store.getItem("locations"));
 
                 for (var i in locations.data) {
@@ -185,21 +187,11 @@ function loadContent(page, result) {
     if (page === 'setting') {
         currlocation = $("#list").val();
         $('#page').load('content.html #settings_page', function () {
-            //  $(document).ready(function () {
-            //set initial state.
             if (autoMode) {
                 // 
                 document.getElementById("switch").setAttribute("checked", "checked");
             }
 
-            //if (offlinemode) {
-            //    //
-            //    document.getElementById("offlinemode").setAttribute("checked", "checked");
-            //}
-            //if (scannerAuto) {
-            //    //
-            //    document.getElementById("scanner").setAttribute("checked", "checked");
-            //}
             if (cameraOn) {
                 // 
                 document.getElementById("cameraOn").setAttribute("checked", "checked");
@@ -207,21 +199,14 @@ function loadContent(page, result) {
 
             $('#cameraOn').val($(this).is(':checked'));
             $('#switch').val($(this).is(':checked'));
-            //$('#offlinemode').val($(this).is(':checked'));
             $('#scanner').val($(this).is(':checked'));
             $('#delay').val(delay);
             $('#Code_lenght').val(code_lenght);
 
             $('#delay').change(function () {
-
                 delay = $('#delay').val();
-
             });
-            //$('#Code_lenght').change(function () {
-            //
-            //    code_lenght = $('#Code_lenght').val();
-            //
-            //});
+
             $('#switch').change(function () {
                 if ($(this).is(":checked")) {
                     autoMode = true;
@@ -230,27 +215,14 @@ function loadContent(page, result) {
                     autoMode = false;
                 }
             });
-            //$('#offlinemode').change(function () {
-            //    if ($(this).is(":checked")) {
-            //        offlinemode = true;
-            //    }
-            //    else {
-            //        offlinemode = false;
-            //    }
-            //});
-            //$('#scanner').change(function () {
-            //    if ($(this).is(":checked")) {
-            //        scannerAuto = true;
-            //    }
-            //    else {
-            //        scannerAuto = false;
-            //    }
-            //});
+
             $('#cameraOn').change(function () {
                 if ($(this).is(":checked")) {
                     cameraOn = true;
+                    isBarcode = true;
                 }
                 else {
+                    isBarcode = false;
                     cameraOn = false;
                 }
             });
@@ -422,6 +394,7 @@ function checkConnection() {
         console.log(error.message);
     }
 }
+
 function getlocation() {
     var od = {};
     od.locations = "get";
@@ -513,7 +486,9 @@ function clean() {
 
     if (autoMode) {
         if (isBarcode) {
-            scanBarcode();
+            setTimeout(function(){
+                scanBarcode();
+            },201);
         } else {
             $('#guid').focus();
         }
@@ -535,12 +510,9 @@ function showAlert(message, title) {
         alert(message);
     }
 }
+
 function scanBarcode() {
-
-
     scanBarcodeProcess(afterScanCode);
-
-
     function afterScanCode(status, result) {
 //        log('result.format: ' + result.format + '; text:' + result.text + '; cancelled: ' + result.cancelled);
         if (status.error) {
@@ -580,7 +552,6 @@ function scanBarcodeProcess(callback) {
             var status = {success: true, error: false};
             if (result.cancelled) {
                 isBarcode = false;
-                alert(isBarcode);
             }
             callback(status, result);
         },
@@ -600,9 +571,8 @@ function addSlipNumberToView(slipNumber) {
     if (autoMode) {
         formSubmit();
     }
-//     $('#ContentPlaceHolder1_gvProductList_DXSE_I').val(slipNumber);
-
 }
+
 function gethistory() {
     var od = {};
     od.history = "get";
@@ -620,6 +590,7 @@ function gethistory() {
 
     }, "json");
 }
+
 function moreinfo(guid) {
     if (timeOutVar) {
         clearTimeout(timeOutVar);
@@ -680,6 +651,7 @@ function moreinfo(guid) {
         $("#moreinfolist").append(liTmp);
     }, "json");
 }
+
 function uploadData() {
     var data = {};
     data.id = "send";
@@ -712,6 +684,7 @@ function uploadData() {
 
     }, "json");
 }
+
 function logout() {
     navigator.notification.confirm('Do you really want to log out?',
         function (button_id) {
