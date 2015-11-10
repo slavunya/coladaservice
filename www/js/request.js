@@ -219,7 +219,6 @@ function loadContent(page, result) {
             $('#cameraOn').change(function () {
                 if ($(this).is(":checked")) {
                     cameraOn = true;
-                    isBarcode = true;
                 }
                 else {
                     isBarcode = false;
