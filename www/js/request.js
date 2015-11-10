@@ -210,6 +210,7 @@ function loadContent(page, result) {
             $('#switch').change(function () {
                 if ($(this).is(":checked")) {
                     autoMode = true;
+                    isBarcode = false;
                 }
                 else {
                     autoMode = false;
