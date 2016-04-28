@@ -127,6 +127,18 @@ $(document).on('change', '#list', function () {
     }
 });
 
+$(document).on('click', '.qr-button', function (e) {
+    if($('.qr-button').hasClass('disabled')){
+        return false;
+    }
+
+    if(autoMode){
+        $('.qr-button').addClass('disabled');
+    }
+    scanBarcode();
+    e.preventDefault();
+});
+
 $(document).on('input', '#guid', function () {
     if (count == 0) {
         keyboardShowHandler();
@@ -513,15 +525,6 @@ function showAlert(message, title) {
 }
 
 function scanBarcode() {
-
-    if($('.qr-button').hasClass('disabled')){
-        return false;
-    }
-
-    if(autoMode){
-        $('.qr-button').addClass('disabled');
-    }
-
     scanBarcodeProcess(afterScanCode);
     function afterScanCode(status, result) {
 //        log('result.format: ' + result.format + '; text:' + result.text + '; cancelled: ' + result.cancelled);
@@ -531,7 +534,7 @@ function scanBarcode() {
         }
 
         if (!(result.cancelled === false || result.cancelled === 0)) {
-            log('scanning cancelled');
+            alert('scanning cancelled');
             $('.qr-button').removeClass('disabled');
             return;
         }
