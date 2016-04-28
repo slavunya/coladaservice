@@ -460,10 +460,23 @@ li a .menu-icon {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
+
 .info-content p{
     text-align: justify;
     padding-right: 15px;
 }
+
 .qr a{
     display: inline-block;
+}
+
+.qr-button i{
+    color: #000;
+    font-size: 45px;
+    margin-right: 10px;
+}
+
+
+.qr-button.disabled i{
+    color: #888;
 }

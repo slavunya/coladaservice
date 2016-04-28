@@ -71,7 +71,8 @@ function onDeviceReady() {
     window.addEventListener('native.keyboardhide', keyboardHideHandler);
 }
 
-var baseUrl = "https://seera.de/scanner-api/index.php";
+//var baseUrl = "https://seera.de/scanner-api/index.php";
+var baseUrl = "http://server/3/scanner-api/index.php";
 
 $(document).on('submit', '#login-form', function () {
     login = $('input[name=login]').val();
@@ -512,6 +513,15 @@ function showAlert(message, title) {
 }
 
 function scanBarcode() {
+
+    if($('.qr-button').hasClass('disabled')){
+        return false;
+    }
+
+    if(autoMode){
+        $('.qr-button').addClass('disabled');
+    }
+
     scanBarcodeProcess(afterScanCode);
     function afterScanCode(status, result) {
 //        log('result.format: ' + result.format + '; text:' + result.text + '; cancelled: ' + result.cancelled);
@@ -522,8 +532,10 @@ function scanBarcode() {
 
         if (!(result.cancelled === false || result.cancelled === 0)) {
             log('scanning cancelled');
+            $('.qr-button').removeClass('disabled');
             return;
         }
+
 //        if (!(result.format === 'CODE_128')) {
 //            showErrorMessage(eMsg.wrongCodeType);
 //            return;
