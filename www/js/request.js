@@ -71,8 +71,8 @@ function onDeviceReady() {
     window.addEventListener('native.keyboardhide', keyboardHideHandler);
 }
 
-//var baseUrl = "https://seera.de/scanner-api/index.php";
-var baseUrl = "http://server/3/scanner-api/index.php";
+var baseUrl = "https://seera.de/scanner-api/index.php";
+//var baseUrl = "http://server/3/scanner-api/index.php";
 
 $(document).on('submit', '#login-form', function () {
     login = $('input[name=login]').val();
