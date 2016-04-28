@@ -534,7 +534,7 @@ function scanBarcode() {
         }
 
         if (!(result.cancelled === false || result.cancelled === 0)) {
-            alert('scanning cancelled');
+            //alert('scanning cancelled');
             $('.qr-button').removeClass('disabled');
             return;
         }
