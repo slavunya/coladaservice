@@ -31,14 +31,14 @@ $(document).ready(function () {
 
 function keyboardShowHandler() {
     if (menu === 1) {
-        $('.parentControlBottomButtons').hide();
+        $('.bottom-menu').hide();
     }
     window.scrollTo(0, 100);
 }
 function keyboardHideHandler() {
     if (menu === 1) {
         setTimeout(function () {
-            $('.parentControlBottomButtons').slideDown();
+            $('.bottom-menu').slideDown();
         }, 600);
     }
 }
@@ -128,11 +128,11 @@ $(document).on('change', '#list', function () {
 });
 
 $(document).on('click', '.qr-button', function (e) {
-    if($('.qr-button').hasClass('disabled')){
+    if ($('.qr-button').hasClass('disabled')) {
         return false;
     }
 
-    if(autoMode){
+    if (autoMode) {
         $('.qr-button').addClass('disabled');
     }
     scanBarcode();
@@ -165,9 +165,9 @@ function loadContent(page, result) {
         menu = 1;
     }
     if (menu === 0) {
-        $('.parentControlBottomButtons').slideUp();
+        $('.bottom-menu').slideUp();
     } else {
-        $('.parentControlBottomButtons').slideDown();
+        $('.bottom-menu').slideDown();
     }
     count++;
 
@@ -260,9 +260,9 @@ function loadContent(page, result) {
                         num_loc = obj.num_locations;
                         break;
                 }
-                $(".content_data").append("<div class=\"cd\"><p>" + num_loc + "  " + obj.locations_name + "</p></div>");
+                $(".content_data").append("<div class=\"cd\"><p class=\"history-by-location-block\">" + num_loc + "  " + obj.locations_name + "</p></div>");
             }
-            var button = "<button class=\"black-button\" onclick=\"loadContent('main','')\">Back</button>";
+            var button = "<button class=\"button reject-button\" onclick=\"loadContent('main','')\">Back</button>";
             $(".content").append("<div id=\"buttons\">" + button + "</div>");
 
         });
@@ -316,22 +316,22 @@ function formSubmit() {
         var button = "";
         var time = "";
 
-        $("#submitform").hide(200);
-        $(".content").show(200);
+        $("#submitform").hide(0);
+        $(".content").show(0);
 
         switch (result.status_user) {
             case "1":
                 userData = "<div>The code is not found</div>";
-                button = "<button class=\"black-button\" onclick=\"clean()\">Back</button>";
+                button = "<button class=\"button reject-button\" onclick=\"clean()\">Back</button>";
                 break;
             case "2":
-                button = "<button class=\"accept_on\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
+                button = "<button class=\"submit-button button\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
                 break;
             case "3":
                 button =
-                    "<button class=\"accept\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>" +
-                    "<button class=\"reject\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>" +
-                    "<button class=\"black-button b-info\" onclick=\"moreinfo('" + obj.guid + "')\">Info</button>";
+                    "<button class=\"submit-button button\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>" +
+                    "<button class=\"button reject-button\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>" +
+                    "<button class=\"submit-button button\" onclick=\"moreinfo('" + obj.guid + "')\">Info</button>";
 
                 if (result.scanned_data) {
                     var date = new Date();
@@ -360,7 +360,7 @@ function formSubmit() {
             "</div>" +
             "<div class=\"content-more-info\">" +
             "<div class=\"content_data\"><div id=\"moreInfo\"><ul id=\"moreinfolist\"></ul></div></div>" +
-            "<div id=\"buttons\"><button class=\"black-button\" onclick=\"backToOption()\">Back</button></div>" +
+            "<div id=\"buttons\"><button class=\"button reject-button\" onclick=\"backToOption()\">Back</button></div>" +
             "</div>"
         );
 
@@ -494,14 +494,14 @@ function clean() {
     if (timeOutVar) {
         clearTimeout(timeOutVar);
     }
-    $(".content").hide(200);
-    $("#submitform").show(200);
+    $(".content").hide(0);
+    $("#submitform").show(0);
 
     if (autoMode) {
         if (isBarcode) {
-            setTimeout(function(){
+            setTimeout(function () {
                 scanBarcode();
-            },201);
+            }, 201);
         } else {
             $('#guid').focus();
         }
