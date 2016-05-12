@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Content</title>
+</head>
+<body>
+<div id="login">
+    <h1 class="naked-block head-text">Login</h1>
+
+    <form id="login-form" action="">
+        <div class="blocks">
+            <label for="login-input">Username</label>
+            <input type="text" name="login" id="login-input" required placeholder="Enter login">
+        </div>
+        <div class="blocks">
+            <label for="password-input">Password</label>
+            <input type="password" name="password" id="password-input" required placeholder="Enter password">
+        </div>
+        <div class="blocks check-item">
+            <input type="checkbox" id="rem-me" name="remember_me"/>
+            <label for="rem-me"><span></span>Remember me</label>
+        </div>
+        <div class="login-submit">
+            <a href="config.xml"></a>
+            <button class="button submit-button" type="submit">Login</button>
+        </div>
+    </form>
+</div>
+<div id="main">
+    <span class="titleMode"></span>
+
+    <h1 class="naked-block head-text">Scan</h1>
+
+    <div id="submitform">
+        <div class="blocks select">
+            <label for="list">Location</label>
+            <select required="" id="list" name="list">
+                <option value="0">Select location</option>
+                <option value="1">GalaAbend</option>
+                <option value="2">RotesHaus</option>
+                <option value="3">Schulung Sanitary</option>
+                <option value="4">Schulung Flooring</option>
+            </select>
+        </div>
+        <div class="blocks">
+            <input id="guid" type="text" name='guid' placeholder="Scan code"><span class="qr"><a
+                onclick="" class="qr-button"><i class="fa fa-qrcode" aria-hidden="true"></i></a></span>
+        </div>
+        <div class="submit-holder">
+            <button class="submit-button button" id="btn" onclick="formSubmit()">Submit</button>
+        </div>
+    </div>
+    <div class="content">
+
+    </div>
+</div>
+<div id="location_history">
+    <div class="content">
+        <div class="content_data">
+            <h1 class="naked-block head-text">History by location</h1>
+        </div>
+    </div>
+</div>
+<div id="info">
+    <div class="content">
+        <div class="content_data">
+            <div class="info-content">
+                <p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem
+                    Ipsum
+                    has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                    galley
+                    of type and scrambled it to make a type specimen book. It has survived not only five centuries, but
+                    also
+                    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
+                    1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+        </div>
+        <div id="buttons">
+            <button class="button reject-button medium-button" onclick="loadContent('main','')">Back</button>
+        </div>
+    </div>
+</div>
+<div id="settings_page">
+    <div class="settings_switch">
+        <span class="setting_page_title">Camera ON</span>
+
+        <div class="switch">
+
+            <input type="checkbox" id="cameraOn" class="switch-check">
+            <label for="cameraOn" class="switch-label">
+                <span class="switch-slider switch-slider-on"></span>
+                <span class="switch-slider switch-slider-off"></span>
+            </label>
+
+        </div>
+    </div>
+    <div class="settings_switch">
+        <span class="setting_page_title">Auto</span>
+
+        <div class="switch">
+
+            <input type="checkbox" id="switch" class="switch-check">
+            <label for="switch" class="switch-label">
+                <span class="switch-slider switch-slider-on"></span>
+                <span class="switch-slider switch-slider-off"></span>
+            </label>
+
+        </div>
+    </div>
+    <div class="settings_switch select">
+        <label class="setting_page_title" for="delay">Accept Delay</label>
+        <select class="switch" id="delay">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+    <div id="buttons">
+        <button class="button reject-button" onclick="loadContent('main', '')">Back</button>
+    </div>
+</div>
+<div id="page-content">
+    <div id="search-by-name">
+        <h1 class="naked-block head-text">Search by name</h1>
+
+        <div class="search-form">
+            <form action="" id="searchName" novalidate="novalidate">
+                <div class="blocks search-block">
+                    <input type="text" name="search_name" required="" placeholder="Search" aria-required="true"
+                           class="valid" aria-invalid="false">
+                </div>
+                <p class="error-message error-search"></p>
+
+                <div class="submit-holder">
+                    <input type="submit" class="submit-button button"  value="Search">
+                </div>
+            </form>
+        </div>
+
+        <div class="content ">
+            <div class="content_data margin-block">
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
