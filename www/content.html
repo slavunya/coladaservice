@@ -7,6 +7,7 @@
 <body>
 <div id="login">
     <h1 class="naked-block head-text">Login</h1>
+
     <form id="login-form" action="">
         <div class="blocks">
             <label for="login-input">Username</label>
@@ -28,7 +29,9 @@
 </div>
 <div id="main">
     <span class="titleMode"></span>
+
     <h1 class="naked-block head-text">Scan</h1>
+
     <div id="submitform">
         <div class="blocks select">
             <label for="list">Location</label>
@@ -124,6 +127,30 @@
         <button class="button reject-button" onclick="loadContent('main', '')">Back</button>
     </div>
 </div>
+<div id="page-content">
+    <div id="search-by-name">
+        <h1 class="naked-block head-text">Search by name</h1>
 
+        <div class="search-form">
+            <form action="" id="searchName" novalidate="novalidate">
+                <div class="blocks search-block">
+                    <input type="text" name="search_name" required="" placeholder="Search" aria-required="true"
+                           class="valid" aria-invalid="false">
+                </div>
+                <p class="error-message error-search"></p>
+
+                <div class="submit-holder">
+                    <input type="submit" class="submit-button button"  value="Search">
+                </div>
+            </form>
+        </div>
+
+        <div class="content ">
+            <div class="content_data margin-block">
+
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -27,6 +27,7 @@ if (document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") =
 $(document).ready(function () {
     document.addEventListener("deviceready", onDeviceReady, false);
     loadContent('login', '');
+
 });
 
 function keyboardShowHandler() {
@@ -175,6 +176,9 @@ function loadContent(page, result) {
         count = 0;
 
         $('#page').load('content.html #main', function () {
+            if(typeof result !=='undefined'){
+                $('#guid').val(result);
+            }
             if (!cameraOn) {
                 $('.qr').remove();
             }
@@ -194,6 +198,7 @@ function loadContent(page, result) {
                         $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
                     }
                 }
+
             }
         });
     }
@@ -201,12 +206,12 @@ function loadContent(page, result) {
         currlocation = $("#list").val();
         $('#page').load('content.html #settings_page', function () {
             if (autoMode) {
-                // 
+                //
                 document.getElementById("switch").setAttribute("checked", "checked");
             }
 
             if (cameraOn) {
-                // 
+                //
                 document.getElementById("cameraOn").setAttribute("checked", "checked");
             }
 
@@ -272,6 +277,60 @@ function loadContent(page, result) {
 
         });
     }
+    if (page === 'searchByUsername') {
+        $('#page').load('content.html #page-content', function () {
+            $('#searchName').submit(function (e) {
+                var data = {
+                    login: JSON.parse(window.localStorage['login']),
+                    password: JSON.parse(window.localStorage['password']),
+                    search_name: $("input[name='search_name']").val()
+                };
+                $.post(baseUrl, data,function(result){
+                    result=JSON.parse(result);
+                    if (result.status == 'success') {
+                        var searchNameList = '';
+                        var regStatus = '';
+                        var regFunction = '';
+
+                        var countElements = result.data.length;
+                        for (var i in result.data) {
+                            var obj = result.data[i];
+                            if (obj.regcomp === '1') {
+                                regStatus = 'b-green';
+                                regFunction = 'addRegUser';
+                            } else {
+                                regStatus = 'b-yellow';
+                                regFunction = 'addNoRegUser';
+                            }
+                            obj.company = obj.company ? ', ' + obj.company : '';
+                            obj.firstname = obj.firstname ? ', ' + obj.firstname : '';
+
+                            var showItem = i > 4 ? 'none' : 'block';
+
+                            searchNameList += '<div class="search-item" data-id="' + obj.guid + '" style="display:'+showItem+'"><div class="wrapper-table"><div class="s-buttons"><i onclick="' + regFunction +
+                                '(\'' + obj.guid + '\')" class="fa fa-plus-circle m-button ' + regStatus + '"></i></div><div class="s-text more-info"><span>' +
+                                obj.lastname + obj.firstname + obj.company + '</span></div></div><div class="more-info-data"></div></div>'
+                        }
+                        var buttonMore = countElements > 5 ? '<div class="more-block"><p class="more-info-button more-button">More items</p></div>' : '';
+                        $(".content").html('<div class="content_data margin-block">' + searchNameList + buttonMore + '</div>');
+                    } else {
+                        $(".content").html('');
+                        showAlert('User is not found', '.error-search');
+                    }
+                });
+                //.success(function (result) {
+                //    console.log(result)
+                //})
+                //.error(function (error) {
+                //    console.log(error);
+                //});
+                e.preventDefault();
+            })
+        });
+    }
+}
+function addRegUser(id) {
+    loadContent('main', id);
 }
 
 function formSubmit() {
@@ -604,6 +663,10 @@ function gethistory() {
 
 
     }, "json");
+}
+function searchByUsername() {
+
+    loadContent("searchByUsername");
 }
 
 function moreinfo(guid) {

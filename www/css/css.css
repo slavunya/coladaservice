@@ -643,6 +643,9 @@ switch,
 /*====================*/
 
 /*====================*/
-
+#buttons,
+.submit-button {
+    margin: 15px auto;
+}
 
 
