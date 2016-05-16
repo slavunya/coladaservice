@@ -308,7 +308,7 @@ function loadContent(page, result) {
                             var showItem = i > 4 ? 'none' : 'block';
 
                             searchNameList += '<div class="search-item" data-id="' + obj.guid + '" style="display:'+showItem+'"><div class="wrapper-table"><div class="s-buttons"><i onclick="' + regFunction +
-                                '(\'' + obj.guid + '\')" class="fa fa-plus-circle m-button ' + regStatus + '"></i></div><div class="s-text more-info"><span onclick="' + regFunction +
+                                '(\'' + obj.guid + '\')" class="fa fa-plus-circle m-button ' + regStatus + '"></i></div><div class="s-text more-info"><span onclick="' + 'addRegUser' +
                                 '(\'' + obj.guid + '\')" >' +
                                 obj.lastname + obj.firstname + obj.company + '</span></div></div><div class="more-info-data"></div></div>'
                         }
