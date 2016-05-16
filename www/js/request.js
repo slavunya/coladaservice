@@ -311,7 +311,7 @@ function loadContent(page, result) {
                                 '(\'' + obj.guid + '\')" class="fa fa-plus-circle m-button ' + regStatus + '"></i></div><div class="s-text more-info"><span>' +
                                 obj.lastname + obj.firstname + obj.company + '</span></div></div><div class="more-info-data"></div></div>'
                         }
-                        var buttonMore = countElements > 5 ? '<div class="more-block"><p class="more-info-button more-button">More items</p></div>' : '';
+                        var buttonMore = countElements > 5 ? '<div class="more-block"><p class="more-info-button more-button">Next 5 items</p></div>' : '';
                         $(".content").html('<div class="content_data margin-block">' + searchNameList + buttonMore + '</div>');
                         var userCounter=5;
                         $('.more-button').click(function(){
