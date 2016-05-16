@@ -313,6 +313,22 @@ function loadContent(page, result) {
                         }
                         var buttonMore = countElements > 5 ? '<div class="more-block"><p class="more-info-button more-button">More items</p></div>' : '';
                         $(".content").html('<div class="content_data margin-block">' + searchNameList + buttonMore + '</div>');
+                        var userCounter=5;
+                        $('.more-button').click(function(){
+                            var allUsers= document.getElementsByClassName('search-item');
+                            for(var i=userCounter;i< userCounter+5;i++)
+                            {
+
+                                if(typeof allUsers[i]!=='undefined'){
+                                    allUsers[i].style.display='block';
+                                }
+                                else{
+                                    $('.more-button').css({'display':'none'});
+                                    break;
+                                }
+                            }
+                            userCounter+=5;
+                        })
                     } else {
                         $(".content").html('');
                         showAlert('User is not found', '.error-search');
