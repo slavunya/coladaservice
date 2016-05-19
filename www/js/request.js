@@ -123,6 +123,7 @@ $(document).on('submit', '#login-form', function () {
 });
 
 $(document).on('change', '#list', function () {
+    currLoc=$("#list").val();
     if (($("#guid").val().length) > 2 && ($("#list").val() != 0)) {
         formSubmit();
     }
@@ -178,6 +179,7 @@ function loadContent(page, result) {
         $('#page').load('content.html #main', function () {
             if(typeof result !=='undefined'){
                 $('#guid').val(result);
+                $('#list').val(currLoc);
             }
             if (!cameraOn) {
                 $('.qr').remove();
