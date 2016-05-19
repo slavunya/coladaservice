@@ -123,7 +123,6 @@ $(document).on('submit', '#login-form', function () {
 });
 
 $(document).on('change', '#list', function () {
-    currLoc=$("#list").val();
     if (($("#guid").val().length) > 2 && ($("#list").val() != 0)) {
         formSubmit();
     }
@@ -179,8 +178,6 @@ function loadContent(page, result) {
         $('#page').load('content.html #main', function () {
             if(typeof result !=='undefined'){
                 $('#guid').val(result);
-                $('#list').val(currLoc);
-
             }
             if (!cameraOn) {
                 $('.qr').remove();
@@ -209,12 +206,12 @@ function loadContent(page, result) {
         currlocation = $("#list").val();
         $('#page').load('content.html #settings_page', function () {
             if (autoMode) {
-                // 
+                //
                 document.getElementById("switch").setAttribute("checked", "checked");
             }
 
             if (cameraOn) {
-                // 
+                //
                 document.getElementById("cameraOn").setAttribute("checked", "checked");
             }
 
@@ -319,7 +316,7 @@ function loadContent(page, result) {
                         $(".content").html('<div class="content_data margin-block">' + searchNameList + buttonMore + '</div>');
                         var userCounter=5;
                         $('.more-button').click(function(){
-                           var allUsers= document.getElementsByClassName('search-item');
+                            var allUsers= document.getElementsByClassName('search-item');
                             for(var i=userCounter;i< userCounter+5;i++)
                             {
 
@@ -338,12 +335,12 @@ function loadContent(page, result) {
                         showAlert('User is not found', '.error-search');
                     }
                 });
-                    //.success(function (result) {
-                    //    console.log(result)
-                    //})
-                    //.error(function (error) {
-                    //    console.log(error);
-                    //});
+                //.success(function (result) {
+                //    console.log(result)
+                //})
+                //.error(function (error) {
+                //    console.log(error);
+                //});
                 e.preventDefault();
             })
         });

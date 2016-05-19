@@ -446,7 +446,7 @@ button:focus {
 
 #buttons,
 .submit-button {
-    margin: 15px auto;
+    margin: 15px;
 }
 
 label.error,
@@ -643,6 +643,9 @@ switch,
 /*====================*/
 
 /*====================*/
-
+#buttons,
+.submit-button {
+    margin: 15px auto;
+}
 
 
