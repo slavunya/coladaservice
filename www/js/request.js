@@ -123,6 +123,7 @@ $(document).on('submit', '#login-form', function () {
 });
 
 $(document).on('change', '#list', function () {
+    currLoc=$("#list").val();
     if (($("#guid").val().length) > 2 && ($("#list").val() != 0)) {
         formSubmit();
     }
@@ -178,6 +179,8 @@ function loadContent(page, result) {
         $('#page').load('content.html #main', function () {
             if(typeof result !=='undefined'){
                 $('#guid').val(result);
+                $('#list').val(currLoc);
+
             }
             if (!cameraOn) {
                 $('.qr').remove();
@@ -308,11 +311,28 @@ function loadContent(page, result) {
                             var showItem = i > 4 ? 'none' : 'block';
 
                             searchNameList += '<div class="search-item" data-id="' + obj.guid + '" style="display:'+showItem+'"><div class="wrapper-table"><div class="s-buttons"><i onclick="' + regFunction +
-                                '(\'' + obj.guid + '\')" class="fa fa-plus-circle m-button ' + regStatus + '"></i></div><div class="s-text more-info"><span>' +
+                                '(\'' + obj.guid + '\')" class="fa fa-plus-circle m-button ' + regStatus + '"></i></div><div class="s-text more-info"><span onclick="' + 'addRegUser' +
+                                '(\'' + obj.guid + '\')" >' +
                                 obj.lastname + obj.firstname + obj.company + '</span></div></div><div class="more-info-data"></div></div>'
                         }
                         var buttonMore = countElements > 5 ? '<div class="more-block"><p class="more-info-button more-button">More items</p></div>' : '';
                         $(".content").html('<div class="content_data margin-block">' + searchNameList + buttonMore + '</div>');
+                        var userCounter=5;
+                        $('.more-button').click(function(){
+                           var allUsers= document.getElementsByClassName('search-item');
+                            for(var i=userCounter;i< userCounter+5;i++)
+                            {
+
+                                if(typeof allUsers[i]!=='undefined'){
+                                    allUsers[i].style.display='block';
+                                }
+                                else{
+                                    $('.more-button').css({'display':'none'});
+                                    break;
+                                }
+                            }
+                            userCounter+=5;
+                        })
                     } else {
                         $(".content").html('');
                         showAlert('User is not found', '.error-search');

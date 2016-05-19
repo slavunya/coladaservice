@@ -31,6 +31,9 @@
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
     </feature>
+    <feature name="Notification">
+        <param name="ios-package" value="Notification"/>
+    </feature>
     <feature name="http://api.phonegap.com/1.0/file"/>
     <feature name="http://api.phonegap.com/1.0/camera"/>
     <icon src="/res/icon/icon.png"/>
@@ -53,6 +56,9 @@
     <icon gap:platform="ios" height="114" src="/res/icon/ios/icon-57-2x.png" width="114"/>
     <icon gap:platform="ios" height="144" src="/res/icon/ios/icon-72-2x.png" width="144"/>
     <icon gap:platform="ios" height="120" src="/res/icon/ios/icon-120.png" width="120"/>
+    <icon gap:platform="ios" height="76" src="/res/icon/ios/icon-76.png" width="76"/>
+    <icon gap:platform="ios" height="152" src="/res/icon/ios/icon-76-2x.png" width="152"/>
+
     <gap:splash gap:platform="ios" height="1024" src="res/screen/splash.png" width="768"/>
     <gap:splash gap:platform="ios" height="2048" src="res/screen/splash.png" width="1536"/>
     <gap:splash gap:platform="ios" height="480" src="res/screen/splash.png" width="320"/>
