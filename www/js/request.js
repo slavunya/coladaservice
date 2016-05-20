@@ -437,10 +437,10 @@ function formSubmit() {
 
 
         if (result.status_user !== "1") {
-            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.jobtitle + "<p>" + obj.company + "</p>" + obj.notes + "</p><p>" + obj.guid + "</p>";
+            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.location_choice + "</p><p>" + obj.jobtitle + "<p>" + obj.company + "</p>" + obj.notes + "</p><p>" + obj.guid + "</p>";
         }
         if (result.status_user === "2") {
-            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.location_choice + "</p><p>" + obj.jobtitle + "<p>" + obj.company + "</p>" + obj.notes + "</p><p>" + obj.guid + "</p>";
+            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.jobtitle + "<p>" + obj.company + "</p>" + obj.notes + "</p><p>" + obj.guid + "</p>";
         }
 
         $('.content').html(
