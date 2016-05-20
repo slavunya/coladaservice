@@ -179,7 +179,10 @@ function loadContent(page, result) {
         $('#page').load('content.html #main', function () {
             if(typeof result !=='undefined'){
                 $('#guid').val(result);
-                $('#list').val(currLoc);
+                if(typeof currLoc!=='undefined'){
+                    $('#list').val(currLoc);
+                }
+
             }
             if (!cameraOn) {
                 $('.qr').remove();
@@ -382,7 +385,7 @@ function formSubmit() {
         return false;
     }
 
-
+    window.localStorage.locations={};
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
