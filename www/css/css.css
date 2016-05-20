@@ -91,10 +91,10 @@ footer {
 
 .logo-project {
     text-align: center;
-    padding: 40px 0 40px;
+    padding: 10px 0;
 }
 
-#page{
+#page {
     margin: 0 auto;
     max-width: 960px;
     border: 1px solid #f5f5f5;
@@ -320,7 +320,7 @@ select::-ms-expand {
 }
 
 .margin-left {
-    margin-left: 8px!important;
+    margin-left: 8px !important;
 }
 
 .button-group-3 .big-button {
@@ -471,7 +471,7 @@ label.error,
 .check-item label span {
     width: 14px;
     height: 14px;
-    border: 2px solid #2597c1 ;
+    border: 2px solid #2597c1;
     float: left;
     border-radius: 3px;
     transition: all 0.3s ease;
@@ -486,20 +486,20 @@ label.error,
     border: 0;
 }
 
-.qr a{
+.qr a {
     display: inline-block;
 }
 
-.qr-button i{
+.qr-button i {
     color: #000;
     font-size: 40px;
     margin-right: 10px;
 }
 
-
-.qr-button.disabled i{
+.qr-button.disabled i {
     color: #888;
 }
+
 .blocks .qr {
     position: absolute;
     right: 0;
@@ -524,6 +524,7 @@ label.error,
 .content-more-info {
     display: none;
 }
+
 switch,
 .switch-label,
 .switch-slider {
@@ -633,8 +634,7 @@ switch,
     width: 80%;
 }
 
-
-@media screen and (max-width: 380px)  {
+@media screen and (max-width: 380px) {
     .button {
         width: 100%;
     }
@@ -648,4 +648,8 @@ switch,
     margin: 15px auto;
 }
 
+/*LAST fixes*/
+#scan-time {
+    color: red;
+}
 

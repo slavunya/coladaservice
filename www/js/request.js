@@ -123,7 +123,7 @@ $(document).on('submit', '#login-form', function () {
 });
 
 $(document).on('change', '#list', function () {
-    currLoc=$("#list").val();
+    currLoc = $("#list").val();
     if (($("#guid").val().length) > 2 && ($("#list").val() != 0)) {
         formSubmit();
     }
@@ -177,11 +177,9 @@ function loadContent(page, result) {
         count = 0;
 
         $('#page').load('content.html #main', function () {
-            if(typeof result !=='undefined'){
+            if (typeof result !== 'undefined') {
                 $('#guid').val(result);
-                if(typeof currLoc!=='undefined'){
-                    $('#list').val(currLoc);
-                }
+
 
             }
             if (!cameraOn) {
@@ -290,8 +288,11 @@ function loadContent(page, result) {
                     password: JSON.parse(window.localStorage['password']),
                     search_name: $("input[name='search_name']").val()
                 };
-                $.post(baseUrl, data,function(result){
-                    result=JSON.parse(result);
+                if (data.search_name.length < 3) {
+                    return false;
+                }
+                $.post(baseUrl, data, function (result) {
+                    result = JSON.parse(result);
                     if (result.status == 'success') {
                         var searchNameList = '';
                         var regStatus = '';
@@ -312,28 +313,27 @@ function loadContent(page, result) {
 
                             var showItem = i > 4 ? 'none' : 'block';
 
-                            searchNameList += '<div class="search-item" data-id="' + obj.guid + '" style="display:'+showItem+'"><div class="wrapper-table"><div class="s-buttons"><i onclick="' + regFunction +
-                                '(\'' + obj.guid + '\')" class="fa fa-plus-circle m-button ' + regStatus + '"></i></div><div class="s-text more-info"><span onclick="' + 'addRegUser' +
+                            searchNameList += '<div class="search-item" data-id="' + obj.guid + '" style="display:' + showItem + '"><div class="wrapper-table"><div class="s-buttons"><i onclick="' + regFunction +
+                                '(\'' + obj.guid + '\')" class="fa fa-plus-circle m-button ' + regStatus + '"></i></div><div class="s-text more-info"><span onclick="' + regFunction +
                                 '(\'' + obj.guid + '\')" >' +
                                 obj.lastname + obj.firstname + obj.company + '</span></div></div><div class="more-info-data"></div></div>'
                         }
                         var buttonMore = countElements > 5 ? '<div class="more-block"><p class="more-info-button more-button">More items</p></div>' : '';
                         $(".content").html('<div class="content_data margin-block">' + searchNameList + buttonMore + '</div>');
-                        var userCounter=5;
-                        $('.more-button').click(function(){
-                            var allUsers= document.getElementsByClassName('search-item');
-                            for(var i=userCounter;i< userCounter+5;i++)
-                            {
+                        var userCounter = 5;
+                        $('.more-button').click(function () {
+                            var allUsers = document.getElementsByClassName('search-item');
+                            for (var i = userCounter; i < userCounter + 5; i++) {
 
-                                if(typeof allUsers[i]!=='undefined'){
-                                    allUsers[i].style.display='block';
+                                if (typeof allUsers[i] !== 'undefined') {
+                                    allUsers[i].style.display = 'block';
                                 }
-                                else{
-                                    $('.more-button').css({'display':'none'});
+                                else {
+                                    $('.more-button').css({'display': 'none'});
                                     break;
                                 }
                             }
-                            userCounter+=5;
+                            userCounter += 5;
                         })
                     } else {
                         $(".content").html('');
@@ -352,6 +352,11 @@ function loadContent(page, result) {
     }
 }
 function addRegUser(id) {
+    isNotReg = false;
+    loadContent('main', id);
+}
+function addNoRegUser(id) {
+    isNotReg = true;
     loadContent('main', id);
 }
 
@@ -385,7 +390,7 @@ function formSubmit() {
         return false;
     }
 
-    window.localStorage.locations={};
+    window.localStorage.locations = {};
     $.post(baseUrl, od, function (result) {
 
         console.log("Submit");
@@ -406,13 +411,14 @@ function formSubmit() {
                 button = "<button class=\"button reject-button\" onclick=\"clean()\">Back</button>";
                 break;
             case "2":
+
                 button = "<button class=\"submit-button button\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>";
                 break;
             case "3":
                 button =
                     "<button class=\"submit-button button\" onclick=\"accept('" + obj.guid + "','" + od.location_id + "')\">Accept</button>" +
-                    "<button class=\"button reject-button\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>" +
-                    "<button class=\"submit-button button\" onclick=\"moreinfo('" + obj.guid + "')\">Info</button>";
+                    "<button class=\"button reject-button\" onclick=\"reject('" + obj.guid + "','" + od.location_id + "')\">Reject</button>"
+                //"<button class=\"submit-button button\" onclick=\"moreinfo('" + obj.guid + "')\">Info</button>";
 
                 if (result.scanned_data) {
                     var date = new Date();
@@ -431,7 +437,10 @@ function formSubmit() {
 
 
         if (result.status_user !== "1") {
-            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.guid + "</p>";
+            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.jobtitle + "<p>" + obj.company + "</p>" + obj.notes + "</p><p>" + obj.guid + "</p>";
+        }
+        if (result.status_user === "2") {
+            userData = "<p>" + obj.firstname + " " + obj.lastname + "</p><p>" + obj.location_choice + "</p><p>" + obj.jobtitle + "<p>" + obj.company + "</p>" + obj.notes + "</p><p>" + obj.guid + "</p>";
         }
 
         $('.content').html(
@@ -453,9 +462,12 @@ function formSubmit() {
                 clean();
             }, delay * 1000);
         } else {
-            timeOutVar = setTimeout(function () {
-                accept(obj.guid, od.location_id);
-            }, delay * 1000);
+            if(!isNotReg){
+                timeOutVar = setTimeout(function () {
+                    accept(obj.guid, od.location_id);
+                }, delay * 1000);
+            }
+
         }
 
     }, "json");
@@ -508,6 +520,9 @@ function getlocation() {
             else {
                 $('#list').append("<option value=" + obj.id + ">" + obj.locations_name + "</option>");
             }
+        }
+        if (typeof currLoc !== 'undefined') {
+            $('#list').val(currLoc);
         }
     }, "json");
 }
