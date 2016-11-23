@@ -18,11 +18,12 @@
     <!--<preference name="phonegap-version" value="3.5.0" />-->
 
     <!--<gap:plugin name="org.apache.cordova.dialogs"/>-->
-    <!--<gap:plugin name="net.yoik.cordova.plugins.screenorientation" version="1.3.1"/>-->
-    <!--<gap:plugin name="org.apache.cordova.network-information" />-->
-    <!--<gap:plugin name="org.apache.cordova.statusbar" version="0.1.4"/>-->
-    <!--<gap:plugin name="org.apache.cordova.device"/>-->
-    <!--<gap:plugin name="com.phonegap.plugins.barcodescanner"/>-->
+    <plugin name="net.yoik.cordova.plugins.screenorientation" version="1.3.1"/>
+
+    <gap:plugin name="org.apache.cordova.network-information" />
+    <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4"/>
+    <gap:plugin name="org.apache.cordova.device"/>
+    <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
     <!--<gap:plugin name="org.apache.cordova.camera" version="0.2.3" />-->
 
     <feature name="http://api.phonegap.com/1.0/network" />
@@ -39,7 +40,9 @@
     <feature name="http://api.phonegap.com/1.0/camera"/>
     <icon src="/res/icon/icon.png"/>
     <splash src="res/screen/splash.png"/>
+
     <!--<gap:plugin name="com.ionic.keyboard" version="1.0.3" />-->
+    <plugin spec="https://github.com/driftyco/ionic-plugin-keyboard.git" source="git" />
     <gap:splash src="res/screen/splash.png"/>
     <!-- -->
     <icon gap:platform="android" height="96" src="/res/icon/android/icon-96-xhdpi.png" width="96"/>
