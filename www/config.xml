@@ -14,7 +14,7 @@
     <access origin="*"/>
     <preference name="fullscreen" value="false"/>
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="phonegap-version" value="3.5.0" />
+    <!--<preference name="phonegap-version" value="3.5.0" />-->
 
     <gap:plugin name="org.apache.cordova.dialogs"/>
     <gap:plugin name="net.yoik.cordova.plugins.screenorientation" version="1.3.1"/>
