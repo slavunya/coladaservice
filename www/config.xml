@@ -61,13 +61,13 @@
     <!--<gap:splash gap:platform="android" height="480" src="/res/screen/android/screen-hdpi-portrait.png" width="320"/>-->
     <!--<gap:splash gap:platform="android" height="1280" src="/res/screen/android/screen-hdpi-portrait.png" width="720"/>-->
     
-    <!--<icon gap:platform="ios" height="57" src="/res/icon/ios/icon-57.png" width="57"/>-->
-    <!--<icon gap:platform="ios" height="72" src="/res/icon/ios/icon-72.png" width="72"/>-->
-    <!--<icon gap:platform="ios" height="76" src="/res/icon/ios/icon-76.png" width="76"/>-->
-    <!--<icon gap:platform="ios" height="114" src="/res/icon/ios/icon-57-2x.png" width="114"/>-->
-    <!--<icon gap:platform="ios" height="120" src="/res/icon/ios/icon-120.png" width="120"/>-->
-    <!--<icon gap:platform="ios" height="144" src="/res/icon/ios/icon-72-2x.png" width="144"/>-->
-    <!--<icon gap:platform="ios" height="152" src="/res/icon/ios/icon-76-2x.png" width="152"/>-->
+    <icon gap:platform="ios" height="57" src="/res/icon/ios/icon-57.png" width="57"/>
+    <icon gap:platform="ios" height="72" src="/res/icon/ios/icon-72.png" width="72"/>
+    <icon gap:platform="ios" height="76" src="/res/icon/ios/icon-76.png" width="76"/>
+    <icon gap:platform="ios" height="114" src="/res/icon/ios/icon-57-2x.png" width="114"/>
+    <icon gap:platform="ios" height="120" src="/res/icon/ios/icon-120.png" width="120"/>
+    <icon gap:platform="ios" height="144" src="/res/icon/ios/icon-72-2x.png" width="144"/>
+    <icon gap:platform="ios" height="152" src="/res/icon/ios/icon-76-2x.png" width="152"/>
 
     <!--<gap:splash gap:platform="ios" height="1024" src="res/screen/splash.png" width="768"/>-->
     <!--<gap:splash gap:platform="ios" height="2048" src="res/screen/splash.png" width="1536"/>-->
