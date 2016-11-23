@@ -22,7 +22,7 @@
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4"/>
     <gap:plugin name="org.apache.cordova.device"/>
     <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
-    <gap:plugin name="org.apache.cordova.camera" version="0.2.3" />
+    <!--<gap:plugin name="org.apache.cordova.camera" version="0.2.3" />-->
 
     <feature name="http://api.phonegap.com/1.0/network" />
     <feature name="StatusBar">
