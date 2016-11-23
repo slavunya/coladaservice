@@ -48,7 +48,8 @@ function onDeviceReady() {
     if (device.model.indexOf("iPod") !== -1) {
         cameraOn = false;
     }
-
+    StatusBar.styleDefault();
+    // StatusBar.overlaysWebView(false);
     setInterval(function () {
         isConnected = checkConnection();
         if (!isConnected) {
