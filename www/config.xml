@@ -46,7 +46,7 @@
     <feature name="http://api.phonegap.com/1.0/file"/>
     <feature name="http://api.phonegap.com/1.0/camera"/>
     <icon src="/res/icon/icon.png"/>
-    <splash src="res/screen/ios/screen-iphone-portrait-2x.png"/>
+    <gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png"/>
 
     <!--<gap:plugin name="com.ionic.keyboard" version="1.0.3" />-->
 
@@ -74,5 +74,5 @@
     <!--<gap:splash gap:platform="ios" height="2048" src="res/screen/splash.png" width="1536"/>-->
     <!--<gap:splash gap:platform="ios" height="480" src="res/screen/splash.png" width="320"/>-->
     <!--<gap:splash gap:platform="ios" height="960" src="res/screen/splash.png" width="640"/>-->
-    <!--<gap:splash gap:platform="ios" height="1136" src="res/screen/ios/screen-iphone-portrait-2x.png"  width="640"/>-->
+    <splash gap:platform="ios" height="1136" src="res/screen/ios/screen-iphone-portrait-2x.png"  width="640"/>
 </widget>
