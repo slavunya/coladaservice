@@ -46,7 +46,7 @@
     <feature name="http://api.phonegap.com/1.0/file"/>
     <feature name="http://api.phonegap.com/1.0/camera"/>
     <icon src="/res/icon/icon.png"/>
-    <gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png"/>
+    <splash src="res/screen/ios/screen-iphone-portrait-2x.png"/>
 
     <!--<gap:plugin name="com.ionic.keyboard" version="1.0.3" />-->
 
